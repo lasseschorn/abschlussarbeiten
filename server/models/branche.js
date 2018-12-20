@@ -1,30 +1,36 @@
 exports.method =
 function(connection, callback) {
     return {
-        getBranche: (req) => {
+        getById: (req) => {
             var sql  = `SELECT *
                         FROM branche 
                         WHERE BranchenID = ${req.param('id').toString()} ;`;
             connection.query(sql, callback);
         },
-        getAllBranche: () => {
+        getAll: () => {
             var sql = `SELECT * 
             FORM branche `;
             connection.query(sql, callback);
         },
-        deleteBranche: (id) => {
+        delete: (id) => {
             var sql = `DELETE  
                         FORM branche 
                         WHERE BranchenID = ${id} `;
             connection.query(sql, callback);
         },
-        updateBranche: (id, bez) => {
+        update: (id, bez) => {
             var sql = `UPDATE branche 
                         SET  Bezeichnung = ${bez}
                         WHERE BranchenID = ${id}`;
             connection.query(sql, callback);
         },
-        findBrancheByBez: (bez) => {
+        find: (bez) => {
+            var sql = `SELECT * 
+                        FORM branche 
+                        WHERE Bezeichnung = ? ${bez} ?`;
+            connection.query(sql, callback);
+        },
+        create: (bez) => {
             var sql = `SELECT * 
                         FORM branche 
                         WHERE Bezeichnung = ? ${bez} ?`;

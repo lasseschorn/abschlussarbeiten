@@ -44,7 +44,7 @@ app.route('/api/branche')
 			res.send('Error in Database Connection or Query');
 			} else {
 				res.json(results)
-	}}).getBranche(req) })
+	}}).getById(req) })
 
 /* .get( function(req, res) {
 	debugger
@@ -53,7 +53,7 @@ app.route('/api/branche')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results).getAllBranche()
+				res.json(results).getAll()
 				}})
 })
 .post( function(req, res){
