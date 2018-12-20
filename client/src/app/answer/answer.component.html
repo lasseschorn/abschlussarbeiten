@@ -1,0 +1,33 @@
+<md-radio-group *ngIf="editMode" class="radio-group" [(ngModel)]="correctAnswer" (change)="change(correctAnswer)">
+  <md-radio-button class="radio-button" *ngFor="let answer of answers; let i = index" [value]="answer">
+
+    <md-form-field *ngIf="editMode">
+      <input mdInput placeholder="Answer" [(ngModel)]="answer.text">
+    </md-form-field>
+
+    <button md-icon-button (click)="remove(i)" *ngIf="answers.length > 1">
+      <md-icon class="md-24">delete</md-icon>
+    </button>
+
+  </md-radio-button>
+</md-radio-group>
+
+<ul *ngIf="!editMode && editable">
+  <li *ngFor="let answer of answers">
+    <button class="answerButton" md-raised-button *ngIf="!answer.isCorrect" color="basic">{{ answer.text }}</button>
+    <button class="answerButton" md-raised-button *ngIf="answer.isCorrect" color="accent">{{ answer.text }}</button>
+  </li>
+</ul>
+
+<ul *ngIf="!editable">
+  <li *ngFor="let answer of answers">
+    <button class="answerButton" md-raised-button color="basic" (click)="select(answer)">{{ answer.text }}</button>
+  </li>
+</ul>
+ 
+
+<md-card-actions *ngIf="editMode">
+  <button md-icon-button (click)="newAnswer()">
+    <md-icon class="md-24">plus_one</md-icon>
+  </button>
+</md-card-actions>

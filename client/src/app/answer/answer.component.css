@@ -1,0 +1,17 @@
+.answerButton {
+    min-width: 150px;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.radio-group {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.radio-button {
+    margin: 5px;
+}

@@ -1,0 +1,22 @@
+<md-toolbar color="primary" class="toolbar funnyText">
+  {{title}}
+  <span class="spacer"></span>
+
+  <button md-button routerLink="/start">
+    <md-icon>play_arrow</md-icon>
+    <span>Start</span>
+  </button>
+
+  <button md-button routerLink="/manage">
+    <md-icon>list</md-icon>
+    <span>Manage quizzes</span>
+  </button>
+</md-toolbar>
+
+<div class="flex-container" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutAlign.xs="start">
+  <div class="flex-item" fxFlex="10%" fxFlex.xs="0%"></div>
+  <div class="flex-item" fxFlex="80%" fxFlex.xs="100%">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="flex-item" fxFlex="10%" fxFlex.xs="0%"></div>
+</div>
