@@ -1,6 +1,5 @@
-export class AkaGrad {
+export class Rechtsform {
 
   id: number;
   bezeichnung: string;
 }
-

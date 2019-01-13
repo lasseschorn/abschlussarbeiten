@@ -1,6 +1,6 @@
-export class AkaGrad {
+export class Kategorie {
 
   id: number;
   bezeichnung: string;
+  
 }
-

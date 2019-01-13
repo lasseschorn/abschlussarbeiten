@@ -9,13 +9,18 @@ import 'rxjs/add/operator/of';
 
 @Injectable()
 export class BrancheService {
-//  private url = '/verwaltung/bezeichner';
+//  private generalUrl = '/api/branche';
 
   constructor(private http: HttpClient) { }
 
-  getAkaGrad(branche: Observable<Branche>): Observable<Branche> {
-    return branche;
+  getBranche(id: number): Observable<Branche> {
+	      const url = `${this.generalUrl}/?id=${id}`;
+    return this.http.get<Branche>(url);
   }
+   getAllBranchen( ): Observable<Branche[]> {
+	   const url = `${this.generalUrl}`;
+   return this.http.post<Branche[]>(url);
+}
   createAkaGrad(branche: Observable<Branche>): Observable<Branche> {
    return branche;
  //   .retry(3)
@@ -28,7 +33,5 @@ export class BrancheService {
   deleteAkaGrad(branche: Observable<Branche>): Observable<Branche> {
   return branche;
   }
- getAllAkaGrad( ): Observable<Branche[]> {
-   return new Observable<Branche[]>();
-}
+
 }
