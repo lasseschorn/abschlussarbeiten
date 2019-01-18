@@ -47,8 +47,7 @@ app.route('/api/branche')
 	}}).getById(req) })
 	/* Methoden zum umwandeln in ein bestimmtes Objekt:
 	Object.assign(new Branche, res.json(results)); OR  Object.setPrototypeOf(res.json(results), Branche.prototype);
-	*/
-	
+	*/	
 	
 /* .get( function(req, res) {
 	debugger
