@@ -1,9 +1,9 @@
 export class Student {
 
-  personid: number;
+  person: Person;
   matrikelnummer: number;
-  akaGradId: number;
-  studiengangId: number;
-  abschlussarbeitsId: number;
+  akaGrad: AkaGrad;
+  studiengang: Studiengang;
+  abschlussarbeit: Abschlussarbeit;
   
 }

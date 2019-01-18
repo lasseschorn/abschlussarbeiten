@@ -1,6 +1,6 @@
 export class Dozent {
 
-  personId: number;
-  akaGradId: number; 
+  person: Person;
+  akaGrad: AkaGrad; 
    
 }

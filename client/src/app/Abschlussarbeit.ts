@@ -5,8 +5,8 @@ export class Abschlussarbeit {
   datum: date;
   beschreibung: string;
   abstract: string;
-  studentId: number;
-  dozentId: number;
-  betreuerId: number;
+  student: Person;
+  dozent: Person;
+  betreuer: Person;
   
 }

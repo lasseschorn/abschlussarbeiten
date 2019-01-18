@@ -45,7 +45,11 @@ app.route('/api/branche')
 			} else {
 				res.json(results)
 	}}).getById(req) })
-
+	/* Methoden zum umwandeln in ein bestimmtes Objekt:
+	Object.assign(new Branche, res.json(results)); OR  Object.setPrototypeOf(res.json(results), Branche.prototype);
+	*/
+	
+	
 /* .get( function(req, res) {
 	debugger
 	 Branche(connection, function(error, results, fields) {

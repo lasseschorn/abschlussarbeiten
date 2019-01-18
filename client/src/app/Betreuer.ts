@@ -1,7 +1,7 @@
 export class Betreuer {
 
-  personid: number;
-  unternehmensId: number;
+  person: Person;
+  unternehmen: Unternehmen;
   
 }
 
