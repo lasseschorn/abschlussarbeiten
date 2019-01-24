@@ -21,20 +21,49 @@ const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'abschlussarbeitdb'
+  database : 'abschlussarbeitendb'
 });
 connection.connect();
+
+
+
+
+/*******************************************************************************
+ * 								Fileupload 
+ ******************************************************************************/
+
+
+
+var multer = require('multer');
+
+var storage =   multer.diskStorage({  
+	  destination: function (req, file, callback) {  
+	    callback(null, './uploads');  
+	  },  
+	  filename: function (req, file, callback) {  
+	    callback(null, file.originalname);  
+	  }  
+	});  
+	var upload = multer({ storage : storage}).single('myfile');  
+	  
+	app.get('/uploads',function(req,res){  
+	      res.sendFile(__dirname + "/index.html");  
+	});  
+	  
+	app.post('/uploadjavatpoint',function(req,res){  
+	    upload(req,res,function(err) {  
+	        if(err) {  
+	            return res.end("Error uploading file.");  
+	        }  
+	        res.end("File is uploaded successfully!");  
+	    });  
+	});  
+
+
+
 /* -------------------------------------------------------------
 					Branche
 -------------------------------------------------------------*/
-	/* Methoden zum umwandeln in ein bestimmtes Objekt:
-	Object.assign(new Branche, res.json(results)); OR  Object.setPrototypeOf(res.json(results), Branche.prototype);
-	*/	
-	
-/*.post( function(req, res){
-	res.send('Hallo')
-})
- */
 app.route('/api/branche')
 .get( function(req, res){
 	branche(connection, function(error, results, fields)  { 
@@ -600,6 +629,10 @@ app.route('/api/akademischergrad/find')
 				res.json(results)
 				}}).find(req)
 })
+^
+
+
+
 
 
 app.listen(8080, function(){
