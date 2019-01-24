@@ -3,14 +3,13 @@ function(connection, callback) {
     return {
         getById: (req) => {
             var sql  = `SELECT *
-                        FROM branche 
-                        WHERE BranchenID = ${req.param('id').toString()} ;`;
+                        FROM rechtsform 
+                        WHERE RechtformID = ${req.param('id').toString()} ;`;
             connection.query(sql, callback);
         },
         getAll: () => {
-        	console.log("getAll-branche")
-            var sql = `SELECT * 
-            FROM branche; `;
+        	var sql = `SELECT * 
+            FROM rechtsform; `;
 //            connection.query("SELECT * FROM branche", function (err, result, fields) {
 //                if (err) throw err;
 //                console.log(result);
@@ -18,16 +17,14 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         delete: (req) => {
-        	console.log("getDelete");
-            var sql = `DELETE  
+        	var sql = `DELETE  
                         FROM branche 
                         WHERE BranchenID = ${req.param('id').toString()}; `;
         	console.log(sql);
             connection.query(sql, callback);
         },
         update: (req) => {
-        	console.log("update")
-            var sql = `UPDATE branche 
+        	var sql = `UPDATE branche 
                         SET  Bezeichnung = ${req.param('bez').toString()}
                         WHERE BranchenID = ${req.param('id').toString()}`;
             connection.query(sql, callback);
