@@ -37,13 +37,18 @@ connection.connect();
 var multer = require('multer');
 
 var storage =   multer.diskStorage({  
-	  destination: function (req, file, callback) {  
+	//Ordner auswählen wo es drin gespeichert werden soll.  
+	destination: function (req, file, callback) {  
 	    callback(null, './uploads');  
 	  },  
+	  
+	  //FIlename orignal benutzen oder vielleicht anders abspeichern ?
 	  filename: function (req, file, callback) {  
 	    callback(null, file.originalname);  
 	  }  
 	});  
+
+
 	var upload = multer({ storage : storage}).single('myfile');  
 	  
 	app.get('/uploads',function(req,res){  
