@@ -35,6 +35,7 @@ connection.connect();
 
 
 var multer = require('multer');
+var patt = new RegExp("/.*.pdf.*/i");
 
 var storage =   multer.diskStorage({  
 	//Ordner auswählen wo es drin gespeichert werden soll.  
@@ -44,20 +45,34 @@ var storage =   multer.diskStorage({
 	  
 	  //FIlename orignal benutzen oder vielleicht anders abspeichern ?
 	  filename: function (req, file, callback) {  
-	    callback(null, file.originalname);  
-	  }  
-	});  
-
-
-	var upload = multer({ storage : storage}).single('myfile');  
+		  
+		callback(null, file.originalname);  
 	  
+}	  
+	  
+
+	});  
+	var upload = multer({ 
+		storage : storage,
+		fileFilter: function (req, file, cb) {
+			
+			//prüfung ob filetyp pdf ist anhand des namens sonst über mimetype besser
+			if (path.extname(file.originalname) !== '.pdf') {
+			      return cb(new Error('Only pdfs are allowed'))
+			    }
+		     cb(null, true);
+		   }
+		}).single('myfile');  
+	
 	app.get('/uploads',function(req,res){  
-	      res.sendFile(__dirname + "/index.html");  
+	
+		res.sendFile(__dirname + "/index.html");  
 	});  
 	  
+	
 	app.post('/uploadjavatpoint',function(req,res){  
 	    upload(req,res,function(err) {  
-	        if(err) {  
+	    	if(err) {  
 	            return res.end("Error uploading file.");  
 	        }  
 	        res.end("File is uploaded successfully!");  
