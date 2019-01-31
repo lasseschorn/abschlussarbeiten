@@ -2,19 +2,20 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
+        	
+        	
+        	//sicherer für SQL injection vielleicht noch prüfen ob param nur zahlen enthält?? 
+        	//connection escape funktioniert nicht 
             var sql  = `SELECT *
                         FROM branche 
-                        WHERE BranchenID = ${req.param('id').toString()} ;`;
-            connection.query(sql, callback);
+                        WHERE BranchenID = ?`;
+            //Hier die richtigen variablennamen einsetzen
+        	
+            connection.query(sql,req.query['id'], callback);
         },
         getAll: () => {
-        	console.log("getAll-branche")
             var sql = `SELECT * 
             FROM branche; `;
-//            connection.query("SELECT * FROM branche", function (err, result, fields) {
-//                if (err) throw err;
-//                console.log(result);
-//              });
             connection.query(sql, callback);
         },
         delete: (req) => {
@@ -26,23 +27,27 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         update: (req) => {
-        	console.log("update")
-            var sql = `UPDATE branche 
-                        SET  Bezeichnung = ${req.param('bez').toString()}
-                        WHERE BranchenID = ${req.param('id').toString()}`;
-            connection.query(sql, callback);
+        	//Hier eintragen beide id backslashes drin falls man beide mit placeholder macht lösung ???
+        	
+        	var sql = `UPDATE branche 
+                        SET  Bezeichnung = ` + req.query['bez'] +
+                        `WHERE BranchenID = ?`;
+        	
+            connection.query(sql,req.query['id'], callback);
         },
         find: (req) => {
-            var sql = `SELECT * 
+        	//hier variable einfügen
+          
+        	var sql = `SELECT * 
                         FROM branche 
-                        WHERE Bezeichnung like ${req.param('bez').toString()}`;
+                        WHERE Bezeichnung like ` + req.query['bez'];
             connection.query(sql, callback);
         },
         create: (req) => {
-            var sql = `SELECT * 
-                        FORM branche 
-                        WHERE Bezeichnung = ? ${bez} ?`;
-            connection.query(sql, callback);
+        	var bez = req.query['bez'];
+            var sql = `INSERT INTO branche (Bezeichnung)
+            		   VALUES (?)`;
+            connection.query(sql,bez, callback);
         }
     };
 }

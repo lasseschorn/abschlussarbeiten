@@ -2,14 +2,16 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-            var sql  = `SELECT *
-                        FROM abschlussarbeiten 
-                        WHERE DozentID = ${req.param('id').toString()} ;`;
-            connection.query(sql, callback);
+        	var sql  = `SELECT *
+                        FROM abschlussarbeit 
+                        WHERE DozentID = ?`;
+        	
+            connection.query(sql,req.query['id'], callback);
         },
         getAll: () => {
+        	//namen anpassen der tabelle
         	var sql = `SELECT * 
-            FROM abschlussarbeiten; `;
+            FROM abschlussarbeit; `;
 //            connection.query("SELECT * FROM branche", function (err, result, fields) {
 //                if (err) throw err;
 //                console.log(result);
@@ -24,7 +26,12 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         update: (req) => {
-        	var sql = `UPDATE branche 
+        	var abstract = req.query['abstract'];
+        	var titel = req.query['titel'];
+        	var beschreibung = req.query['beschreibung'];
+        	var datum = req.query['date'];
+        	
+        	var sql = `UPDATE abschlussarbeit 
                         SET  Bezeichnung = ${req.param('bez').toString()}
                         WHERE BranchenID = ${req.param('id').toString()}`;
             connection.query(sql, callback);
