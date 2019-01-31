@@ -44,6 +44,7 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         create: (req) => {
+        	
         	var bez = req.query['bez'];
             var sql = `INSERT INTO branche (Bezeichnung)
             		   VALUES (?)`;

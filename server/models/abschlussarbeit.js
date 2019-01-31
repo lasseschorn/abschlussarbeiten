@@ -26,15 +26,20 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         update: (req) => {
+        	
+        	//was ist mit den anderen daten die in anderen tabellen abgelegt sind 
+        	//vorher  holen und dann eintragen oder wie?
         	var abstract = req.query['abstract'];
         	var titel = req.query['titel'];
         	var beschreibung = req.query['beschreibung'];
+        	//noch eintragen weiss nicht gerade wie dateformat aussehen soll
         	var datum = req.query['date'];
+        	var id = req.query['id'];
         	
         	var sql = `UPDATE abschlussarbeit 
-                        SET  Bezeichnung = ${req.param('bez').toString()}
-                        WHERE BranchenID = ${req.param('id').toString()}`;
-            connection.query(sql, callback);
+                        SET  Abstract = `+ abstract +`, Titel = `+ titel + `, Beschreibung`+ beschreibung + `
+                        WHERE Dozent_DozentID = ?`;
+            connection.query(sql,id, callback);
         },
         find: (req) => {
             var sql = `SELECT * 
