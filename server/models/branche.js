@@ -2,16 +2,12 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-        	
-        	
-        	//sicherer für SQL injection vielleicht noch prüfen ob param nur zahlen enthält?? 
-        	//connection escape funktioniert nicht 
-            var sql  = `SELECT *
+        	var bID = req.query['bID'];
+        	var sql  = `SELECT *
                         FROM branche 
                         WHERE BranchenID = ?`;
-            //Hier die richtigen variablennamen einsetzen
-        	
-            connection.query(sql,req.query['id'], callback);
+            
+            connection.query(sql,bID, callback);
         },
         getAll: () => {
             var sql = `SELECT * 
@@ -19,36 +15,48 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         delete: (req) => {
-        	console.log("getDelete");
+        	var bID = req.query['bID']; 
             var sql = `DELETE  
                         FROM branche 
-                        WHERE BranchenID = ${req.param('id').toString()}; `;
-        	console.log(sql);
-            connection.query(sql, callback);
+                        WHERE BranchenID = ? `;
+            connection.query(sql,bID, callback);
         },
         update: (req) => {
-        	//Hier eintragen beide id backslashes drin falls man beide mit placeholder macht lösung ???
+        	const ins = {
+        			Bezeichnung: req.query['bez'],
+        			BranchenID: req.query['bID']
+        	}
         	
-        	var sql = `UPDATE branche 
-                        SET  Bezeichnung = ` + req.query['bez'] +
-                        `WHERE BranchenID = ?`;
+        	var sql = `UPDATE Branche 
+                        SET  ?`;
         	
-            connection.query(sql,req.query['id'], callback);
+            connection.query(sql,ins, callback);
         },
         find: (req) => {
         	//hier variable einfügen
-          
+        	var bezeichnung = req.query['bez'];
+            
         	var sql = `SELECT * 
-                        FROM branche 
-                        WHERE Bezeichnung like ` + req.query['bez'];
+                        FROM Branche 
+                        WHERE Bezeichnung like ` + bezeichnung;
             connection.query(sql, callback);
+        },
+        add: (req) => {
+            	const ins = {
+            			Bezeichnung: req.query['bez']
+            	}
+            	var sql = `INSERT INTO Branche SET ? `
+                connection.query(sql,ins,callback);
+            
         },
         create: (req) => {
         	
-        	var bez = req.query['bez'];
-            var sql = `INSERT INTO branche (Bezeichnung)
-            		   VALUES (?)`;
-            connection.query(sql,bez, callback);
+        	var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Branche (
+  BranchenID INT NOT NULL AUTO_INCREMENT,
+  Bezeichnung VARCHAR(45) NOT NULL,
+  PRIMARY KEY (BranchenID))
+ENGINE = InnoDB;`;
+            connection.query(sql, callback);
         }
     };
 }

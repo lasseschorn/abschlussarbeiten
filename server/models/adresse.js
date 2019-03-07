@@ -2,32 +2,52 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-            var sql  = `SELECT *
-                        FROM adresse 
-                        WHERE AdressID = ${req.param('id').toString()} ;`;
-            connection.query(sql, callback);
+        	
+    //Hier die richtigen variablennamen einsetzen        	
+        	var aID = req.query['aID'];
+        	var sql  = `SELECT *
+                        FROM Adresse 
+                        WHERE AdressID = ?`;
+            connection.query(sql, aID , callback);
         },
         getAll: () => {
         	var sql = `SELECT * 
             FROM adresse; `;
-//            connection.query("SELECT * FROM branche", function (err, result, fields) {
-//                if (err) throw err;
-//                console.log(result);
-//              });
             connection.query(sql, callback);
         },
         delete: (req) => {
+        	var aID = req.query['aID'];
         	var sql = `DELETE  
-                        FROM branche 
-                        WHERE BranchenID = ${req.param('id').toString()}; `;
-        	console.log(sql);
-            connection.query(sql, callback);
+                        FROM adresse 
+                        WHERE AdressID = ? `;
+        	connection.query(sql,aID, callback);
         },
         update: (req) => {
-        	var sql = `UPDATE branche 
-                        SET  Bezeichnung = ${req.param('bez').toString()}
-                        WHERE BranchenID = ${req.param('id').toString()}`;
-            connection.query(sql, callback);
+        	
+        	const ins = {
+        		Straße: req.query['str'],
+        		Hausnummer: req.query['hnr'],
+        		Zusatz: req.query['Zusatz'],
+        		Postleitzahl: req.query['plz'],
+        		Ort: req.query['ort'],
+        		AdressID: req.query['aID']
+        	}
+        	
+        	var sql = `UPDATE Adresse
+        	SET ?` 
+            connection.query(sql, ins,callback);
+        },
+        add: (req) =>{
+        	const ins = {
+            		Straße: req.query['str'],
+            		Hausnummer: req.query['hnr'],
+            		Zusatz: req.query['Zusatz'],
+            		Postleitzahl: req.query['plz'],
+            		Ort: req.query['ort'],
+            	}
+        	var sql = `INSERT INTO Adresse SET ? `
+                connection.query(sql,ins,callback);
+            	
         },
         find: (req) => {
             var sql = `SELECT * 
@@ -36,9 +56,15 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         create: (req) => {
-            var sql = `SELECT * 
-                        FORM branche 
-                        WHERE Bezeichnung = ? ${bez} ?`;
+            var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Adresse (
+  AdressID INT NOT NULL AUTO_INCREMENT,
+  Straße VARCHAR(45) NOT NULL,
+  Hausnummer INT(4) NOT NULL,
+  Zusatz VARCHAR(1) NULL,
+  Postleitzahl INT(5) NOT NULL,
+  Ort VARCHAR(45) NOT NULL,
+  PRIMARY KEY (AdressID))
+ENGINE = InnoDB;`;
             connection.query(sql, callback);
         }
     };

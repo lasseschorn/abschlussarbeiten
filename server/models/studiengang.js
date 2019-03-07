@@ -3,39 +3,39 @@ function(connection, callback) {
     return {
         getById: (req) => {
         	//richtige variable eintagen
-        	var kID = req.query['kID'];
+        	var sID = req.query['sID'];
             var sql  = `select * 
-            from Kategorie
-            where KategorieID = ? `
-            connection.query(sql,kID, callback);
+            from Studiengang
+            where StudiengangID = ? `
+            connection.query(sql,sID, callback);
         },
         getAll: () => {
         	var sql = `SELECT * 
-            FROM kategorie; `;
+            FROM Studiengang; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
-        	var kID = req.query['kID'];
+        	var sID = req.query['sID'];
         	var sql = `DELETE  
-                        FROM Kategorie 
-                        WHERE KategorieID = ?`;
+                        FROM Studiengang
+                        WHERE StudiengangID = ?`;
         	console.log(sql);
-            connection.query(sql,kID, callback);
+            connection.query(sql,sID, callback);
         },
         update: (req) => {
         	var bez = req.query['bez'];
-        	var kID = req.query['kID'];
-        	var sql = `UPDATE Kategorie 
+        	var sID = req.query['sID'];
+        	var sql = `UPDATE Studiengang
                         SET  Bezeichnung = ?
-                        WHERE KategorieID = ?`;
-            connection.query(sql,[bez, kID] ,callback);
+                        WHERE StudiengangID = ?`;
+            connection.query(sql,[bez, sID] ,callback);
         },
         
         add: (req) => {
         	const ins = {
         			Bezeichnung: req.query['bez']
         	}
-        	var sql = `INSERT INTO Kategorie SET ? `
+        	var sql = `INSERT INTO Studiengang SET ? `
             connection.query(sql,ins,callback);
         	
         },
@@ -51,11 +51,11 @@ function(connection, callback) {
         
         
         create: (req) => {
-            var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Kategorie (
-            		   KategorieID INT NOT NULL AUTO_INCREMENT, 
-            		   Bezeichnung VARCHAR(45) NULL DEFAULT NULL,
-            		   PRIMARY KEY (KategorieID))
-            		   ENGINE = InnoDB;`;
+            var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Studiengang (
+            StudiengangID INT NOT NULL AUTO_INCREMENT,
+            Bezeichnung VARCHAR(45) NOT NULL,
+            PRIMARY KEY (StudiengangID))
+            ENGINE = InnoDB;`;
             connection.query(sql, callback);
         }
     };

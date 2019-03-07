@@ -1,0 +1,2 @@
+zb rechtsform kann nichtv geupdatet werden da 
+'Cannot delete or update a parent row: a foreign key constraint fails (`abschlussarbeitendb`.`unternehmen`, CONSTRAINT `fk_Unternehmen_Rechtsform1

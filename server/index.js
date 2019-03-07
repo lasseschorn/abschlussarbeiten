@@ -33,7 +33,7 @@ connection.connect();
  ******************************************************************************/
 
 
-
+var mime = require('mime');
 var multer = require('multer');
 var patt = new RegExp("/.*.pdf.*/i");
 
@@ -55,7 +55,10 @@ var storage =   multer.diskStorage({
 	var upload = multer({ 
 		storage : storage,
 		fileFilter: function (req, file, cb) {
+			console.log( path.extname(file.orignalname));
+//			var x = mime.contentType(y.toString);
 			
+	//		console.log(x.toString());
 			//prüfung ob filetyp pdf ist anhand des namens sonst über mimetype besser
 			if (path.extname(file.originalname) !== '.pdf') {
 			      return cb(new Error('Only pdfs are allowed'))
@@ -158,7 +161,7 @@ const adress = require('./models/adresse').method;
 
 
 
-app.route('/api/adresse/')
+app.route('/api/adresse/getbyid')
 .get(function(req, res) {
 	 adress(connection, function(error, results, fields) {
 		if(error) { 
@@ -195,7 +198,7 @@ app.route('/api/adresse/update')
 .get(function(req, res) {
 	 adress(connection, function(error, results, fields) {
 		if(error) { 
-			res.status(500);
+			console.log(error);
 			res.send('Error in Database Connection or Query');
 			} else {
 				res.json(results)
@@ -212,7 +215,16 @@ app.route('/api/adresse/find')
 				res.json(results)
 				}}).find(req)
 })
-
+app.route('/api/adresse/add')
+.get(function(req, res) {
+	 adress(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
 
 /* -------------------------------------------------------------
 					unternehmen
@@ -308,7 +320,9 @@ app.route('/api/abschlussarbeit/getall')
 app.route('/api/abschlussarbeit/create')
 .get(function(req, res) {
 	 abschluss(connection, function(error, results, fields) {
-		if(error) { 
+		 console.log(results);
+		 if(error) {
+			console.log(error);
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
@@ -316,10 +330,24 @@ app.route('/api/abschlussarbeit/create')
 				}}).create(req)
 })
 
+app.route('/api/abschlussarbeit/add')
+.get(function(req, res) {
+	 abschluss(connection, function(error, results, fields) {
+		if(error) {
+			console.log(error);
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+
+
+
 app.route('/api/abschlussarbeit/update')
 .get(function(req, res) {
 	 abschluss(connection, function(error, results, fields) {
-		if(error) { 
+		if(error) {
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
@@ -470,7 +498,7 @@ const rechtsform = require('./models/rechtsform').method;
 
 
 
-app.route('/api/rechtsform/')
+app.route('/api/rechtsform/getbyid')
 .get(function(req, res) {
 	 rechtsform(connection, function(error, results, fields) {
 		if(error) { 
@@ -513,6 +541,17 @@ app.route('/api/rechtsform/update')
 				res.json(results)
 				}}).update(req)
 })
+app.route('/api/rechtsform/add')
+.get(function(req, res) {
+	 rechtsform(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+
 
 app.route('/api/rechtsform/find')
 .get(function(req, res) {
@@ -533,10 +572,11 @@ const kategorie = require('./models/kategorie').method;
 
 
 
-app.route('/api/kategorie/')
+app.route('/api/kategorie/getbyid')
 .get(function(req, res) {
 	 kategorie(connection, function(error, results, fields) {
 		if(error) { 
+			console.log(error);
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
@@ -587,6 +627,28 @@ app.route('/api/kategorie/find')
 				res.json(results)
 				}}).find(req)
 })
+app.route('/api/kategorie/add')
+.get(function(req, res) {
+	 kategorie(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+app.route('/api/kategorie/delete')
+.get(function(req, res) {
+	 kategorie(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).delete(req)
+})
+
+
 
 /* -------------------------------------------------------------
 					akademischergrad
@@ -649,7 +711,90 @@ app.route('/api/akademischergrad/find')
 				res.json(results)
 				}}).find(req)
 })
-^
+
+/* -------------------------------------------------------------
+					Studiengang
+-------------------------------------------------------------*/
+const Studiengang = require('./models/Studiengang').method;
+
+
+
+app.route('/api/Studiengang/getbyid')
+.get(function(req, res) {
+	 Studiengang(connection, function(error, results, fields) {
+		if(error) { 
+			console.log(error);
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).getById(req)
+})
+
+app.route('/api/Studiengang/getall')
+.get(function(req, res) {
+	 Studiengang(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).getAll()
+})
+
+app.route('/api/Studiengang/create')
+.get(function(req, res) {
+	 Studiengang(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).create(req)
+})
+
+app.route('/api/Studiengang/update')
+.get(function(req, res) {
+	 Studiengang(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).update(req)
+})
+
+app.route('/api/Studiengang/find')
+.get(function(req, res) {
+	 Studiengang(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).find(req)
+})
+app.route('/api/Studiengang/add')
+.get(function(req, res) {
+	 Studiengang(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+app.route('/api/Studiengang/delete')
+.get(function(req, res) {
+	 Studiengang(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).delete(req)
+})
+
 
 
 
