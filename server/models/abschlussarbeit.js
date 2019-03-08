@@ -2,59 +2,48 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
+        	var aID = req.query['aID']
+            	
         	var sql  = `SELECT *
                         FROM abschlussarbeit 
-                        WHERE Dozent_DozentID = ?`;
+                        WHERE ArbeitsID = ?`;
         	
-            connection.query(sql,req.query['id'], callback);
+            connection.query(sql,aID, callback);
         },
         getAll: () => {
-        	//namen anpassen der tabelle
         	var sql = `SELECT * 
             FROM abschlussarbeit; `;
-//            connection.query("SELECT * FROM branche", function (err, result, fields) {
-//                if (err) throw err;
-//                console.log(result);
-//              });
+
             connection.query(sql, callback);
         },
         delete: (req) => {
+        	var aID = req.query['aID']
+        	
         	var sql = `DELETE  
-                        FROM branche 
-                        WHERE BranchenID = ${req.param('id').toString()}; `;
-        	console.log(sql);
-            connection.query(sql, callback);
+                        FROM abschlussarbeit 
+                        WHERE ArbeitsID = ?`;
+        	
+            connection.query(sql,aID, callback);
         },
         update: (req) => {
         	
-        	//variablen deklaration nur query[' hier variablen der oberfläche eintragen']
         	var aID = req.query['aID']
-        	var abstract = req.query['abstract'];
-        	var titel = req.query['titel'];
-        	var datum = req.query['date'];
-        	var kID = req.query['kID'];
-        	var sID = req.query['sID'];
-        	var dID = req.query['dID'];
-        	var bUUID = req.query['bUUID'];
-        	var bUAAID = req.query['bUAAID'];
-        	var sPID = req.query['sPID'];
-        	
-        	//Tabellen Objekt
-        	//Datum fehlt noch
         	const ins = {
-        			ArbeitsID: aID,
-        			Abstract: abstract,
-        			Titel: titel,
-        			Kategorie_KategorieID: kID,
-        			Studiengang_StudiengangID: sID,
-        			Dozent_DozentID: dID,
-        			Betreuer_Unternehmen_UnternehmensID: bUUID,
-        			Betreuer_Unternehmen_Adresse_AdressID: bUAAID,
-        			Student_PersonID: sPID,
+        			Abstract: req.query['abstract'],
+        			Titel: req.query['titel'],
+        			Datum: req.query['date'],
+        			Kategorie_KategorieID: req.query['kID'],
+        			Studiengang_StudiengangID: req.query['sSID'],
+        			Dozent_DozentID: req.query['dDID'],
+        			Betreuer_Unternehmen_UnternehmensID: req.query['bUUID'],
+        			Betreuer_Unternehmen_Adresse_AdressID: req.query['bUAAID'],
+        			Student_PersonID:req.query['sPID']
         	}
+        	
        	var sql = `UPDATE abschlussarbeit 
-                   SET  ?`;
-            connection.query(sql,ins,callback);
+                   SET  ?
+                   WHERE ArbeitsID = ?`;
+            connection.query(sql,[ins,aID],callback);
             
         },
         
@@ -63,28 +52,17 @@ function(connection, callback) {
         	connection.query(sql, callback);
         },
         add: (req) => {
-        	var aID = req.query['aID']
-        	var abstract = req.query['abstract'];
-        	var titel = req.query['titel'];
-        	var datum = req.query['date'];
-        	var kID = req.query['kID'];
-        	var sID = req.query['sID'];
-        	var dID = req.query['dID'];
-        	var bUUID = req.query['bUUID'];
-        	var bUAAID = req.query['bUAAID'];
-        	var sPID = req.query['sPID'];
-        	
         	//Tabellen Objekt
-        	//Datum fehlt noch
         	const ins = {
-        			Abstract: abstract,
-        			Titel: titel,
-        			
-        			Kategorie_KategorieID: kID,
-        			Studiengang_StudiengangID: sID,
-        			Dozent_DozentID: dID,
-        			Betreuer_Unternehmen_UnternehmensID: bUUID,
-        			Betreuer_Unternehmen_Adresse_AdressID: bUAAID,
+        			Abstract: req.query['abstract'],
+        			Titel: req.query['titel'],
+        			Datum: req.query['date'],
+        			Kategorie_KategorieID: req.query['kID'],
+        			Studiengang_StudiengangID: req.query['sSID'],
+        			Dozent_DozentID: req.query['dDID'],
+        			Betreuer_Unternehmen_UnternehmensID: req.query['bUUID'],
+        			Betreuer_Unternehmen_Adresse_AdressID: req.query['bUAAID'],
+        			Student_PersonID:req.query['sPID']
         	}
         	var sql = `INSERT INTO Abschlussarbeiten SET ? `
             connection.query(sql,ins,callback);

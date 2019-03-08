@@ -23,19 +23,20 @@ function(connection, callback) {
         	connection.query(sql,aID, callback);
         },
         update: (req) => {
-        	
+        	var  aID = req.query['aID'];
+            
         	const ins = {
         		Straße: req.query['str'],
         		Hausnummer: req.query['hnr'],
         		Zusatz: req.query['Zusatz'],
         		Postleitzahl: req.query['plz'],
         		Ort: req.query['ort'],
-        		AdressID: req.query['aID']
-        	}
+         	}
         	
         	var sql = `UPDATE Adresse
-        	SET ?` 
-            connection.query(sql, ins,callback);
+        	SET ?
+        	WHERE AdressID = ?` 
+            connection.query(sql,[ins,aID],callback);
         },
         add: (req) =>{
         	const ins = {

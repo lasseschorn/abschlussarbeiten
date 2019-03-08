@@ -22,15 +22,14 @@ function(connection, callback) {
             connection.query(sql,bID, callback);
         },
         update: (req) => {
-        	const ins = {
-        			Bezeichnung: req.query['bez'],
-        			BranchenID: req.query['bID']
-        	}
-        	
+        	var	bez =  req.query['bez'];
+        	var bID =  req.query['bID'];
+             	
         	var sql = `UPDATE Branche 
-                        SET  ?`;
+                        SET  Bezeichnung = ?
+                        WHERE BranchenID = ? `;
         	
-            connection.query(sql,ins, callback);
+            connection.query(sql,[bez,bid], callback);
         },
         find: (req) => {
         	//hier variable einfügen

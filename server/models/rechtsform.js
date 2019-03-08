@@ -22,13 +22,15 @@ function(connection, callback) {
             connection.query(sql,rID, callback);
         },
         update: (req) => {
+			var rID = req.query['rID'];
+		 
         	const ins = {
-        			RechtsformID: req.query['rID'],
-        			Bezeichnung: req.query['bez']
+         			Bezeichnung: req.query['bez']
         	}
         	var sql = `UPDATE Rechtsform 
-                        SET  ?`;
-            connection.query(sql,ins, callback);
+                        SET  ?
+                        WHERE RechtsformID = ?`;
+            connection.query(sql,[ins,rID], callback);
         },
         find: (req) => {
             var sql = `SELECT * 
@@ -37,9 +39,11 @@ function(connection, callback) {
             connection.query(sql, callback);
         },
         add: (req) =>{
-        	var bez = req.query['bez'];
+        	const ins = {
+        			Bezeichnung: req.query['bez']
+        	}
         	var sql = `INSERT INTO Rechtsform SET ? `
-                connection.query(sql,bez,callback);
+                connection.query(sql,ins,callback);
             	
         },
         create: (req) => {

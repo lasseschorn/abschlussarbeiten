@@ -2,33 +2,32 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-            var sql  = `SELECT *
-                        FROM akademischer grad 
-                        WHERE GradID = ${req.param('id').toString()} ;`;
-            connection.query(sql, callback);
+        	var gID = req.query['gID'];
+            var sql  = 'SELECT *'
+                        +'FROM `akademischer grad`' 
+                        + 'WHERE GradID = ?;';
+            connection.query(sql,gID, callback);
         },
         getAll: () => {
-        	console.log("akagrad")
-        	var sql = `SELECT * 
-            FROM akademischer grad; `;
-//            connection.query("SELECT * FROM branche", function (err, result, fields) {
-//                if (err) throw err;
-//                console.log(result);
-//              });
+        	var sql = 'SELECT *' 
+        		+ 'FROM `akademischer grad`; ';
+
             connection.query(sql, callback);
         },
         delete: (req) => {
-        	var sql = `DELETE  
-                        FROM branche 
-                        WHERE BranchenID = ${req.param('id').toString()}; `;
-        	console.log(sql);
-            connection.query(sql, callback);
+        	var gID = req.query['gID'];
+        	var sql = 'DELETE'  
+                       +'FROM  `akademischer grad`'
+                        + 'WHERE GradID = ?; ';
+            connection.query(sql,gID, callback);
         },
         update: (req) => {
-        	var sql = `UPDATE branche 
-                        SET  Bezeichnung = ${req.param('bez').toString()}
-                        WHERE BranchenID = ${req.param('id').toString()}`;
-            connection.query(sql, callback);
+        	var gID = req.query['gID'];
+        	var bez = req.query['bez'];
+        	var sql = 'UPDATE `akademischer grad`'  
+                       + 'SET  Bezeichnung = ?'
+                        + 'WHERE GradID = ?';
+            connection.query(sql,[bez,gID], callback);
         },
         find: (req) => {
             var sql = `SELECT * 

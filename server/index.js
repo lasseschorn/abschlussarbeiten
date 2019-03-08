@@ -87,7 +87,7 @@ var storage =   multer.diskStorage({
 /* -------------------------------------------------------------
 					Branche
 -------------------------------------------------------------*/
-app.route('/api/branche')
+app.route('/api/branche/getbyid')
 .get( function(req, res){
 	branche(connection, function(error, results, fields)  { 
 		if(error) { 
@@ -152,6 +152,18 @@ app.route('/api/branche/create')
 				res.json(results)
 				}}).create(req)
 })
+app.route('/api/branche/add')
+.get(function(req, res) {
+	 branche(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+
+
 
 /* -------------------------------------------------------------
 					adresse
@@ -233,7 +245,7 @@ const company = require('./models/unternehmen').method;
 
 
 
-app.route('/api/unternehmen/')
+app.route('/api/unternehmen/getbyid')
 .get(function(req, res) {
 	 company(connection, function(error, results, fields) {
 		if(error) { 
@@ -288,6 +300,18 @@ app.route('/api/unternehmen/find')
 				}}).find(req)
 })
 
+app.route('/api/unternehmen/add')
+.get(function(req, res) {
+	 company(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+
+
 /* -------------------------------------------------------------
 					abschlussarbeit
 -------------------------------------------------------------*/
@@ -295,7 +319,7 @@ const abschluss = require('./models/abschlussarbeit').method;
 
 
 
-app.route('/api/abschlussarbeit/')
+app.route('/api/abschlussarbeit/getbyid')
 .get(function(req, res) {
 	 abschluss(connection, function(error, results, fields) {
 		if(error) { 
@@ -373,7 +397,7 @@ const student = require('./models/student').method;
 
 
 
-app.route('/api/student/')
+app.route('/api/student/getbyid')
 .get(function(req, res) {
 	 student(connection, function(error, results, fields) {
 		if(error) { 
@@ -427,7 +451,16 @@ app.route('/api/student/find')
 				res.json(results)
 				}}).find(req)
 })
-
+app.route('/api/student/add')
+.get(function(req, res) {
+	 student(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
 
 /* -------------------------------------------------------------
 					person
@@ -436,7 +469,7 @@ const person = require('./models/person').method;
 
 
 
-app.route('/api/person/')
+app.route('/api/person/getbyid')
 .get(function(req, res) {
 	 person(connection, function(error, results, fields) {
 		if(error) { 
@@ -473,6 +506,7 @@ app.route('/api/person/update')
 .get(function(req, res) {
 	 person(connection, function(error, results, fields) {
 		if(error) { 
+			console.log(error)
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
@@ -490,6 +524,17 @@ app.route('/api/person/find')
 				res.json(results)
 				}}).find(req)
 })
+app.route('/api/person/add')
+.get(function(req, res) {
+	 person(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+
 
 /* -------------------------------------------------------------
 					rechtsform
@@ -657,7 +702,7 @@ const akgrad = require('./models/akademischergrad').method;
 
 
 
-app.route('/api/akademischergrad/')
+app.route('/api/akademischergrad/getbyid')
 .get(function(req, res) {
 	 akgrad(connection, function(error, results, fields) {
 		if(error) { 
@@ -672,6 +717,7 @@ app.route('/api/akademischergrad/getall')
 .get(function(req, res) {
 	 akgrad(connection, function(error, results, fields) {
 		if(error) { 
+			console.log(error);
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
@@ -710,6 +756,18 @@ app.route('/api/akademischergrad/find')
 			} else {
 				res.json(results)
 				}}).find(req)
+})
+
+
+app.route('/api/akademischergrad/add')
+.get(function(req, res) {
+	 akgrad(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
 })
 
 /* -------------------------------------------------------------
@@ -796,8 +854,78 @@ app.route('/api/Studiengang/delete')
 })
 
 
+/* -------------------------------------------------------------
+					Betreuer
+-------------------------------------------------------------*/
+const betreuer = require('./models/Betreuer').method;
 
 
+
+app.route('/api/Betreuer/getbyid')
+.get(function(req, res) {
+	 betreuer(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).getById(req)
+})
+
+app.route('/api/Betreuer/getall')
+.get(function(req, res) {
+	 betreuer(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).getAll()
+})
+
+app.route('/api/Betreuer/create')
+.get(function(req, res) {
+	 betreuer(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).create(req)
+})
+
+app.route('/api/Betreuer/update')
+.get(function(req, res) {
+	 betreuer(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).update(req)
+})
+
+app.route('/api/Betreuer/find')
+.get(function(req, res) {
+	 betreuer(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).find(req)
+})
+
+app.route('/api/Betreuer/add')
+.get(function(req, res) {
+	 betreuer(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
 
 
 app.listen(8080, function(){

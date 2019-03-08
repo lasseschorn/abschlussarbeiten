@@ -2,32 +2,48 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
+        	var pID = req.query['pID'];
             var sql  = `SELECT *
                         FROM person 
-                        WHERE StudentenID = ${req.param('id').toString()} ;`;
-            connection.query(sql, callback);
+                        WHERE PersonenID = ?`
+            connection.query(sql,pID, callback);
         },
         getAll: () => {
         	var sql = `SELECT * 
             FROM person; `;
-//            connection.query("SELECT * FROM branche", function (err, result, fields) {
-//                if (err) throw err;
-//                console.log(result);
-//              });
             connection.query(sql, callback);
         },
         delete: (req) => {
+        	var pID = req.query['pID'];
         	var sql = `DELETE  
-                        FROM branche 
-                        WHERE BranchenID = ${req.param('id').toString()}; `;
-        	console.log(sql);
-            connection.query(sql, callback);
+                        FROM Person 
+                        WHERE PersonenID = ?; `;
+            connection.query(sql,pID, callback);
         },
         update: (req) => {
-        	var sql = `UPDATE branche 
-                        SET  Bezeichnung = ${req.param('bez').toString()}
-                        WHERE BranchenID = ${req.param('id').toString()}`;
-            connection.query(sql, callback);
+        	const ins = {
+        			Vorname: req.query['vname'],
+        			Nachname: req.query['nname'],
+        			Geschlecht: req.query['gs'],
+        			'E-Mail': req.query['email']
+        			
+        	}
+        	var pID = req.query['pID'];
+        	var sql = `UPDATE Person 
+                        SET  ?
+                        WHERE PersonenID = ?`;
+            connection.query(sql,[ins,pID], callback);
+        },
+        add: (req) => {
+        	const ins = {
+        			Vorname: req.query['vname'],
+        			Nachname: req.query['nname'],
+        			Geschlecht: req.query['gs'],
+        			'E-Mail': req.query['email']
+        	}
+
+        	var sql = `INSERT INTO Person SET ? `
+            connection.query(sql,ins,callback);
         },
         find: (req) => {
             var sql = `SELECT * 
