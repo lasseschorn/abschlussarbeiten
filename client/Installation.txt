@@ -1,0 +1,8 @@
+erstmalige Installation: npm install -g @angular/cli (am besten im client-Ordner)
+
+in client: npm install (erstellt node_modules)
+in client: ng build (erstellt dist-Ordner)
+ 
+in server: Inhalt aus dem dist-Ordner(im client) kopieren und in den server/assets Ordner kopieren
+
+danach erst: npm start im client
