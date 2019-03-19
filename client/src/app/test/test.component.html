@@ -1,3 +1,28 @@
-<p>
-  test works!
+GetAll
+<p>  
+<select ng-model="selectedBranche" ng-options="bez for bezeichnung in branchen">
+</select>
 </p>
+<hr>
+GetByID
+<input #getBy>
+<button (click)="getBranche(getBy.value)" >find</button>
+<label>{{this.getByIdBranche}}</label>
+<hr>
+Add
+<input #add>
+<button ng-click="addBranche(add.value)" >add</button>
+<label>{{this.addedBranche}}</label>
+<hr>
+Update
+<input #upid>
+<input #upbez>
+<button ng-click="updateBranche(upid.value, upbez.value)" >update</button>
+<label>{{this.updatedBranche}}</label>
+<hr>
+Delete
+<input #delete>
+<button ng-click="deleteBranche(delete.value)" >delete</button>
+<label>{{this.deletedBranche}}</label>
+<hr>
+<hr>
