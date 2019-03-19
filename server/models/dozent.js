@@ -4,19 +4,19 @@ function(connection, callback) {
         getById: (req) => {
         	var pPID = req.query['pPID'];
             var sql  = `SELECT *
-                        FROM student 
+                        FROM dozent 
                         WHERE Person_PersonenID = ? ;`;
             connection.query(sql,pPid, callback);
         },
         getAll: () => {
         	var sql = `SELECT * 
-            FROM student; `;
+            FROM dozent; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var pPId = req.query['pPid'];
         	var sql = `DELETE  
-                        FROM Student 
+                        FROM dozent 
                         WHERE Person_PersonenID = ? ;`;
         	
             connection.query(sql,pPid, callback);
@@ -24,27 +24,19 @@ function(connection, callback) {
         update: (req) => {
         	var pPID = req.query['pPID'];
         	const ins = {
-        			Matrikelnummer: req.query['mtnr'],
-        			Studiengang_StudiengangID: req.query['sSID'],
-        			'Akademischer Grad_GradID': req.query['aGGID'],
-        			Abschlussarbeiten_Kategorie_KategorieID: req.query['aKKID'],
-        			Abschlussarbeiten_Studiengang_StudiengangID: req.query['aSSID']
+        			'Akademischer Grad_GradID':req.query['aGGID']
         	}
-        	var sql = `UPDATE Student 
+        	var sql = `UPDATE dozent 
                         SET  ?
                         WHERE Person_PersonenID = ?;`;
             connection.query(sql,[ins,pPid], callback);
         },
         add: (req) => {
         	const ins = {
-        			Person_PersonenID: req.query['pPID'],
-        			Matrikelnummer: req.query['mtnr'],
-        			Studiengang_StudiengangID: req.query['sSID'],
         			'Akademischer Grad_GradID': req.query['aGGID'],
-        			Abschlussarbeiten_Kategorie_KategorieID: req.query['aKKID'],
-        			Abschlussarbeiten_Studiengang_StudiengangID: req.query['aSSID']
+        			Person_PersonenID:req.query['pPID']
         	}
-        	var sql = `INSERT INTO Student SET ? `
+        	var sql = `INSERT INTO dozent SET ? `
                 connection.query(sql,ins,callback);
         },
         find: (req) => {

@@ -6,7 +6,7 @@ function(connection, callback) {
         	var sql  = `SELECT *
                         FROM branche 
                         WHERE BranchenID = ?`;
-            
+            console.log("halloo")
             connection.query(sql,bID, callback);
         },
         getAll: () => {
@@ -29,7 +29,7 @@ function(connection, callback) {
                         SET  Bezeichnung = ?
                         WHERE BranchenID = ? `;
         	
-            connection.query(sql,[bez,bid], callback);
+            connection.query(sql,[bez,bID], callback);
         },
         find: (req) => {
         	//hier variable einfügen
