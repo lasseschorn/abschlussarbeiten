@@ -2,6 +2,8 @@ const express 	 	= require('express');
 const bodyParser 	= require('body-parser');
 const path 			= require('path');
 const session 		= require('express-session');
+var logger 			= require('morgan');
+var cookieParser 	= require('cookie-parser');
 
 const app = express();
 
@@ -28,12 +30,13 @@ connection.connect();
 
 
 
+
 /*******************************************************************************
  * 								Fileupload 
  ******************************************************************************/
 
 
-var mime = require('mime');
+//var mime = require('mime');
 var multer = require('multer');
 var patt = new RegExp("/.*.pdf.*/i");
 
@@ -82,6 +85,49 @@ var storage =   multer.diskStorage({
 	    });  
 	});  
 
+	
+/*--------------------------------------------------------------------------------
+ -------------------------------Login---------------------------------------------
+ ---------------------------------------------------------------------------------*/
+	
+	const users = require('./models/users').method;
+	
+	
+	app.route('/api/users')
+	.get( function(req, res){
+		
+		var x = users(connection, function(error, results, fields)  { 
+			if(error) { 
+				res.status(500);
+				res.send('Error in Database Connection or Query');
+				} else {
+					
+					res.json(results)
+					
+					
+				}
+			var x = JSON.stringify(res);
+			// hier vielleicht die Logik des anmeldens und der session implementieren.
+			if (x.length >= 0){
+				console.log(x)
+				console.log("Eintrag gefunden")
+			} else {
+				console.log("eintrag nicht gefunden")
+			}
+		}).checkuser(req) 
+	})
+	
+
+	
+function requireRole (role) {
+	return function (req, res, next) {
+	if (req.session.user && req.session.user.role === role) {
+	next();
+	} else {
+	res.send(403);
+	}
+	}
+	}
 
 
 /* -------------------------------------------------------------
@@ -926,6 +972,80 @@ app.route('/api/Betreuer/add')
 				res.json(results)
 				}}).add(req)
 })
+
+/* -------------------------------------------------------------
+					person
+-------------------------------------------------------------*/
+const dozent = require('./models/dozent').method;
+
+
+
+app.route('/api/dozent/getbyid')
+.get(function(req, res) {
+	 dozent(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).getById(req)
+})
+
+app.route('/api/dozent/getall')
+.get(function(req, res) {
+	 dozent(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).getAll()
+})
+
+app.route('/api/dozent/create')
+.get(function(req, res) {
+	 dozent(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).create(req)
+})
+
+app.route('/api/dozent/update')
+.get(function(req, res) {
+	 dozent(connection, function(error, results, fields) {
+		if(error) { 
+			console.log(error)
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).update(req)
+})
+
+app.route('/api/dozent/find')
+.get(function(req, res) {
+	 dozent(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).find(req)
+})
+app.route('/api/dozent/add')
+.get(function(req, res) {
+	 dozent(connection, function(error, results, fields) {
+		if(error) { 
+			res.status(500);
+			res.send('Error in Database Connection or Query');
+			} else {
+				res.json(results)
+				}}).add(req)
+})
+
 
 
 app.listen(8080, function(){
