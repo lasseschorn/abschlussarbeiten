@@ -2,24 +2,24 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-        	
+
         	var uID = req.query['uID'];
-        	
+
             var sql  = `SELECT *
-                        FROM unternehmen 
+                        FROM Unternehmen
                         WHERE UnternehmensID = ?`;
             connection.query(sql,uID, callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM Unternehmen; `;
 
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var uID = req.query['uID'];
-        	var sql = `DELETE  
-                        FROM Unternehmen 
+        	var sql = `DELETE
+                        FROM Unternehmen
                         WHERE ? `;
             connection.query(sql,uID, callback);
         },
@@ -32,9 +32,9 @@ function(connection, callback) {
         			  }
         		var sql = `INSERT INTO Unternehmen SET ? `
                 connection.query(sql,ins,callback);
-            
+
         },
-        
+
         update: (req) => {
 const ins = {
 		  Firmenname: req.query['fname'],
@@ -43,16 +43,16 @@ const ins = {
 		  Branche_BranchenID: req.query['bbID'],
 		  }
         var   uID = req.query['uID'];
-		
-			var sql = `UPDATE Unternehmen 
+
+			var sql = `UPDATE Unternehmen
                         SET  ?
                         Where UnternehmensID = ?`;
             connection.query(sql,[ins,uID], callback);
         },
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
-                        WHERE Bezeichnung like ${req.param('bez').toString()}`;
+            var sql = `SELECT *
+                        FROM Unternehmen
+                        WHERE Firmenname like ${req.param('bez').toString()}%`;
             connection.query(sql, callback);
         },
         create: (req) => {

@@ -2,29 +2,29 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-        	
-    //Hier die richtigen variablennamen einsetzen        	
+
+    //Hier die richtigen variablennamen einsetzen
         	var aID = req.query['aID'];
         	var sql  = `SELECT *
-                        FROM Adresse 
+                        FROM Adresse
                         WHERE AdressID = ?`;
             connection.query(sql, aID , callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM adresse; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var aID = req.query['aID'];
-        	var sql = `DELETE  
-                        FROM adresse 
+        	var sql = `DELETE
+                        FROM adresse
                         WHERE AdressID = ? `;
         	connection.query(sql,aID, callback);
         },
         update: (req) => {
         	var  aID = req.query['aID'];
-            
+
         	const ins = {
         		Straße: req.query['str'],
         		Hausnummer: req.query['hnr'],
@@ -32,10 +32,10 @@ function(connection, callback) {
         		Postleitzahl: req.query['plz'],
         		Ort: req.query['ort'],
          	}
-        	
+
         	var sql = `UPDATE Adresse
         	SET ?
-        	WHERE AdressID = ?` 
+        	WHERE AdressID = ?`
             connection.query(sql,[ins,aID],callback);
         },
         add: (req) =>{
@@ -48,12 +48,12 @@ function(connection, callback) {
             	}
         	var sql = `INSERT INTO Adresse SET ? `
                 connection.query(sql,ins,callback);
-            	
+
         },
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
-                        WHERE Bezeichnung like ${req.param('bez').toString()}`;
+            var sql = `SELECT *
+                        FROM Adresse 
+                        WHERE Straße like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },
         create: (req) => {

@@ -4,21 +4,21 @@ function(connection, callback) {
         getById: (req) => {
         	var pPID = req.query['pPID'];
             var sql  = `SELECT *
-                        FROM dozent 
+                        FROM dozent
                         WHERE Person_PersonenID = ? ;`;
             connection.query(sql,pPid, callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM dozent; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var pPId = req.query['pPid'];
-        	var sql = `DELETE  
-                        FROM dozent 
+        	var sql = `DELETE
+                        FROM dozent
                         WHERE Person_PersonenID = ? ;`;
-        	
+
             connection.query(sql,pPid, callback);
         },
         update: (req) => {
@@ -26,7 +26,7 @@ function(connection, callback) {
         	const ins = {
         			'Akademischer Grad_GradID':req.query['aGGID']
         	}
-        	var sql = `UPDATE dozent 
+        	var sql = `UPDATE dozent
                         SET  ?
                         WHERE Person_PersonenID = ?;`;
             connection.query(sql,[ins,pPid], callback);
@@ -39,15 +39,16 @@ function(connection, callback) {
         	var sql = `INSERT INTO dozent SET ? `
                 connection.query(sql,ins,callback);
         },
+        //TODO: find und create anpassen
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
+            var sql = `SELECT *
+                        FROM branche
                         WHERE Bezeichnung like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },
         create: (req) => {
-            var sql = `SELECT * 
-                        FORM branche 
+            var sql = `SELECT *
+                        FORM branche
                         WHERE Bezeichnung = ? ${bez} ?`;
             connection.query(sql, callback);
         }

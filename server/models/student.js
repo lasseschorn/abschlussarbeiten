@@ -4,21 +4,21 @@ function(connection, callback) {
         getById: (req) => {
         	var pPID = req.query['pPID'];
             var sql  = `SELECT *
-                        FROM student 
+                        FROM student
                         WHERE Person_PersonenID = ? ;`;
             connection.query(sql,pPid, callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM student; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var pPId = req.query['pPid'];
-        	var sql = `DELETE  
-                        FROM Student 
+        	var sql = `DELETE
+                        FROM Student
                         WHERE Person_PersonenID = ? ;`;
-        	
+
             connection.query(sql,pPid, callback);
         },
         update: (req) => {
@@ -30,7 +30,7 @@ function(connection, callback) {
         			Abschlussarbeiten_Kategorie_KategorieID: req.query['aKKID'],
         			Abschlussarbeiten_Studiengang_StudiengangID: req.query['aSSID']
         	}
-        	var sql = `UPDATE Student 
+        	var sql = `UPDATE Student
                         SET  ?
                         WHERE Person_PersonenID = ?;`;
             connection.query(sql,[ins,pPid], callback);
@@ -47,15 +47,16 @@ function(connection, callback) {
         	var sql = `INSERT INTO Student SET ? `
                 connection.query(sql,ins,callback);
         },
+        //TODO: find und create anpassen
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
+            var sql = `SELECT *
+                        FROM branche
                         WHERE Bezeichnung like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },
         create: (req) => {
-            var sql = `SELECT * 
-                        FORM branche 
+            var sql = `SELECT *
+                        FORM branche
                         WHERE Bezeichnung = ? ${bez} ?`;
             connection.query(sql, callback);
         }

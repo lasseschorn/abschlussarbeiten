@@ -3,30 +3,30 @@ function(connection, callback) {
     return {
         getById: (req) => {
         	var aID = req.query['aID']
-            	
+
         	var sql  = `SELECT *
-                        FROM abschlussarbeit 
+                        FROM abschlussarbeit
                         WHERE ArbeitsID = ?`;
-        	
+
             connection.query(sql,aID, callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM abschlussarbeit; `;
 
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var aID = req.query['aID']
-        	
-        	var sql = `DELETE  
-                        FROM abschlussarbeit 
+
+        	var sql = `DELETE
+                        FROM abschlussarbeit
                         WHERE ArbeitsID = ?`;
-        	
+
             connection.query(sql,aID, callback);
         },
         update: (req) => {
-        	
+
         	var aID = req.query['aID']
         	const ins = {
         			Abstract: req.query['abstract'],
@@ -39,16 +39,19 @@ function(connection, callback) {
         			Betreuer_Unternehmen_Adresse_AdressID: req.query['bUAAID'],
         			Student_PersonID:req.query['sPID']
         	}
-        	
-       	var sql = `UPDATE abschlussarbeit 
+
+       	var sql = `UPDATE abschlussarbeit
                    SET  ?
                    WHERE ArbeitsID = ?`;
             connection.query(sql,[ins,aID],callback);
-            
+
         },
-        
+
         //nach was hier suchen???
         find: (req) => {
+          var sql = `SELECT *
+                      FROM abschlussarbeit
+                      WHERE Titel like ${req.param('titel').toString()}%`;
         	connection.query(sql, callback);
         },
         add: (req) => {
@@ -99,7 +102,7 @@ function(connection, callback) {
 ENGINE = InnoDB;
 `
     	  	  connection.query(sql,callback);
-     
-      }  
+
+      }
     };
 }

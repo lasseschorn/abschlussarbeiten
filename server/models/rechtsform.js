@@ -4,37 +4,38 @@ function(connection, callback) {
         getById: (req) => {
         	var rID = req.query['rID'];
         	var sql  = `SELECT *
-                        FROM rechtsform 
+                        FROM rechtsform
                         WHERE RechtformID = ? ;`;
             connection.query(sql,rID, callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM Rechtsform; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var rID = req.query['rID'];
-        	var sql = `DELETE  
-                        FROM Rechtsform 
+        	var sql = `DELETE
+                        FROM Rechtsform
                         WHERE RechtsformID = ?; `;
         	console.log(sql);
             connection.query(sql,rID, callback);
         },
         update: (req) => {
 			var rID = req.query['rID'];
-		 
+
         	const ins = {
          			Bezeichnung: req.query['bez']
         	}
-        	var sql = `UPDATE Rechtsform 
+        	var sql = `UPDATE Rechtsform
                         SET  ?
                         WHERE RechtsformID = ?`;
             connection.query(sql,[ins,rID], callback);
         },
+        //TODO: anpassen
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
+            var sql = `SELECT *
+                        FROM branche
                         WHERE Bezeichnung like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },
@@ -44,7 +45,7 @@ function(connection, callback) {
         	}
         	var sql = `INSERT INTO Rechtsform SET ? `
                 connection.query(sql,ins,callback);
-            	
+
         },
         create: (req) => {
             var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Rechtsform (

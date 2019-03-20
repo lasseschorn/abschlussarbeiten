@@ -11,14 +11,14 @@ function(connection, callback) {
             connection.query(sql,[uUID,uAAID], callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM betreuer; `;
             connection.query(sql, callback);
-        },    
+        },
         delete: (req) => {
         	var pPID = req.query['pPID'];
-            
-        	var sql = `DELETE  
+
+        	var sql = `DELETE
                         FROM Betreuer
                         WHERE Person_PersonenID= ?`;
             connection.query(sql,pPID, callback);
@@ -27,12 +27,12 @@ function(connection, callback) {
         	const ins ={
         			Unternehmen_UnternehmensID : req.query['uUID'],
         			Unternehmen_Adresse_AdressID : req.query['uAAID']
-                   
+
         	}
-    
-        	var pPID = req.query['pPID'];		
-            
-        	var sql = `UPDATE Betreuer 
+
+        	var pPID = req.query['pPID'];
+
+        	var sql = `UPDATE Betreuer
                         SET  ?
                         WHERE Person_PersonenID = ?`;
             connection.query(sql,[ins,pPID], callback);
@@ -47,15 +47,16 @@ function(connection, callback) {
         	var sql = `INSERT INTO Betreuer SET ? `
             connection.query(sql,ins,callback);
         },
+        //TODO: find und create anpassen
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
+            var sql = `SELECT *
+                        FROM branche
                         WHERE Bezeichnung like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },
         create: (req) => {
-            var sql = `SELECT * 
-                        FORM branche 
+            var sql = `SELECT *
+                        FORM branche
                         WHERE Bezeichnung = ? ${bez} ?`;
             connection.query(sql, callback);
         }

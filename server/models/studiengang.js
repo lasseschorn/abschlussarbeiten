@@ -4,19 +4,19 @@ function(connection, callback) {
         getById: (req) => {
         	//richtige variable eintagen
         	var sID = req.query['sID'];
-            var sql  = `select * 
+            var sql  = `select *
             from Studiengang
             where StudiengangID = ? `
             connection.query(sql,sID, callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM Studiengang; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var sID = req.query['sID'];
-        	var sql = `DELETE  
+        	var sql = `DELETE
                         FROM Studiengang
                         WHERE StudiengangID = ?`;
         	console.log(sql);
@@ -30,26 +30,26 @@ function(connection, callback) {
                         WHERE StudiengangID = ?`;
             connection.query(sql,[bez, sID] ,callback);
         },
-        
+
         add: (req) => {
         	const ins = {
         			Bezeichnung: req.query['bez']
         	}
         	var sql = `INSERT INTO Studiengang SET ? `
             connection.query(sql,ins,callback);
-        	
+
         },
-        
-        
-        
+
+
+        //TODO: find anpassen
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
+            var sql = `SELECT *
+                        FROM branche
                         WHERE Bezeichnung like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },
-        
-        
+
+
         create: (req) => {
             var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Studiengang (
             StudiengangID INT NOT NULL AUTO_INCREMENT,

@@ -4,20 +4,20 @@ function(connection, callback) {
         getById: (req) => {
         	//richtige variable eintagen
         	var kID = req.query['kID'];
-            var sql  = `select * 
+            var sql  = `select *
             from Kategorie
             where KategorieID = ? `
             connection.query(sql,kID, callback);
         },
         getAll: () => {
-        	var sql = `SELECT * 
+        	var sql = `SELECT *
             FROM kategorie; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
         	var kID = req.query['kID'];
-        	var sql = `DELETE  
-                        FROM Kategorie 
+        	var sql = `DELETE
+                        FROM Kategorie
                         WHERE KategorieID = ?`;
         	console.log(sql);
             connection.query(sql,kID, callback);
@@ -25,34 +25,34 @@ function(connection, callback) {
         update: (req) => {
         	var bez = req.query['bez'];
         	var kID = req.query['kID'];
-        	var sql = `UPDATE Kategorie 
+        	var sql = `UPDATE Kategorie
                         SET  Bezeichnung = ?
                         WHERE KategorieID = ?`;
             connection.query(sql,[bez, kID] ,callback);
         },
-        
+
         add: (req) => {
         	const ins = {
         			Bezeichnung: req.query['bez']
         	}
         	var sql = `INSERT INTO Kategorie SET ? `
             connection.query(sql,ins,callback);
-        	
+
         },
-        
-        
-        
+
+
+        //TODO: find und create anpassen
         find: (req) => {
-            var sql = `SELECT * 
-                        FROM branche 
+            var sql = `SELECT *
+                        FROM branche
                         WHERE Bezeichnung like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },
-        
-        
+
+
         create: (req) => {
             var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Kategorie (
-            		   KategorieID INT NOT NULL AUTO_INCREMENT, 
+            		   KategorieID INT NOT NULL AUTO_INCREMENT,
             		   Bezeichnung VARCHAR(45) NULL DEFAULT NULL,
             		   PRIMARY KEY (KategorieID))
             		   ENGINE = InnoDB;`;
