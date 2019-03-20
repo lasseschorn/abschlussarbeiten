@@ -3,7 +3,9 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Branche } from '../Branche';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BrancheService {
   private generalUrl = '/api/branche';
 
