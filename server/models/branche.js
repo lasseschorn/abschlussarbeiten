@@ -4,39 +4,40 @@ function(connection, callback) {
         getById: (req) => {
         	var bID = req.query['bID'];
         	var sql  = `SELECT *
-                        FROM branche 
+                        FROM branche
                         WHERE BranchenID = ?`;
             console.log("halloo")
             connection.query(sql,bID, callback);
         },
         getAll: () => {
-            var sql = `SELECT * 
+            var sql = `SELECT *
             FROM branche; `;
             connection.query(sql, callback);
         },
         delete: (req) => {
-        	var bID = req.query['bID']; 
-            var sql = `DELETE  
-                        FROM branche 
+        	var bID = req.query['bID'];
+            var sql = `DELETE
+                        FROM branche
                         WHERE BranchenID = ? `;
             connection.query(sql,bID, callback);
         },
         update: (req) => {
         	var	bez =  req.query['bez'];
         	var bID =  req.query['bID'];
-             	
-        	var sql = `UPDATE Branche 
+
+        	var sql = `UPDATE Branche
                         SET  Bezeichnung = ?
                         WHERE BranchenID = ? `;
-        	
+
             connection.query(sql,[bez,bID], callback);
         },
         find: (req) => {
+          //ikkkk
         	//hier variable einfügen
         	var bezeichnung = req.query['bez'];
-            
-        	var sql = `SELECT * 
-                        FROM Branche 
+
+        	var sql = `SELECT *
+                        FROM Branche
                         WHERE Bezeichnung like ` + bezeichnung;
             connection.query(sql, callback);
         },
@@ -46,10 +47,10 @@ function(connection, callback) {
             	}
             	var sql = `INSERT INTO Branche SET ? `
                 connection.query(sql,ins,callback);
-            
+
         },
         create: (req) => {
-        	
+
         	var sql = `CREATE TABLE IF NOT EXISTS AbschlussarbeitenDB.Branche (
   BranchenID INT NOT NULL AUTO_INCREMENT,
   Bezeichnung VARCHAR(45) NOT NULL,
