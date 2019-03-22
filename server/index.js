@@ -155,6 +155,7 @@ app.route('/api/branche/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
+        //
         // Lasse bitte einmal Prüfen ob du das objekt so wie es jetzt ankommt haben willst
         //wenn nicht dann probier mal bitte die auskommentierte Zeile unter res.send und kommentier die erste aus
         //var json =  JSON.parse(results);
