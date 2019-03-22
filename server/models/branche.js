@@ -2,17 +2,23 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-        	var bID = req.query['bID'];
+
+          var bID = req.query['bID'];
         	var sql  = `SELECT *
                         FROM branche
                         WHERE BranchenID = ?`;
-            console.log("halloo")
-            connection.query(sql,bID, callback);
+        connection.query(sql,bID,function(err, rows){
+
+          callback(err,JSON.stringify(rows));
+        });
         },
         getAll: () => {
             var sql = `SELECT *
             FROM branche; `;
-            connection.query(sql, callback);
+            connection.query(sql,function(err,rows){
+
+            callback(err,JSON.stringify(rows));
+            });
         },
         delete: (req) => {
         	var bID = req.query['bID'];
