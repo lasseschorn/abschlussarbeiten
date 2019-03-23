@@ -12,7 +12,11 @@ function(connection, callback) {
         },
         getAll: () => {
         	var sql = `SELECT *
-            FROM abschlussarbeit; `;
+            FROM abschlussarbeit
+            JOIN kategorie on abschlussarbeit.Kategorie_KategorieID  = kategorie.KategorieID
+            join Studiengang on abschlussarbeit.Studiengang_StudiengangID = Studiengang.StudiengangID
+            join dozent on abschlussarbeit.Dozent_DozentID = dozent.Person_PersonenID
+            join unternehmen on abschlussarbeit.Betreuer_Unternehmen_UnternehmensID = unternehmen.UnternehmensID; `;
 
             connection.query(sql, callback);
         },

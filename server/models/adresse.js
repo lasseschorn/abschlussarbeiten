@@ -8,12 +8,27 @@ function(connection, callback) {
         	var sql  = `SELECT *
                         FROM Adresse
                         WHERE AdressID = ?`;
-            connection.query(sql, aID , callback);
+            connection.query(sql, aID , function(err,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else if (results.length > 0){
+                return callback(null,JSON.stringify(results));
+              } else {
+                return callback(new Error("Falsche ID angegeben"),null);
+              }
+            });
+
         },
         getAll: () => {
         	var sql = `SELECT *
             FROM adresse; `;
-            connection.query(sql, callback);
+            connection.query(sql, function(err,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
         },
         delete: (req) => {
         	var aID = req.query['aID'];
@@ -36,7 +51,20 @@ function(connection, callback) {
         	var sql = `UPDATE Adresse
         	SET ?
         	WHERE AdressID = ?`
-            connection.query(sql,[ins,aID],callback);
+            connection.query(sql,[ins,aID],function(err,results){
+              if(err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else {
+                  if (results.changedRows == 0) {
+                      if (results.affectedRows == 0) {
+                        return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
+                      } else {
+                        return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                  }} else {
+                      return callback(null,JSON.stringify(results))
+                  }
+              }
+            });
         },
         add: (req) =>{
         	const ins = {
@@ -52,7 +80,7 @@ function(connection, callback) {
         },
         find: (req) => {
             var sql = `SELECT *
-                        FROM Adresse 
+                        FROM Adresse
                         WHERE Straße like ${req.param('bez').toString()}`;
             connection.query(sql, callback);
         },

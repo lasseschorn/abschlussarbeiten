@@ -236,7 +236,7 @@ app.route('/api/adresse/getbyid')
 	 adress(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
-			res.send('Error in Database Connection or Query');
+			res.send(error);
 			} else {
 				res.send(results)
 				}}).getById(req)
@@ -247,7 +247,7 @@ app.route('/api/adresse/getall')
 	 adress(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
-			res.send('Error in Database Connection or Query');
+			res.send(error);
 			} else {
 				res.send(results)
 				}}).getAll()
@@ -268,8 +268,7 @@ app.route('/api/adresse/update')
 .get(function(req, res) {
 	 adress(connection, function(error, results, fields) {
 		if(error) {
-			console.log(error);
-			res.send('Error in Database Connection or Query');
+			res.send(error);
 			} else {
 				res.send(results)
 				}}).update(req)
@@ -765,7 +764,7 @@ app.route('/api/akademischergrad/getbyid')
 	 akgrad(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
-			res.send('Error in Database Connection or Query');
+			res.send(error);
 			} else {
 				res.send(results)
 				}}).getById(req)
@@ -775,9 +774,8 @@ app.route('/api/akademischergrad/getall')
 .get(function(req, res) {
 	 akgrad(connection, function(error, results, fields) {
 		if(error) {
-			console.log(error);
 			res.status(500);
-			res.send('Error in Database Connection or Query');
+			res.send(error);
 			} else {
 				res.send(results)
 				}}).getAll()
@@ -799,7 +797,7 @@ app.route('/api/akademischergrad/update')
 	 akgrad(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
-			res.send('Error in Database Connection or Query');
+			res.send(error);
 			} else {
 				res.send(results)
 				}}).update(req)

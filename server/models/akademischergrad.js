@@ -6,13 +6,27 @@ function(connection, callback) {
             var sql  = 'SELECT *'
                         +'FROM `akademischer grad`'
                         + 'WHERE GradID = ?;';
-            connection.query(sql,gID, callback);
+            connection.query(sql,gID, function(err,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else if (results.length > 0){
+                return callback(null,JSON.stringify(results));
+              } else {
+                return callback(new Error("Falsche ID angegeben"),null);
+              }
+            });
         },
         getAll: () => {
         	var sql = 'SELECT *'
         		+ 'FROM `akademischer grad`; ';
 
-            connection.query(sql, callback);
+            connection.query(sql, function(err,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
         },
         delete: (req) => {
         	var gID = req.query['gID'];
@@ -27,7 +41,20 @@ function(connection, callback) {
         	var sql = 'UPDATE `akademischer grad`'
                        + 'SET  Bezeichnung = ?'
                         + 'WHERE GradID = ?';
-            connection.query(sql,[bez,gID], callback);
+            connection.query(sql,[bez,gID], function(err,results){
+              if(err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else {
+                  if (results.changedRows == 0) {
+                      if (results.affectedRows == 0) {
+                        return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
+                      } else {
+                        return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                  }} else {
+                      return callback(null,JSON.stringify(results))
+                  }
+              }
+            });
         },
         //TODO: Anpassen
         find: (req) => {
