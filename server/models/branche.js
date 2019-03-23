@@ -7,17 +7,28 @@ function(connection, callback) {
         	var sql  = `SELECT *
                         FROM branche
                         WHERE BranchenID = ?`;
-        connection.query(sql,bID,function(err, rows){
+        connection.query(sql,bID,function(err, results){
+          if (err){
+            return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+          } else if (results.length > 0){
+            return callback(null,JSON.stringify(results));
+          } else {
+            return callback(new Error("Falsche ID angegeben"),null);
+          }
 
-          callback(err,JSON.stringify(rows));
+//          callback(err,JSON.stringify(rows));
         });
         },
         getAll: () => {
             var sql = `SELECT *
             FROM branche; `;
-            connection.query(sql,function(err,rows){
-
-            callback(err,JSON.stringify(rows));
+            connection.query(sql,function(err,results){
+            if (err){
+              return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+            } else{
+              return callback(null,JSON.stringify(results));
+            }
+            //callback(err,JSON.stringify(results));
             });
         },
         delete: (req) => {
@@ -25,7 +36,8 @@ function(connection, callback) {
             var sql = `DELETE
                         FROM branche
                         WHERE BranchenID = ? `;
-            connection.query(sql,bID, callback);
+          connection.query(sql,bID, callback);
+
         },
         update: (req) => {
         	var	bez =  req.query['bez'];
@@ -35,7 +47,21 @@ function(connection, callback) {
                         SET  Bezeichnung = ?
                         WHERE BranchenID = ? `;
 
-            connection.query(sql,[bez,bID], callback);
+            connection.query(sql,[bez,bID], function(err,results) {
+              if(err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+
+              } else {
+                  if (results.changedRows == 0) {
+                      if (results.affectedRows == 0) {
+                        return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
+                      } else {
+                      return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                  }} else {
+                      return callback(null,JSON.stringify(results))
+                  }
+              }
+            });
         },
         find: (req) => {
           //ikkkk

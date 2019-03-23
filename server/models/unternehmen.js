@@ -6,13 +6,19 @@ function(connection, callback) {
         	var uID = req.query['uID'];
 
             var sql  = `SELECT *
-                        FROM Unternehmen
-                        WHERE UnternehmensID = ?`;
+              FROM Unternehmen
+              JOIN adresse on Unternehmen.Adresse_AdressID = adresse.AdressID
+              JOIN rechtsform on Unternehmen.Rechtsform_RechtsformID = rechtsform.RechtsformID
+              JOIN branche on Unternehmen.Branche_BranchenID = branche.BranchenID
+              WHERE UnternehmensID = ?`;
             connection.query(sql,uID, callback);
         },
         getAll: () => {
         	var sql = `SELECT *
-            FROM Unternehmen; `;
+            FROM Unternehmen
+            JOIN adresse on Unternehmen.Adresse_AdressID = adresse.AdressID
+            JOIN rechtsform on Unternehmen.Rechtsform_RechtsformID = rechtsform.RechtsformID
+            JOIN branche on Unternehmen.Branche_BranchenID = branche.BranchenID ; `;
 
             connection.query(sql, callback);
         },

@@ -103,7 +103,7 @@ var storage =   multer.diskStorage({
 				res.send('Error in Database Connection or Query');
 				} else {
 
-					res.json(results)
+					res.send(results)
 
 
 				}
@@ -139,10 +139,11 @@ app.route('/api/branche/getbyid')
         branche(connection, function(error, results, fields)  {
             if(error) {
                 res.status(500);
-                res.send('Error in Database Connection or Query');
-            } else {
 
-                res.send(results);
+                //Hier bitte gucken ob error objekt zurück kommen soll oder message
+                res.send(error.toString());
+            } else {
+                    res.send(results);
             }
         }).getById(req)
     }
@@ -168,10 +169,10 @@ app.route('/api/branche/delete')
  .get( function(req, res) {
 	 branche(connection, function(error, results, fields) {
 		if(error) {
-			res.status(500);
+      res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).delete(req)
 })
 
@@ -180,10 +181,11 @@ app.route('/api/branche/update')
 	 branche(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
-			res.send('Error in Database Connection or Query');
+			res.send(error.toString());
 			} else {
-				res.json(results)
-				}}).update(req)
+        console.log(results.toString());
+				res.send(results)
+      }}).update(req)
 })
 
 
@@ -194,7 +196,7 @@ app.route('/api/branche/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 
@@ -205,7 +207,7 @@ app.route('/api/branche/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 app.route('/api/branche/add')
@@ -215,7 +217,7 @@ app.route('/api/branche/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -236,7 +238,7 @@ app.route('/api/adresse/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -247,7 +249,7 @@ app.route('/api/adresse/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -258,7 +260,7 @@ app.route('/api/adresse/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -269,7 +271,7 @@ app.route('/api/adresse/update')
 			console.log(error);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -280,7 +282,7 @@ app.route('/api/adresse/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 app.route('/api/adresse/add')
@@ -290,7 +292,7 @@ app.route('/api/adresse/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -308,7 +310,7 @@ app.route('/api/unternehmen/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -319,7 +321,7 @@ app.route('/api/unternehmen/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -330,7 +332,7 @@ app.route('/api/unternehmen/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -341,7 +343,7 @@ app.route('/api/unternehmen/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -352,7 +354,7 @@ app.route('/api/unternehmen/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 
@@ -363,7 +365,7 @@ app.route('/api/unternehmen/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -382,7 +384,7 @@ app.route('/api/abschlussarbeit/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -393,7 +395,7 @@ app.route('/api/abschlussarbeit/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -406,7 +408,7 @@ app.route('/api/abschlussarbeit/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -418,7 +420,7 @@ app.route('/api/abschlussarbeit/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -431,7 +433,7 @@ app.route('/api/abschlussarbeit/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -442,7 +444,7 @@ app.route('/api/abschlussarbeit/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 
@@ -460,7 +462,7 @@ app.route('/api/student/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -471,7 +473,7 @@ app.route('/api/student/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -482,7 +484,7 @@ app.route('/api/student/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -493,7 +495,7 @@ app.route('/api/student/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -504,7 +506,7 @@ app.route('/api/student/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 app.route('/api/student/add')
@@ -514,7 +516,7 @@ app.route('/api/student/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -532,7 +534,7 @@ app.route('/api/person/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -543,7 +545,7 @@ app.route('/api/person/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -554,7 +556,7 @@ app.route('/api/person/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -566,7 +568,7 @@ app.route('/api/person/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -577,7 +579,7 @@ app.route('/api/person/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 app.route('/api/person/add')
@@ -587,7 +589,7 @@ app.route('/api/person/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -606,7 +608,7 @@ app.route('/api/rechtsform/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -617,7 +619,7 @@ app.route('/api/rechtsform/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -628,7 +630,7 @@ app.route('/api/rechtsform/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -639,7 +641,7 @@ app.route('/api/rechtsform/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 app.route('/api/rechtsform/add')
@@ -649,7 +651,7 @@ app.route('/api/rechtsform/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -661,7 +663,7 @@ app.route('/api/rechtsform/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 
@@ -681,7 +683,7 @@ app.route('/api/kategorie/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -692,7 +694,7 @@ app.route('/api/kategorie/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -703,7 +705,7 @@ app.route('/api/kategorie/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -714,7 +716,7 @@ app.route('/api/kategorie/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -725,7 +727,7 @@ app.route('/api/kategorie/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 app.route('/api/kategorie/add')
@@ -735,7 +737,7 @@ app.route('/api/kategorie/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 app.route('/api/kategorie/delete')
@@ -745,7 +747,7 @@ app.route('/api/kategorie/delete')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).delete(req)
 })
 
@@ -765,7 +767,7 @@ app.route('/api/akademischergrad/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -777,7 +779,7 @@ app.route('/api/akademischergrad/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -788,7 +790,7 @@ app.route('/api/akademischergrad/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -799,7 +801,7 @@ app.route('/api/akademischergrad/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -810,7 +812,7 @@ app.route('/api/akademischergrad/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 
@@ -822,7 +824,7 @@ app.route('/api/akademischergrad/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -841,7 +843,7 @@ app.route('/api/Studiengang/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -852,7 +854,7 @@ app.route('/api/Studiengang/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -863,7 +865,7 @@ app.route('/api/Studiengang/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -874,7 +876,7 @@ app.route('/api/Studiengang/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -885,7 +887,7 @@ app.route('/api/Studiengang/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 app.route('/api/Studiengang/add')
@@ -895,7 +897,7 @@ app.route('/api/Studiengang/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 app.route('/api/Studiengang/delete')
@@ -905,7 +907,7 @@ app.route('/api/Studiengang/delete')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).delete(req)
 })
 
@@ -924,7 +926,7 @@ app.route('/api/Betreuer/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -935,7 +937,7 @@ app.route('/api/Betreuer/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -946,7 +948,7 @@ app.route('/api/Betreuer/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -957,7 +959,7 @@ app.route('/api/Betreuer/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -968,7 +970,7 @@ app.route('/api/Betreuer/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 
@@ -979,7 +981,7 @@ app.route('/api/Betreuer/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
@@ -997,7 +999,7 @@ app.route('/api/dozent/getbyid')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getById(req)
 })
 
@@ -1008,7 +1010,7 @@ app.route('/api/dozent/getall')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).getAll()
 })
 
@@ -1019,7 +1021,7 @@ app.route('/api/dozent/create')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).create(req)
 })
 
@@ -1031,7 +1033,7 @@ app.route('/api/dozent/update')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).update(req)
 })
 
@@ -1042,7 +1044,7 @@ app.route('/api/dozent/find')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).find(req)
 })
 app.route('/api/dozent/add')
@@ -1052,7 +1054,7 @@ app.route('/api/dozent/add')
 			res.status(500);
 			res.send('Error in Database Connection or Query');
 			} else {
-				res.json(results)
+				res.send(results)
 				}}).add(req)
 })
 
