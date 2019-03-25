@@ -141,7 +141,7 @@ app.route('/api/branche/getbyid')
                 res.status(500);
 
                 //Hier bitte gucken ob error objekt zurück kommen soll oder message
-                res.send(error.toString());
+                res.send(error);
             } else {
                     res.send(results);
             }
@@ -154,7 +154,7 @@ app.route('/api/branche/getbyid')
 	 branche(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
-			res.send('Error in Database Connection or Query');
+			res.send(error);
 			} else {
         //
         // Lasse bitte einmal Prüfen ob du das objekt so wie es jetzt ankommt haben willst
@@ -181,9 +181,9 @@ app.route('/api/branche/update')
 	 branche(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
-			res.send(error.toString());
+			res.send(error;
 			} else {
-        console.log(results.toString());
+
 				res.send(results)
       }}).update(req)
 })
