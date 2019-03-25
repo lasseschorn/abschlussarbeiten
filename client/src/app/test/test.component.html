@@ -1,28 +1,37 @@
-GetAll
-<p>  
-<select ng-model="selectedBranche" ng-options="bez for bezeichnung in branchen">
-</select>
-</p>
-<hr>
-GetByID
-<input #getBy>
-<button (click)="getBranche(getBy.value)" >find</button>
-<label>{{this.getByIdBranche}}</label>
-<hr>
-Add
-<input #add>
-<button ng-click="addBranche(add.value)" >add</button>
-<label>{{this.addedBranche}}</label>
-<hr>
-Update
-<input #upid>
-<input #upbez>
-<button ng-click="updateBranche(upid.value, upbez.value)" >update</button>
-<label>{{this.updatedBranche}}</label>
-<hr>
-Delete
-<input #delete>
-<button ng-click="deleteBranche(delete.value)" >delete</button>
-<label>{{this.deletedBranche}}</label>
-<hr>
-<hr>
+<div>
+4.  <label>Branche name:
+5.    <input #brancheName />
+6.  </label>
+7.  <!-- (click) passes input value to add() and then clears the input -->
+8.  <button (click)="add(brancheName.value); brancheName.value=''">
+9.    add
+10.  </button>
+11.</div>
+12. 
+13.<ul class="branchen">
+14.  <li *ngFor="let branche of branchen">
+15.    <a routerLink="/detail/">
+16.      <span class="badge">{{branche?.BranchenID}}</span> {{branche?.Beschreibung}}
+17.    </a>
+18.    <button class="delete" title="delete branche"
+19.      (click)="delete(branche)">x</button>
+20.  </li>
+21.</ul>
+<div *ngIf="branche">
+  <h2>{{branche.Bezeichnung | uppercase}} Details</h2>
+  <div><span>id: </span>{{branche.BranchenID}}</div>
+  <div>
+    <label>name:
+      <input  placeholder="name"/>
+    </label>
+  </div>
+  <div class="grid grid-pad">
+  <a *ngFor="let branche of branchen" class="col-1-4"
+      routerLink="/detail/">
+    <div class="module branche">
+      <h4>{{branche.Beschreibung}}</h4>
+    </div>
+  </a>
+</div>
+
+

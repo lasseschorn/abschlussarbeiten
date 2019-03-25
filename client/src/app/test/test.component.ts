@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Branche } from '../Branche';
 import { BrancheService } from '../service/branche.service';
+import { Observable } from 'rxjs';
+import {catchError, map,  } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-test',
@@ -9,42 +15,45 @@ import { BrancheService } from '../service/branche.service';
 })
 export class TestComponent implements OnInit {
     branchen: Branche[];
+    branche: Branche;
+    selectedBranche: Branche;
+    deletedBranche: Branche;
+    updatedBranche: Branche;
+    getByIdBranche: Branche;
+    addedBranche: Branche;
 
-selectedBranche: Branche;
-deletedBranche: Branche;
-updatedBranche: Branche;
-getByIdBranche: Branche;
-addedBranche: Branche;
-
-  constructor(private brancheService: BrancheService) { }
+  constructor(  private brancheService: BrancheService,
+                private route: ActivatedRoute,
+                private location: Location
+) { }
 
   ngOnInit() {
         this.getBranchen();
   }
 
-    onSelect(branche: Branche): void {
-        this.selectedBranche = branche;
-}
-    getBranchen(): void {
-        this.brancheService.getAll()
-        .subscribe(branchen => this.branchen = branchen);
-}
-    getBranche(id: number): void {
-        this.brancheService.get(id)
-        .subscribe(branche => this.getByIdBranche = branche);
-    }
-    updateBranche(id: number, bez: string ): void {
-        this.brancheService.update(id, bez)
-        .subscribe(branche => this.updatedBranche = branche);
-    }
-    addBrunche(bez: string): void {
-        this.brancheService.add(bez)
-        .subscribe(branche => this.addedBranche = branche);
-    }
-    deleteBranche(id: number): void {
-        this.brancheService.delete(id)
-        .subscribe( branche => this.deletedBranche = branche);
-    }
+  getBranchen(): void {
+    this.brancheService.getAll()
+    .subscribe(branchen => this.branchen = branchen);
+  }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.brancheService.add(name)
+      .subscribe(branche => {
+        this.branchen.push(branche);
+      });
+  }
+
+  delete(branche: Branche): void {
+    this.branchen = this.branchen.filter(h => h !== branche);
+    this.brancheService.delete(branche.BranchenID).subscribe();
+  }
+
+  getHero(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.brancheService.getNo404(id)
+      .subscribe(branche => this.branche = branche);
+  }
 
 }
