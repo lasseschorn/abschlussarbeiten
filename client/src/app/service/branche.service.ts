@@ -57,7 +57,7 @@ getBranche(id: number): Observable<Branche> {
       const url = `${this.generalUrl}/add?bez=${name}`;
       return this.http.get<Branche>(url)
     .pipe(
-     tap((newBranche: Branche) => this.errorService.log(`added branche w/ id=${newBranche.id}`)),
+     tap((newBranche: Branche) => this.errorService.log(`added branche w/ id=${newBranche.BranchenID}`)),
       catchError(this.errorService.handleError<Branche>('add'))
     );
   }
