@@ -1,25 +1,45 @@
+<h1>ADD Branche</h1>
 <div>
-4.  <label>Branche name:
-5.    <input #brancheName />
-6.  </label>
-7.  <!-- (click) passes input value to add() and then clears the input -->
-8.  <button (click)="add(brancheName.value); brancheName.value=''">
-9.    add
-10.  </button>
-11.</div>
-12. 
-13.<ul class="branchen">
-14.  <li *ngFor="let branche of branchen">
-15.    <a routerLink="/detail/">
-16.      <span class="badge">{{branche?.BranchenID}}</span> {{branche?.Beschreibung}}
-17.    </a>
-18.    <button class="delete" title="delete branche"
-19.      (click)="delete(branche)">x</button>
-20.  </li>
-21.</ul>
+  <label>Branche name:
+    <input #brancheName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(brancheName.value); brancheName.value=''">
+    add
+  </button>
+</div>
+
+ <hr> 
+ <hr>
+<h1>DELETE Branche</h1>
+<ul class="branchen">
+  <li *ngFor="let branche of branchen">
+    <a routerLink="/detail/">
+      <span class="badge">{{branche.BranchenID}}</span> {{branche.Bezeichnung}}
+    </a>
+    <button class="delete" title="delete branche"
+      (click)="delete(branche)">x</button>
+  </li>
+</ul>
+
+ <hr>
+ <hr>
+<h1>GET Branche</h1>
+<label>Branche name:
+    <input #getBranche />
+  </label>
+
+    <button class="get" title="get branche"
+      (click)="get(getBranche.value)">get</button>
+
+{{this.getByIdBranche.Bezeichnung}}
+<hr>
+<hr>
+<h1></h1>
+
 <div *ngIf="branche">
-  <h2>{{branche.Bezeichnung | uppercase}} Details</h2>
-  <div><span>id: </span>{{branche.BranchenID}}</div>
+  <h2>{{branche.bezeichnung | uppercase}} Details</h2>
+  <div><span>id: </span>{{branche.id}}</div>
   <div>
     <label>name:
       <input  placeholder="name"/>
@@ -29,7 +49,7 @@
   <a *ngFor="let branche of branchen" class="col-1-4"
       routerLink="/detail/">
     <div class="module branche">
-      <h4>{{branche.Beschreibung}}</h4>
+      <h4>{{branche.Bezeichnung}}</h4>
     </div>
   </a>
 </div>

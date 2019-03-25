@@ -1,6 +1,6 @@
 export class Branche {
 
-  id: number;
-  bezeichnung: string;
+BranchenID: number;
+Bezeichnung: string;
 }
 

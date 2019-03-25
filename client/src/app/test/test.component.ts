@@ -50,10 +50,10 @@ export class TestComponent implements OnInit {
     this.brancheService.delete(branche.BranchenID).subscribe();
   }
 
-  getHero(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
+  get(id: number): void {
+//    const id = +this.route.snapshot.paramMap.get('id');
     this.brancheService.getNo404(id)
-      .subscribe(branche => this.branche = branche);
+      .subscribe(branche => this.getByIdBranche = branche);
   }
 
 }
