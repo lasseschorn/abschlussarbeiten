@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Branche } from '../Branche';
+import { Branche } from '../data/Branche';
 import { BrancheService } from '../service/branche.service';
 import { Observable } from 'rxjs';
 import {catchError, map,  } from 'rxjs/operators';
