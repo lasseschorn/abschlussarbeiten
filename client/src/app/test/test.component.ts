@@ -47,7 +47,7 @@ export class TestComponent implements OnInit {
 
   delete(branche: Branche): void {
     this.branchen = this.branchen.filter(h => h !== branche);
-    this.brancheService.delete(branche.BranchenID).subscribe();
+    this.brancheService.delete(branche.branchenID).subscribe();
   }
 
   get(id: number): void {
