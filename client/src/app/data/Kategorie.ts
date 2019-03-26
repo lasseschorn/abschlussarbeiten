@@ -1,6 +1,4 @@
 export class Kategorie {
-
-  id: number;
-  bezeichnung: string;
-  
+kategorieID: number;
+bezeichnung: string;
 }

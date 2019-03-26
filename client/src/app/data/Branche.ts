@@ -1,6 +1,5 @@
 export class Branche {
-
-BranchenID: number;
-Bezeichnung: string;
+branchenID: number;
+bezeichnung: string;
 }
 

@@ -3,7 +3,7 @@ import { Unternehmen } from './Unternehmen';
 
 export class Betreuer {
 
-  person: Person;
-  unternehmen: Unternehmen;
+person: Person;
+unternehmen: Unternehmen;
 
 }

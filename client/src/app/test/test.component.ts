@@ -51,6 +51,7 @@ export class TestComponent implements OnInit {
   }
 
   get(id: number): void {
+    {{debugger}}
 //    const id = +this.route.snapshot.paramMap.get('id');
     this.brancheService.getNo404(id)
       .subscribe(branche => this.getByIdBranche = branche);

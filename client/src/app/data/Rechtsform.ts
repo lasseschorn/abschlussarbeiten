@@ -1,5 +1,4 @@
 export class Rechtsform {
-
-  id: number;
-  bezeichnung: string;
+rechtsformID: number;
+bezeichnung: string;
 }

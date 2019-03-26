@@ -1,9 +1,8 @@
 export class Adresse {
-
-  id: number;
-  strasse: string;
-  hausnummer: number;
-  postleitzahl: number;
-  ort: string;
-  zusatz: string;
+adressID: number;
+straße: string;
+hausnummer: number;
+postleitzahl: number;
+ort: string;
+zusatz: string;
 }

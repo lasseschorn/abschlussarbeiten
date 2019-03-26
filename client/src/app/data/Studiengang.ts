@@ -1,6 +1,4 @@
 export class Studiengang {
-
-  id: number;
-  bezeichnung: string;  
-  
+studiengangID: number;
+bezeichnung: string;
 }

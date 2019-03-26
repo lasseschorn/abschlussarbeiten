@@ -26,13 +26,15 @@
  <hr>
 <h1>GET Branche</h1>
 <label>Branche name:
-    <input #getBranche />
+    <input #inGetBranche />
   </label>
 
     <button class="get" title="get branche"
-      (click)="get(getBranche.value)">get</button>
+      (click)="get(inGetBranche.value)">get</button>
 
-{{this.getByIdBranche.Bezeichnung}}
+      <div *ngIf="getByIdBranche">
+        <h2>{{this.getByIdBranche.Bezeichnung}}</h2>
+      </div>
 <hr>
 <hr>
 <h1></h1>
