@@ -6,12 +6,26 @@ function(connection, callback) {
             var sql  = `SELECT *
                         FROM student
                         WHERE Person_PersonenID = ? ;`;
-            connection.query(sql,pPid, callback);
+            connection.query(sql,pPid, function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else if (results.length > 0){
+                return callback(null,JSON.stringify(results));
+              } else {
+                return callback(new Error("Falsche ID angegeben"),null);
+              }
+            });
         },
         getAll: () => {
         	var sql = `SELECT *
             FROM student; `;
-            connection.query(sql, callback);
+            connection.query(sql, function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
         },
         delete: (req) => {
         	var pPId = req.query['pPid'];
@@ -33,7 +47,20 @@ function(connection, callback) {
         	var sql = `UPDATE Student
                         SET  ?
                         WHERE Person_PersonenID = ?;`;
-            connection.query(sql,[ins,pPid], callback);
+            connection.query(sql,[ins,pPid], function(error,results){
+              if(err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else {
+                  if (results.changedRows == 0) {
+                      if (results.affectedRows == 0) {
+                        return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
+                      } else {
+                        return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                  }} else {
+                      return callback(null,JSON.stringify(results))
+                  }
+              }
+            });
         },
         add: (req) => {
         	const ins = {
@@ -45,7 +72,13 @@ function(connection, callback) {
         			Abschlussarbeiten_Studiengang_StudiengangID: req.query['aSSID']
         	}
         	var sql = `INSERT INTO Student SET ? `
-                connection.query(sql,ins,callback);
+                connection.query(sql,ins,function(error,results){
+                  if (err){
+                    return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+                  } else{
+                    return callback(null,JSON.stringify(results));
+                  }
+                });
         },
         //TODO: find und create anpassen
         find: (req) => {

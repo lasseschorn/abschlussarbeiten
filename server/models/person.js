@@ -6,12 +6,26 @@ function(connection, callback) {
             var sql  = `SELECT *
                         FROM person
                         WHERE PersonenID = ?`
-            connection.query(sql,pID, callback);
+            connection.query(sql,pID, function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else if (results.length > 0){
+                return callback(null,JSON.stringify(results));
+              } else {
+                return callback(new Error("Falsche ID angegeben"),null);
+              }
+            });
         },
         getAll: () => {
         	var sql = `SELECT *
             FROM person; `;
-            connection.query(sql, callback);
+            connection.query(sql, function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
         },
         delete: (req) => {
         	var pID = req.query['pID'];
@@ -32,7 +46,20 @@ function(connection, callback) {
         	var sql = `UPDATE Person
                         SET  ?
                         WHERE PersonenID = ?`;
-            connection.query(sql,[ins,pID], callback);
+            connection.query(sql,[ins,pID], function(error,results){
+              if(err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else {
+                  if (results.changedRows == 0) {
+                      if (results.affectedRows == 0) {
+                        return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
+                      } else {
+                        return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                  }} else {
+                      return callback(null,JSON.stringify(results))
+                  }
+              }
+            });
         },
         add: (req) => {
         	const ins = {
@@ -43,7 +70,13 @@ function(connection, callback) {
         	}
 
         	var sql = `INSERT INTO Person SET ? `
-            connection.query(sql,ins,callback);
+            connection.query(sql,ins,function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
         },
         //TODO: find und create anpassen
         find: (req) => {

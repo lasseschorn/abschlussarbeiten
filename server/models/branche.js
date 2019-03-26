@@ -50,13 +50,12 @@ function(connection, callback) {
             connection.query(sql,[bez,bID], function(err,results) {
               if(err){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
-
               } else {
                   if (results.changedRows == 0) {
                       if (results.affectedRows == 0) {
                         return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
                       } else {
-                      return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                        return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
                   }} else {
                       return callback(null,JSON.stringify(results))
                   }
@@ -78,7 +77,13 @@ function(connection, callback) {
             			Bezeichnung: req.query['bez']
             	}
             	var sql = `INSERT INTO Branche SET ? `
-                connection.query(sql,ins,callback);
+                connection.query(sql,ins,function(error,results){
+                  if (err){
+                    return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+                  } else{
+                    return callback(null,JSON.stringify(results));
+                  }
+                });
 
         },
         create: (req) => {

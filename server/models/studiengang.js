@@ -7,12 +7,26 @@ function(connection, callback) {
             var sql  = `select *
             from Studiengang
             where StudiengangID = ? `
-            connection.query(sql,sID, callback);
+            connection.query(sql,sID, function(erorr,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else if (results.length > 0){
+                return callback(null,JSON.stringify(results));
+              } else {
+                return callback(new Error("Falsche ID angegeben"),null);
+              }
+            });
         },
         getAll: () => {
         	var sql = `SELECT *
             FROM Studiengang; `;
-            connection.query(sql, callback);
+            connection.query(sql, function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
         },
         delete: (req) => {
         	var sID = req.query['sID'];
@@ -28,7 +42,20 @@ function(connection, callback) {
         	var sql = `UPDATE Studiengang
                         SET  Bezeichnung = ?
                         WHERE StudiengangID = ?`;
-            connection.query(sql,[bez, sID] ,callback);
+            connection.query(sql,[bez, sID] ,function(error,results){
+              if(err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else {
+                  if (results.changedRows == 0) {
+                      if (results.affectedRows == 0) {
+                        return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
+                      } else {
+                        return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                  }} else {
+                      return callback(null,JSON.stringify(results))
+                  }
+              }
+            });
         },
 
         add: (req) => {
@@ -36,7 +63,13 @@ function(connection, callback) {
         			Bezeichnung: req.query['bez']
         	}
         	var sql = `INSERT INTO Studiengang SET ? `
-            connection.query(sql,ins,callback);
+            connection.query(sql,ins,function(erorr,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
 
         },
 

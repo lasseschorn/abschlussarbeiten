@@ -7,12 +7,26 @@ function(connection, callback) {
             var sql  = `select *
             from Kategorie
             where KategorieID = ? `
-            connection.query(sql,kID, callback);
+            connection.query(sql,kID, function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else if (results.length > 0){
+                return callback(null,JSON.stringify(results));
+              } else {
+                return callback(new Error("Falsche ID angegeben"),null);
+              }
+            } );
         },
         getAll: () => {
         	var sql = `SELECT *
             FROM kategorie; `;
-            connection.query(sql, callback);
+            connection.query(sql, function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
         },
         delete: (req) => {
         	var kID = req.query['kID'];
@@ -28,7 +42,20 @@ function(connection, callback) {
         	var sql = `UPDATE Kategorie
                         SET  Bezeichnung = ?
                         WHERE KategorieID = ?`;
-            connection.query(sql,[bez, kID] ,callback);
+            connection.query(sql,[bez, kID] ,function(error,results){
+              if(err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else {
+                  if (results.changedRows == 0) {
+                      if (results.affectedRows == 0) {
+                        return callback(new Error("Die angegebene ID wurde nicht gefunden."),null)
+                      } else {
+                        return callback(new Error("Es wurden keine änderungen vorgenommen"),null)
+                  }} else {
+                      return callback(null,JSON.stringify(results))
+                  }
+              }
+            });
         },
 
         add: (req) => {
@@ -36,7 +63,13 @@ function(connection, callback) {
         			Bezeichnung: req.query['bez']
         	}
         	var sql = `INSERT INTO Kategorie SET ? `
-            connection.query(sql,ins,callback);
+            connection.query(sql,ins,function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
 
         },
 

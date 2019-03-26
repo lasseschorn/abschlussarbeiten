@@ -4,14 +4,24 @@ function(connection, callback) {
         checkuser: (req) => {
 
     //Hier die richtigen variablennamen einsetzen
-        	var username = req.query['username'];
-        	var password = req.query['password'];
+        	var username = req.query['zID'];
+        	var password = req.query['pwd'];
         	var sql  = `SELECT *
-                        FROM Person
-                        WHERE Vorname = ? and Nachname = ?`;
-            connection.query(sql, [username,password] , callback);
+                        FROM zugangsdaten
+                        WHERE zugangsID = ? and passwort = ?`;
+            connection.query(sql, [zid,pwd] , function(error,results){
+              if (error){
+                return callback(new Error("Falsche Zugangsdaten."),null)
+              } else {
+                if(results){
+                return callback(null,username);
+              } else {
+                return callback(new Error("Etwas ist schief gegangen."),null);
+              }
+            }
+            });
         }
-        
+
 
     };
 }

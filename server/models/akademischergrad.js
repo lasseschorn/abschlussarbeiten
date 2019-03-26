@@ -56,6 +56,19 @@ function(connection, callback) {
               }
             });
         },
+        add: (req) => {
+          const ins = {
+              Bezeichnung: req.query['bez']
+          }
+          var sql = 'INSERT INTO `akademischer grad` SET ?'
+            connection.query(sql,ins,function(error,results){
+              if (err){
+                return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+              } else{
+                return callback(null,JSON.stringify(results));
+              }
+            });
+        },
         //TODO: Anpassen
         find: (req) => {
             var sql = `SELECT *
