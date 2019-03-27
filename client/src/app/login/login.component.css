@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+
+/* container 1 */
+#container3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 80px;
+  text-align: start;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+
+#login {
+  width: 70vw;
+  height: 60vh;
+  margin-top: 100px;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  justify-self: center;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.15), 0 1rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 200ms;
+  float: left;
+}
+
+#txt {
+  margin-left: 3vw;
+}
+
+#container2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 80px;
+    text-align: start;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+
+}

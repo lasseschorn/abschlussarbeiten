@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+/* main */
+
+main {
+    width: 80%;
+    margin-left: 170px;
+    height: 100%;
+}
+
+
+#filter {
+  margin-top: 2vw;
+}
+
+.filter {
+  float: left;
+  padding: 10px;
+}
+
+/* container 1 */
+#container3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 80px;
+  text-align: start;
+  font-size: 22px;
+  font-weight: bold;
+  color: #222E6A;
+  clear: left;
+}
+
+
+
+#tab {
+  width: 70vw;
+  height: 60vh;
+  margin-top: 100px;
+  padding: 10px;
+  background: white;
+  border-radius: 10px;
+  justify-self: center;
+  grid-row-start: 1;
+  grid-column-start: 1;
+  box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.15), 0 1rem 1rem rgba(0, 0, 0, 0.15);
+  transition: all 200ms;
+  float: left;
+}
+
+#tab table, th, td {
+  border: 1px solid #222E6A;
+  border-collapse: collapse;
+  padding: 15px;
+  text-align: left;
+}
+
+#tab td {
+  font-weight: normal;
+}
+
+#tab tr:nth-child(even) {
+  background-color: #c9ceea;
+}
+
+#container2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 80px;
+    text-align: start;
+    font-size: 30px;
+    font-weight: bold;
+    color: #222E6A;
+}
+
+@media only screen and (max-width: 768px) {
+
+}
