@@ -2,26 +2,22 @@
   <div id="filter">
     <div class="filter">Studiengang:
     <select name="Studiengang">
-      <option value="0"> alle</option>
-        <div *ngFor="let  studiengang of studiengaenge;  let i=index;" >
-      <option value="i">{{studiengang}}</option>
-      </div>
+      <option value="999"> alle</option>
+      <option *ngFor="let studiengang of studiengaenge"  [value]="studiengang.studiengangID">{{studiengang.bezeichnung}}</option>
       </select>
       </div>
       <div class="filter">
         Branche:
           <select name="branche">
             <option value="0"> alle</option>
-            <option value="1">Option1</option>
+            <option *ngFor="let branche of branchen"  [value]="branche.branchenID">{{branche.bezeichnung}}</option>
             </select>
       </div>
       <div class="filter">
         Kategorie:
         <select name="kategorie">
-          <option value="0"> alle</option>
-          <div *ngFor="let kategorie of kategorien; let i=index;" >
-            <option value=i>{{kategorie}}</option>
-            </div>
+          <option value="999"> alle</option>
+          <option *ngFor="let kategorie of kategorien"  [value]="kategorie.studiengangID">{{kategorie.bezeichnung}}</option>
           </select>
       </div>
       <div class="filter"> Suche: <input type="text" name="suche" value=""> </div>
