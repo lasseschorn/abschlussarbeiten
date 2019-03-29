@@ -3,7 +3,7 @@
     <div class="filter">Studiengang:
     <select name="Studiengang">
       <option value="0"> alle</option>
-        <div *ngFor="let of studiengang; let i=index;" >
+        <div *ngFor="let  studiengang of studiengaenge;  let i=index;" >
       <option value="i">{{studiengang}}</option>
       </div>
       </select>
@@ -19,7 +19,7 @@
         Kategorie:
         <select name="kategorie">
           <option value="0"> alle</option>
-          <div *ngFor="let of kategorie; let i=index;" >
+          <div *ngFor="let kategorie of kategorien; let i=index;" >
             <option value=i>{{kategorie}}</option>
             </div>
           </select>
@@ -36,10 +36,10 @@
         <th>Kategorie</th>
         <th>Überschrift 3</th>
       </tr>
-      <div *ngFor="let of arbeit; i = index">
+      <div *ngFor="let abschlussarbeit of abschlussarbeiten">
         <tr>
-          <td>{{arbeit.titel}}</td>
-          <td>{{arbeit.kategorie}}</td>
+          <td>{{abschlussarbeit.titel}}</td>
+          <td>{{abschlussarbeit.kategorie.bezeichnung}}</td>
           <td>Daten</td>
         </tr>
     </div>

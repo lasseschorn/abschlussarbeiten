@@ -15,7 +15,7 @@
 <ul class="branchen">
   <li *ngFor="let branche of branchen">
     <a routerLink="/detail/">
-      <span class="badge">{{branche.BranchenID}}</span> {{branche.Bezeichnung}}
+      <span class="badge">{{branche.branchenID}}</span> {{branche.bezeichnung}}
     </a>
     <button class="delete" title="delete branche"
       (click)="delete(branche)">x</button>
@@ -33,15 +33,15 @@
       (click)="get(inGetBranche.value)">get</button>
 
       <div *ngIf="getByIdBranche">
-        <h2>{{this.getByIdBranche.Bezeichnung}}</h2>
+        <h2>{{this.getByIdBranche.bezeichnung}}</h2>
       </div>
 <hr>
 <hr>
 <h1></h1>
 
 <div *ngIf="branche">
-  <h2>{{branche.Bezeichnung | uppercase}} Details</h2>
-  <div><span>id: </span>{{branche.BranchenID}}</div>
+  <h2>{{branche.bezeichnung | uppercase}} Details</h2>
+  <div><span>id: </span>{{branche.branchenID}}</div>
   <div>
     <label>name:
       <input  placeholder="name"/>
@@ -51,7 +51,7 @@
   <a *ngFor="let branche of branchen" class="col-1-4"
       routerLink="/detail/">
     <div class="module branche">
-      <h4>{{branche.Bezeichnung}}</h4>
+      <h4>{{branche.bezeichnung}}</h4>
     </div>
   </a>
 </div>
