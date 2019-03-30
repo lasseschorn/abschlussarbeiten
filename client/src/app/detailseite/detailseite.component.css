@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+
+/* container 1 */
+
+#container2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 80px;
+    text-align: start;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+#beschreibung {
+    width: 34vw;
+    height: 30vh;
+    margin-top: 30px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    justify-self: center;
+    grid-row-start: 1;
+    grid-column-start: 1;
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.15), 0 1rem 1rem rgba(0, 0, 0, 0.15);
+    transition: all 200ms;
+}
+
+#beschreibung:hover {
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.3), 0 1rem 1rem rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transform: translate(0, -0.5rem) scale(1.01);
+    position: relative;
+}
+
+#gliederung {
+    width: 34vw;
+    height: 30vh;
+    margin-top: 30px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    justify-self: center;
+    grid-row-start: 1;
+    grid-column-start: 2;
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.15), 0 1rem 1rem rgba(0, 0, 0, 0.15);
+    transition: all 200ms;
+}
+
+#gliederung:hover {
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.3), 0 1rem 1rem rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transform: translate(0, -0.5rem) scale(1.01);
+    position: relative;
+}
+
+#autor {
+    width: 34vw;
+    height: 30vh;
+    margin-bottom:40px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    justify-self: center;
+    grid-row-start: 2;
+    grid-column-start: 1;
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.15), 0 1rem 1rem rgba(0, 0, 0, 0.15);
+    transition: all 200ms;
+}
+
+#autor:hover {
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.3), 0 1rem 1rem rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transform: translate(0, -0.5rem) scale(1.01);
+    position: relative;
+}
+
+#betreuer {
+    width: 34vw;
+    height: 30vh;
+    margin-bottom: 40px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    justify-self: center;
+    grid-row-start: 2;
+    grid-column-start: 2;
+    box-shadow: 10px 10px;
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.15), 0 1rem 1rem rgba(0, 0, 0, 0.15);
+    transition: all 200ms;
+}
+
+#betreuer:hover {
+    box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.3), 0 1rem 1rem rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    transform: translate(0, -0.5rem) scale(1.01);
+    position: relative;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+
+}

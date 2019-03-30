@@ -1,3 +1,47 @@
-<p>
-  uebersicht works!
-</p>
+<form>
+  <div id="filter">
+    <div class="filter">Studiengang:
+    <select name="Studiengang">
+      <option value="999"> alle</option>
+      <option *ngFor="let studiengang of studiengaenge"  [value]="studiengang.studiengangID">{{studiengang.bezeichnung}}</option>
+      </select>
+      </div>
+      <div class="filter">
+        Branche:
+          <select name="branche">
+            <option value="0"> alle</option>
+            <option *ngFor="let branche of branchen"  [value]="branche.branchenID">{{branche.bezeichnung}}</option>
+            </select>
+      </div>
+      <div class="filter">
+        Kategorie:
+        <select name="kategorie">
+          <option value="999"> alle</option>
+          <option *ngFor="let kategorie of kategorien"  [value]="kategorie.studiengangID">{{kategorie.bezeichnung}}</option>
+          </select>
+      </div>
+      <div class="filter"> Suche: <input type="text" name="suche" value=""> </div>
+    </div>
+    <button (click)="login()">Suchen</button>
+    </form>
+  <section id="container3">
+    <div id="tab">
+    <table>
+      <tr>
+        <th>Titel der Abschlussarbeit</th>
+        <th>Kategorie</th>
+        <th>Überschrift 3</th>
+      </tr>
+      <div *ngFor="let abschlussarbeit of abschlussarbeiten">
+        <tr>
+          <td>{{abschlussarbeit.titel}}</td>
+          <td>{{abschlussarbeit.kategorie.bezeichnung}}</td>
+          <td>Daten</td>
+        </tr>
+    </div>
+
+      </table>
+      </div>
+
+
+  </section>

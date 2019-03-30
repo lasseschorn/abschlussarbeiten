@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Branche } from '../Branche';
+import { HttpClient } from '@angular/common/http';
+import { Branche } from '../data/Branche';
 import {map, tap, catchError} from 'rxjs/operators';
 import {ErrorhandlingService} from '../service/errorhandling.service';
 
@@ -36,14 +36,14 @@ getBranche(id: number): Observable<Branche> {
     const url = `${this.generalUrl}/getbyid?bID=${id}`;
     return this.http.get<Branche>(url)
     .pipe(
-      tap(_ => this.errorService.log(`fetched hero id=${id}`)),
+      tap(_ => this.errorService.log(`fetched branche id=${id}`)),
       catchError(this.errorService.handleError<Branche>(`getBranche id=${id}`))
     );
   }
 //   searchHeroes(term: string): Observable<Branche[]> {
 //       const url = `${this.generalUrl}/search`;
 //    if (!term.trim()) {
-//      // if not search term, return empty hero array.
+//      // if not search term, return empty branche array.
 //      return of([]);
 //    }
 //    return this.http.get<Branche[]>(`${url}/?name=${term}`).pipe(
@@ -57,7 +57,7 @@ getBranche(id: number): Observable<Branche> {
       const url = `${this.generalUrl}/add?bez=${name}`;
       return this.http.get<Branche>(url)
     .pipe(
-     tap((newBranche: Branche) => this.errorService.log(`added branche w/ id=${newBranche.BranchenID}`)),
+     tap((newBranche: Branche) => this.errorService.log(`added branche w/ id=${newBranche.branchenID}`)),
       catchError(this.errorService.handleError<Branche>('add'))
     );
   }

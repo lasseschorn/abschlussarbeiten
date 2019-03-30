@@ -93,6 +93,86 @@ var storage =   multer.diskStorage({
 
 	const users = require('./models/users').method;
 
+//******************************* */
+//******************************* */
+// /api/login/logout Methode GET 
+//session auslesen 
+// retrun json
+//sussess: boolean;
+
+//******************* */
+// PHP Style
+//<?php
+//session_start();
+//unset($_SESSION);
+//session_destroy();
+//?>
+//{
+//    "success": true
+//}
+
+
+//******************************* */
+//******************************* */
+// /api/login/isloggedin  Methode GET
+//session auslesen
+//  retrun json
+//status: boolean;
+
+//******************* */
+// PHP Style
+//<?php
+//session_start();
+//if(isset($_SESSION['user'])) {
+//    echo '{"status": true}';
+//} else {
+//    echo '{"status": false}';
+//}
+//?>
+
+
+//******************************* */
+//******************************* */
+///api/login/userdetails Methode POST
+// return json 
+// success: boolean;
+// message: string;
+
+//******************* */
+//PHP Style
+//<?php
+//session_start();
+//$_POST = json_decode(file_get_contents('php://input'), true);
+//if(isset($_POST) && !empty($_POST)) {
+//    $username = $_POST['username'];
+//    $password = $_POST['password'];
+//    if($username == 'admin' && $password == 'admin') {
+//        $_SESSION['user'] = 'admin';
+//        ?>
+//{
+//  "success": true,
+//  "secret": "This is the secret no one knows but the admin"
+//}
+//    <?php
+//  } else {
+//    ?>
+//{
+//  "success": false,
+//  "message": "Invalid credentials"
+//}
+//    <?php
+//  }
+//} else {
+  //var_dump($_POST)
+//  ?>
+//{
+//  "success": false,
+//  "message": "Only POST access accepted"
+//}
+//  <?php
+//}
+//?>
+
 
   function check_auth(req, res, next) {
 

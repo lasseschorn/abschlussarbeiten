@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Branche } from '../Branche';
+import { Branche } from '../data/Branche';
 import { BrancheService } from '../service/branche.service';
 import { Observable } from 'rxjs';
 import {catchError, map,  } from 'rxjs/operators';
@@ -47,10 +47,11 @@ export class TestComponent implements OnInit {
 
   delete(branche: Branche): void {
     this.branchen = this.branchen.filter(h => h !== branche);
-    this.brancheService.delete(branche.BranchenID).subscribe();
+    this.brancheService.delete(branche.branchenID).subscribe();
   }
 
   get(id: number): void {
+    {{debugger}}
 //    const id = +this.route.snapshot.paramMap.get('id');
     this.brancheService.getNo404(id)
       .subscribe(branche => this.getByIdBranche = branche);

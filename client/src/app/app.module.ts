@@ -20,14 +20,32 @@ import { AppNavComponent } from './app-nav/app-nav.component';
     BrowserModule,
     AppRoutingModule,
   RouterModule.forRoot([
-    {
-      path:'',
-      component: TestComponent
-    },
-    {
-      path: 'test',
-      component: TestComponent
-    }
+    {path: '',
+    component: UebersichtComponent},
+    {path: 'uebersicht',
+    component: UebersichtComponent},
+    {path: 'start',
+    component: UebersichtComponent},
+    {path: 'startseite',
+    component: UebersichtComponent},
+    {path: 'login',
+    component: LoginComponent},
+    {path: 'anmeldung',
+    component: LoginComponent},
+    {path: 'detail',
+    component: DetailseiteComponent},
+    {path: 'detailseite',
+    component: DetailseiteComponent},
+    {path: 'abschlussarbeit',
+    component: DetailseiteComponent},
+    {path: 'neuanlegen',
+    component: ErstellSeiteComponent},
+    {path: 'erstellseite',
+    component: ErstellSeiteComponent},
+    {path: 'hinzufuegen',
+    component: ErstellSeiteComponent},
+    {path: 'test',
+    component: TestComponent}
   ])
 ],
   providers: [],
