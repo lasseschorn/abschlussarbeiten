@@ -6,10 +6,11 @@ function(connection, callback) {
     //Hier die richtigen variablennamen einsetzen
         	var username = req.query['zID'];
         	var password = req.query['pwd'];
-        	var sql  = `SELECT *
+          console.log("blabla");
+          var sql  = `SELECT *
                         FROM zugangsdaten
                         WHERE zugangsID = ? and passwort = ?`;
-            connection.query(sql, [zid,pwd] , function(error,results){
+            connection.query(sql, [username,password] , function(error,results){
               if (error){
                 return callback(new Error("Falsche Zugangsdaten."),null)
               } else {
