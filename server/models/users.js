@@ -2,12 +2,10 @@ exports.method =
 function(connection, callback) {
     return {
         checkuser: (req) => {
-
     //Hier die richtigen variablennamen einsetzen
         	var username = req.query['zID'];
         	var password = req.query['pwd'];
-          console.log("blabla");
-          var sql  = `SELECT *
+        	var sql  = `SELECT *
                         FROM zugangsdaten
                         WHERE zugangsID = ? and passwort = ?`;
             connection.query(sql, [username,password] , function(error,results){

@@ -10,6 +10,16 @@ const app = express();
 // Body Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+//app.use(cookieParser);
+app.use(session({
+    key: 'user_sid',
+    secret: 'SECRET',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    }
+}));
 
 /* -------------------------------------------------------------
 					Entitäten
@@ -93,114 +103,33 @@ var storage =   multer.diskStorage({
 
 	const users = require('./models/users').method;
 
-//******************************* */
-//******************************* */
-// /api/login/logout Methode GET 
-//session auslesen 
-// retrun json
-//sussess: boolean;
-
-//******************* */
-// PHP Style
-//<?php
-//session_start();
-//unset($_SESSION);
-//session_destroy();
-//?>
-//{
-//    "success": true
-//}
-
-
-//******************************* */
-//******************************* */
-// /api/login/isloggedin  Methode GET
-//session auslesen
-//  retrun json
-//status: boolean;
-
-//******************* */
-// PHP Style
-//<?php
-//session_start();
-//if(isset($_SESSION['user'])) {
-//    echo '{"status": true}';
-//} else {
-//    echo '{"status": false}';
-//}
-//?>
-
-
-//******************************* */
-//******************************* */
-///api/login/userdetails Methode POST
-// return json 
-// success: boolean;
-// message: string;
-
-//******************* */
-//PHP Style
-//<?php
-//session_start();
-//$_POST = json_decode(file_get_contents('php://input'), true);
-//if(isset($_POST) && !empty($_POST)) {
-//    $username = $_POST['username'];
-//    $password = $_POST['password'];
-//    if($username == 'admin' && $password == 'admin') {
-//        $_SESSION['user'] = 'admin';
-//        ?>
-//{
-//  "success": true,
-//  "secret": "This is the secret no one knows but the admin"
-//}
-//    <?php
-//  } else {
-//    ?>
-//{
-//  "success": false,
-//  "message": "Invalid credentials"
-//}
-//    <?php
-//  }
-//} else {
-  //var_dump($_POST)
-//  ?>
-//{
-//  "success": false,
-//  "message": "Only POST access accepted"
-//}
-//  <?php
-//}
-//?>
-
-
   function check_auth(req, res, next) {
-
-    // wenn user nicht angemeldet ist wird er weiter geleitet zu /login
-    if(!req.session.login) {
+    if(!req.session.login){
       res.redirect("api/login");
       return;
     }
-
-    //  the user is logged in, so call next()
     next();
   }
 
 
   app.route('/api/login')
-      .post(function(req, res, next){
+      .get(function(req, res, next){
           users(connection, function(error, results, fields)  {
               if(error) {
                   res.status(500);
                   res.send(error);
               } else {
-                console.log(results);
                 req.session.login = results;
-                res.redirect("/");
-                      }
+                res.redirect("/");                      }
           }).checkuser(req)
       }
     )
+
+  app.route('/api/logout')
+      .get(function(req,res,next){
+        req.session.login = null;
+        res.redirect("/");
+      })
 
 
 
@@ -209,7 +138,7 @@ var storage =   multer.diskStorage({
 					Branche
 -------------------------------------------------------------*/
 app.route('/api/branche/getbyid')
-    .get(function(req, res, next){
+    .get(check_auth,function(req, res, next){
         branche(connection, function(error, results, fields)  {
             if(error) {
                 res.status(500);
@@ -224,7 +153,7 @@ app.route('/api/branche/getbyid')
   )
 
  app.route('/api/branche/getAll')
- .get( function(req, res) {
+ .get(check_auth, function(req, res) {
 	 branche(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
