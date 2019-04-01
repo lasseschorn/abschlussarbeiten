@@ -20,92 +20,103 @@
     display: grid;
     height: 100%;
     grid-template-columns: 100%;
-    grid-template-rows: 10% 16% 16% 16% 16% 16% 10%;
+    grid-template-rows: 12% 20% 20% 20% 20% 8%;
     margin: 0 auto;
     padding-top: 3vh;
+}
+
+#link5 img {
+    grid-row-start: 1;
+    height: 50px;
+    width: 50px;
+    margin-left: 12px;
+    justify-self: center;
 }
 
 #link1 {
     grid-row-start: 2;
     justify-self: center;
-    font-size: 30px;
+    font-size: 20px;
     color: rgb(125, 118, 148);
 }
 
-#link1:hover {
+#link1 i {
+  margin-left: 10px;
+  font-size:30px;
+}
+
+#link1 i:hover {
     z-index: 2;
     transform: translate(0, -0.5rem) scale(1.01);
     position: relative;
     cursor: pointer;
     font-size: 35px;
     transition: all 200ms;
-    color: rgb(97, 64, 204);
+    color: #222E6A;
 }
 
 #link2 {
     grid-row-start: 3;
     justify-self: center;
-    font-size: 30px;
+    font-size: 20px;
     color: rgb(125, 118, 148);
 }
 
-#link2:hover {
+#link2 i {
+  margin-left: 10px;
+  font-size:30px;
+}
+
+#link2 i:hover {
     z-index: 2;
     transform: translate(0, -0.5rem) scale(1.01);
     position: relative;
     cursor: pointer;
     font-size: 35px;
     transition: all 200ms;
-    color: rgb(97, 64, 204);
+      color: #222E6A;
 }
 
 #link3 {
     grid-row-start: 4;
     justify-self: center;
-    font-size: 30px;
+    font-size: 20px;
     color: rgb(125, 118, 148);
 }
 
-#link3:hover {
+#link3 i {
+  margin-left: 10px;
+  font-size:30px;
+}
+
+#link3 i:hover {
     z-index: 2;
     transform: translate(0, -0.5rem) scale(1.01);
     position: relative;
     cursor: pointer;
     font-size: 35px;
     transition: all 200ms;
-    color: rgb(97, 64, 204);
+    color: #222E6A;
 }
 
 #link4 {
     grid-row-start: 5;
     justify-self: center;
-    font-size: 30px;
+    font-size: 20px;
     color: rgb(125, 118, 148);
 }
 
-#link4:hover {
+#link4 i {
+  margin-left: 10px;
+  font-size:30px;
+}
+
+#link4 i:hover {
     z-index: 2;
     transform: translate(0, -0.5rem) scale(1.01);
     position: relative;
     cursor: pointer;
     font-size: 35px;
     transition: all 200ms;
-    color: rgb(97, 64, 204);
-}
-
-#link5 {
-    grid-row-start: 6;
-    justify-self: center;
-    font-size: 30px;
-    color: rgb(125, 118, 148);
-}
-
-#link5:hover {
-    z-index: 2;
-    transform: translate(0, -0.5rem) scale(1.01);
-    position: relative;
-    cursor: pointer;
-    font-size: 35px;
-    transition: all 200ms;
-    color: rgb(97, 64, 204);
+    color: #222E6A;
 }

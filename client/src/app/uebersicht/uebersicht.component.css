@@ -15,7 +15,7 @@ main {
 
 .filter {
   float: left;
-  padding: 10px;
+  padding: 5px;
 }
 
 /* container 1 */
@@ -25,18 +25,15 @@ main {
   grid-template-rows: 1fr 1fr;
   grid-row-gap: 80px;
   text-align: start;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   color: #222E6A;
   clear: left;
 }
 
-
-
 #tab {
-  width: 70vw;
-  height: 60vh;
-  margin-top: 100px;
+  width: 80vw;
+  margin-top: 5vh;
   padding: 10px;
   background: white;
   border-radius: 10px;
@@ -45,7 +42,9 @@ main {
   grid-column-start: 1;
   box-shadow: 0 1.5rem 2.8rem rgba(0, 0, 0, 0.15), 0 1rem 1rem rgba(0, 0, 0, 0.15);
   transition: all 200ms;
-  float: left;
+  flex-flow: column;
+  min-width: 180px;
+  border-collapse: collapse;
 }
 
 #tab table, th, td {
