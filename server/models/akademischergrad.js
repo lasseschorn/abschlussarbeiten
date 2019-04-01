@@ -7,7 +7,7 @@ function(connection, callback) {
                         +'FROM `akademischer grad`'
                         + 'WHERE GradID = ?;';
             connection.query(sql,gID, function(err,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
                 return callback(null,JSON.stringify(results));
@@ -21,7 +21,7 @@ function(connection, callback) {
         		+ 'FROM `akademischer grad`; ';
 
             connection.query(sql, function(err,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));
@@ -42,7 +42,7 @@ function(connection, callback) {
                        + 'SET  Bezeichnung = ?'
                         + 'WHERE GradID = ?';
             connection.query(sql,[bez,gID], function(err,results){
-              if(err){
+              if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {
                   if (results.changedRows == 0) {
@@ -62,7 +62,7 @@ function(connection, callback) {
           }
           var sql = 'INSERT INTO `akademischer grad` SET ?'
             connection.query(sql,ins,function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));

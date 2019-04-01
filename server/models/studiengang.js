@@ -8,7 +8,7 @@ function(connection, callback) {
             from Studiengang
             where StudiengangID = ? `
             connection.query(sql,sID, function(erorr,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
                 return callback(null,JSON.stringify(results));
@@ -21,7 +21,7 @@ function(connection, callback) {
         	var sql = `SELECT *
             FROM Studiengang; `;
             connection.query(sql, function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));
@@ -43,7 +43,7 @@ function(connection, callback) {
                         SET  Bezeichnung = ?
                         WHERE StudiengangID = ?`;
             connection.query(sql,[bez, sID] ,function(error,results){
-              if(err){
+              if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {
                   if (results.changedRows == 0) {
@@ -64,7 +64,7 @@ function(connection, callback) {
         	}
         	var sql = `INSERT INTO Studiengang SET ? `
             connection.query(sql,ins,function(erorr,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));

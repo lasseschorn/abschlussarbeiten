@@ -8,7 +8,7 @@ function(connection, callback) {
                         FROM branche
                         WHERE BranchenID = ?`;
         connection.query(sql,bID,function(err, results){
-          if (err){
+          if (error){
             return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
           } else if (results.length > 0){
             return callback(null,JSON.stringify(results));
@@ -23,7 +23,7 @@ function(connection, callback) {
             var sql = `SELECT *
             FROM branche; `;
             connection.query(sql,function(err,results){
-            if (err){
+            if (error){
               return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
             } else{
               return callback(null,JSON.stringify(results));
@@ -48,7 +48,7 @@ function(connection, callback) {
                         WHERE BranchenID = ? `;
 
             connection.query(sql,[bez,bID], function(err,results) {
-              if(err){
+              if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {
                   if (results.changedRows == 0) {
@@ -78,7 +78,7 @@ function(connection, callback) {
             	}
             	var sql = `INSERT INTO Branche SET ? `
                 connection.query(sql,ins,function(error,results){
-                  if (err){
+                  if (error){
                     return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
                   } else{
                     return callback(null,JSON.stringify(results));

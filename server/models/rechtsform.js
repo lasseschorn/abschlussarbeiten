@@ -7,7 +7,7 @@ function(connection, callback) {
                         FROM rechtsform
                         WHERE RechtformID = ? ;`;
             connection.query(sql,rID, function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
                 return callback(null,JSON.stringify(results));
@@ -20,7 +20,7 @@ function(connection, callback) {
         	var sql = `SELECT *
             FROM Rechtsform; `;
             connection.query(sql, function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));
@@ -45,7 +45,7 @@ function(connection, callback) {
                         SET  ?
                         WHERE RechtsformID = ?`;
             connection.query(sql,[ins,rID], function(error,results){
-              if(err){
+              if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {
                   if (results.changedRows == 0) {
@@ -72,7 +72,7 @@ function(connection, callback) {
         	}
         	var sql = `INSERT INTO Rechtsform SET ? `
                 connection.query(sql,ins,function(error,results){
-                  if (err){
+                  if (error){
                     return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
                   } else{
                     return callback(null,JSON.stringify(results));

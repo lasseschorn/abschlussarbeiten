@@ -9,7 +9,7 @@ function(connection, callback) {
                         WHERE Unternehmen_UnternehmensID = ? and
                         Unternehmen_Adresse_AdressID = ?`
             connection.query(sql,[uUID,uAAID], function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
                 return callback(null,JSON.stringify(results));
@@ -22,7 +22,7 @@ function(connection, callback) {
         	var sql = `SELECT *
             FROM betreuer; `;
             connection.query(sql, function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));
@@ -50,7 +50,7 @@ function(connection, callback) {
                         SET  ?
                         WHERE Person_PersonenID = ?`;
             connection.query(sql,[ins,pPID], function(error,results){
-              if(err){
+              if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {
                   if (results.changedRows == 0) {
@@ -73,7 +73,7 @@ function(connection, callback) {
 
         	var sql = `INSERT INTO Betreuer SET ? `
             connection.query(sql,ins,function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));

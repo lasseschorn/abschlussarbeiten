@@ -7,7 +7,7 @@ function(connection, callback) {
                         FROM student
                         WHERE Person_PersonenID = ? ;`;
             connection.query(sql,pPid, function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
                 return callback(null,JSON.stringify(results));
@@ -20,7 +20,7 @@ function(connection, callback) {
         	var sql = `SELECT *
             FROM student; `;
             connection.query(sql, function(error,results){
-              if (err){
+              if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
                 return callback(null,JSON.stringify(results));
@@ -48,7 +48,7 @@ function(connection, callback) {
                         SET  ?
                         WHERE Person_PersonenID = ?;`;
             connection.query(sql,[ins,pPid], function(error,results){
-              if(err){
+              if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {
                   if (results.changedRows == 0) {
@@ -73,7 +73,7 @@ function(connection, callback) {
         	}
         	var sql = `INSERT INTO Student SET ? `
                 connection.query(sql,ins,function(error,results){
-                  if (err){
+                  if (error){
                     return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
                   } else{
                     return callback(null,JSON.stringify(results));

@@ -12,7 +12,7 @@ function(connection, callback) {
       JOIN branche on Unternehmen.Branche_BranchenID = branche.BranchenID
       WHERE UnternehmensID = ?`;
       connection.query(sql,uID, function(error, results) {
-        if (err){
+        if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else if (results.length > 0){
           return callback(null,JSON.stringify(results));
@@ -29,7 +29,7 @@ function(connection, callback) {
       JOIN branche on Unternehmen.Branche_BranchenID = branche.BranchenID ; `;
 
       connection.query(sql, function(error,results) {
-        if (err){
+        if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else{
           return callback(null,JSON.stringify(results));
@@ -68,7 +68,7 @@ function(connection, callback) {
       SET  ?
       Where UnternehmensID = ?`;
       connection.query(sql,[ins,uID], function(error,results){
-        if(err){
+        if(error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else {
             if (results.changedRows == 0) {

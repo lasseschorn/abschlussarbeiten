@@ -9,7 +9,7 @@ function(connection, callback) {
       WHERE ArbeitsID = ?`;
 
       connection.query(sql,aID, function(error,results) {
-        if (err){
+        if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else if (results.length > 0){
           return callback(null,JSON.stringify(results));
@@ -28,7 +28,7 @@ function(connection, callback) {
       join adress as on a.Betreuer_Unternehmen_Adresse_AdressID = as.AdressID; `;
 
       connection.query(sql, function(error,results){
-        if (err){
+        if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else{
           return callback(null,JSON.stringify(results));
@@ -63,7 +63,7 @@ function(connection, callback) {
       SET  ?
       WHERE ArbeitsID = ?`;
       connection.query(sql,[ins,aID],function(error,results){
-        if(err){
+        if(error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else {
             if (results.changedRows == 0) {
@@ -101,7 +101,7 @@ function(connection, callback) {
       }
       var sql = `INSERT INTO Abschlussarbeiten SET ? `
       connection.query(sql,ins,function(error,results){
-        if (err){
+        if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else{
           return callback(null,JSON.stringify(results));
