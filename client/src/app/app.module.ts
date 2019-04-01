@@ -3,7 +3,15 @@ import { AuthService } from './service/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+<<<<<<< HEAD
 import { RouterModule, Routes, CanActivate } from '@angular/router';
+=======
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+
+import { GrdFilterPipe } from './suchfunktion';
+>>>>>>> 9167356c1aedfd74cb0749d106fb57a5664dbf97
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +32,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     HttpClientModule,
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
   RouterModule.forRoot([
     {path: '',
@@ -68,9 +77,13 @@ import { FormsModule } from '@angular/forms';
     AppHeaderComponent,
     AppFooterComponent,
     AppNavComponent,
+<<<<<<< HEAD
     AdminComponent,
     LogoutComponent,
     FileuploadComponent
+=======
+    GrdFilterPipe
+>>>>>>> 9167356c1aedfd74cb0749d106fb57a5664dbf97
   ],
   bootstrap: [AppComponent]
 })

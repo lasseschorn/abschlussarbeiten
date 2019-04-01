@@ -20,28 +20,29 @@
           <option *ngFor="let kategorie of kategorien"  [value]="kategorie.studiengangID">{{kategorie.bezeichnung}}</option>
           </select>
       </div>
-      <div class="filter"> Suche: <input type="text" name="suche" value=""> </div>
+          <button (click)="login()">Suchen</button>
     </div>
-    <button (click)="login()">Suchen</button>
+    <p> Freitextsuche im Titel: <input [(ngModel)]="searchText" placeholder="Freitextsuche.." name="freitext"></p>
     </form>
   <section id="container3">
     <div id="tab">
     <table>
-      <tr>
-        <th>Titel der Abschlussarbeit</th>
-        <th>Kategorie</th>
-        <th>Überschrift 3</th>
-      </tr>
-      <div *ngFor="let abschlussarbeit of abschlussarbeiten">
+      <thead>
         <tr>
-          <td>{{abschlussarbeit.titel}}</td>
-          <td>{{abschlussarbeit.kategorie.bezeichnung}}</td>
-          <td>Daten</td>
+          <th scope="col">Titel der Abschlussarbeit</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Dozent</th>
+          <th scope="col">Kategorie</th>
         </tr>
-    </div>
-
+</thead>
+<tbody>
+    <tr *ngFor="let abschlussarbeit of abschlussarbeiten | grdFilter: searchText ;">
+      <td id="titel">{{abschlussarbeit.titel}}</td>
+      <td>{{abschlussarbeit.student_personID}}</td>
+      <td>{{abschlussarbeit.dozent_personID}}</td>
+      <td>{{abschlussarbeit.kategorie_kategorieID}}</td>
+    </tr>
+  </tbody>
       </table>
       </div>
-
-
   </section>
