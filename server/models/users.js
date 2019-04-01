@@ -19,7 +19,12 @@ function(connection, callback) {
               }
             }
             });
+        },
+
+        add: (req) => {
+
         }
+
 
 
     };

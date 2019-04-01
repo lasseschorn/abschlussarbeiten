@@ -108,6 +108,7 @@ var storage =   multer.diskStorage({
       res.redirect("api/login");
       return;
     }
+
     next();
   }
 
@@ -127,7 +128,8 @@ var storage =   multer.diskStorage({
 
   app.route('/api/logout')
       .get(function(req,res,next){
-        req.session.login = null;
+        req.session.destroy();
+
         res.redirect("/");
       })
 
