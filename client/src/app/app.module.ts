@@ -19,7 +19,6 @@ import { AppNavComponent } from './app-nav/app-nav.component';
 import { AdminComponent } from './admin/admin.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FileuploadComponent } from './fileupload/fileupload.component';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -70,13 +69,10 @@ import { FormsModule } from '@angular/forms';
     AppHeaderComponent,
     AppFooterComponent,
     AppNavComponent,
-<<<<<<< HEAD
     AdminComponent,
     LogoutComponent,
-    FileuploadComponent
-=======
+    FileuploadComponent,
     GrdFilterPipe
->>>>>>> 9167356c1aedfd74cb0749d106fb57a5664dbf97
   ],
   bootstrap: [AppComponent]
 })
