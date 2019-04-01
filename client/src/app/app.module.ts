@@ -1,7 +1,9 @@
+import { AuthGuard } from './guard/auth.guard';
+import { AuthService } from './service/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,10 @@ import { TestComponent } from './test/test.component';
 import { AppHeaderComponent } from './app-header/app-header.component';
 import { AppFooterComponent } from './app-footer/app-footer.component';
 import { AppNavComponent } from './app-nav/app-nav.component';
+import { AdminComponent } from './admin/admin.component';
+import { LogoutComponent } from './logout/logout.component';
+import { FileuploadComponent } from './fileupload/fileupload.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -45,10 +51,13 @@ import { AppNavComponent } from './app-nav/app-nav.component';
     {path: 'hinzufuegen',
     component: ErstellSeiteComponent},
     {path: 'test',
-    component: TestComponent}
-  ])
+    component: TestComponent},
+    {path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGuard]},
+  ]), FormsModule
 ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -58,7 +67,10 @@ import { AppNavComponent } from './app-nav/app-nav.component';
     TestComponent,
     AppHeaderComponent,
     AppFooterComponent,
-    AppNavComponent
+    AppNavComponent,
+    AdminComponent,
+    LogoutComponent,
+    FileuploadComponent
   ],
   bootstrap: [AppComponent]
 })
