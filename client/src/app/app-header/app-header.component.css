@@ -2,12 +2,14 @@
 
 header {
     margin: auto 0;
+    height: 20vh;
+    width: 100vw;
 }
 
 #topbar {
     overflow: hidden;
-    display: flex;
-    background: rgb(97, 64, 204);
+    background: #222E6A;
+    display: block;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     width: 77vw;
@@ -19,14 +21,10 @@ header {
 #download {
     text-decoration: none;
     color: white;
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 81px;
-    margin-left: 125px;
-    transition: all 200ms;
-}
-
-#download:hover {
     font-size: 25px;
+    font-weight: bold;
+    text-align: justify;
+    line-height: 60px;
+    margin-left: 15vw;
+    transition: all 200ms;
 }
