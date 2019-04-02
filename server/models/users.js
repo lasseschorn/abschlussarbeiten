@@ -1,3 +1,6 @@
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 exports.method =
 function(connection, callback) {
     return {
@@ -5,7 +8,19 @@ function(connection, callback) {
     //Hier die richtigen variablennamen einsetzen
         	var username = req.query['zID'];
         	var password = req.query['pwd'];
-        	var sql  = `SELECT *
+
+          var hashedPassword ;
+
+          const myPlaintextPassword = password;
+          hashedPassword = bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+
+          });
+
+          //var hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+
+          //console.log(hashedPassword);
+
+          var sql  = `SELECT *
                         FROM zugangsdaten
                         WHERE zugangsID = ? and passwort like "` + password + `"`;
 
