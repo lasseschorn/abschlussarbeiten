@@ -7,7 +7,7 @@ function(connection, callback) {
         	var sql  = `SELECT *
                         FROM branche
                         WHERE BranchenID = ?`;
-        connection.query(sql,bID,function(err, results){
+        connection.query(sql,bID,function(error, results){
           if (error){
             return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
           } else if (results.length > 0){
@@ -22,7 +22,7 @@ function(connection, callback) {
         getAll: () => {
             var sql = `SELECT *
             FROM branche; `;
-            connection.query(sql,function(err,results){
+            connection.query(sql,function(error,results){
             if (error){
               return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
             } else{
@@ -47,7 +47,7 @@ function(connection, callback) {
                         SET  Bezeichnung = ?
                         WHERE BranchenID = ? `;
 
-            connection.query(sql,[bez,bID], function(err,results) {
+            connection.query(sql,[bez,bID], function(error,results) {
               if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {

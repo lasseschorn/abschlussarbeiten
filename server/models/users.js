@@ -7,18 +7,19 @@ function(connection, callback) {
         	var password = req.query['pwd'];
         	var sql  = `SELECT *
                         FROM zugangsdaten
-                        WHERE zugangsID = ? and passwort = ?`;
-            connection.query(sql, [username,password] , function(error,results){
+                        WHERE zugangsID = ? and passwort like "` + password + `"`;
+
+            connection.query(sql,username , function(error,results){
               if (error){
-                return callback(new Error("Falsche Zugangsdaten."),null)
-              } else {
-                if(results){
-                return callback(null,username);
-              } else {
                 return callback(new Error("Etwas ist schief gegangen."),null);
-              }
+              } else {
+                  if(results.length == 0 ){
+                    return callback(new Error("Falsche Zugangsdaten."),null)
+                  } else {
+                    return callback(null,username);
+                  }
             }
-            });
+          });
         },
 
         add: (req) => {

@@ -100,28 +100,114 @@ var storage =   multer.diskStorage({
 /*--------------------------------------------------------------------------------
  -------------------------------Login---------------------------------------------
  ---------------------------------------------------------------------------------*/
+ //******************************* */
+ //******************************* */
+ // /api/login/logout Methode GET
+ //session auslesen
+ // retrun json
+ //sussess: boolean;
+
+ //******************* */
+ // PHP Style
+ //<?php
+ //session_start();
+ //unset($_SESSION);
+ //session_destroy();
+ //?>
+ //{
+ //    "success": true
+ //}
+
+
+ //******************************* */
+ //******************************* */
+ // /api/login/isloggedin  Methode GET
+ //session auslesen
+ //  retrun json
+ //status: boolean;
+
+ //******************* */
+ // PHP Style
+ //<?php
+ //session_start();
+ //if(isset($_SESSION['user'])) {
+ //    echo '{"status": true}';
+ //} else {
+ //    echo '{"status": false}';
+ //}
+ //?>
+
+
+ //******************************* */
+ //******************************* */
+ ///api/login/userdetails Methode POST
+ // return json
+ // success: boolean;
+ // message: string;
+
+ //******************* */
+ //PHP Style
+ //<?php
+ //session_start();
+ //$_POST = json_decode(file_get_contents('php://input'), true);
+ //if(isset($_POST) && !empty($_POST)) {
+ //    $username = $_POST['username'];
+ //    $password = $_POST['password'];
+ //    if($username == 'admin' && $password == 'admin') {
+ //        $_SESSION['user'] = 'admin';
+ //        ?>
+ //{
+ //  "success": true,
+ //  "secret": "This is the secret no one knows but the admin"
+ //}
+ //    <?php
+ //  } else {
+ //    ?>
+ //{
+ //  "success": false,
+ //  "message": "Invalid credentials"
+ //}
+ //    <?php
+ //  }
+ //} else {
+   //var_dump($_POST)
+ //  ?>
+ //{
+ //  "success": false,
+ //  "message": "Only POST access accepted"
+ //}
+ //  <?php
+ //}
+ //?>
+
 
 	const users = require('./models/users').method;
 
   function check_auth(req, res, next) {
-    if(!req.session.login){
-      res.redirect("api/login");
+    if(!req.session.user){
+      res.send(JSON.stringify({status:false}));
+    //  res.redirect("api/login");
       return;
     }
-
+    //res.send(JSON.stringify({status:true}));
     next();
   }
 
 
   app.route('/api/login')
-      .get(function(req, res, next){
+      .post(function(req, res, next){
           users(connection, function(error, results, fields)  {
               if(error) {
                   res.status(500);
-                  res.send(error);
+                  if (error.message == "Falsche Zugangsdaten."){
+                    res.send(JSON.stringify({success:false,message:"Falsche Zugangsdaten"}));
+
+                  } else {
+                    res.send(JSON.stringify({sucess:false,message:"etwas ist schief gelaufen"}))
+                  }
               } else {
-                req.session.login = results;
-                res.redirect("/");                      }
+                req.session.user = results;
+                res.send(JSON.stringify({success:true,message:"Alles in ordnung."}));                      }
           }).checkuser(req)
       }
     )
@@ -129,8 +215,15 @@ var storage =   multer.diskStorage({
   app.route('/api/logout')
       .get(function(req,res,next){
         req.session.destroy();
+        res.send(JSON.stringify({success:true}))
+      })
 
-        res.redirect("/");
+
+  app.route('/api/signup')
+      .post(function(req,res,next){
+        users(connection, function(error,results,fields){
+
+        }).add(req)
       })
 
 

@@ -6,7 +6,7 @@ function(connection, callback) {
             var sql  = 'SELECT *'
                         +'FROM `akademischer grad`'
                         + 'WHERE GradID = ?;';
-            connection.query(sql,gID, function(err,results){
+            connection.query(sql,gID, function(error, results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
@@ -20,7 +20,7 @@ function(connection, callback) {
         	var sql = 'SELECT *'
         		+ 'FROM `akademischer grad`; ';
 
-            connection.query(sql, function(err,results){
+            connection.query(sql, function(error, results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else{
@@ -41,7 +41,7 @@ function(connection, callback) {
         	var sql = 'UPDATE `akademischer grad`'
                        + 'SET  Bezeichnung = ?'
                         + 'WHERE GradID = ?';
-            connection.query(sql,[bez,gID], function(err,results){
+            connection.query(sql,[bez,gID], function(error, results){
               if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {

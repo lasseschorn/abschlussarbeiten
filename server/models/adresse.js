@@ -8,7 +8,7 @@ function(connection, callback) {
       var sql  = `SELECT *
       FROM Adresse
       WHERE AdressID = ?`;
-      connection.query(sql, aID , function(err,results){
+      connection.query(sql, aID , function(error,results){
         if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else if (results.length > 0){
@@ -22,7 +22,7 @@ function(connection, callback) {
     getAll: () => {
       var sql = `SELECT *
       FROM adresse; `;
-      connection.query(sql, function(err,results){
+      connection.query(sql, function(error,results){
         if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else{
@@ -51,7 +51,7 @@ function(connection, callback) {
       var sql = `UPDATE Adresse
       SET ?
       WHERE AdressID = ?`
-      connection.query(sql,[ins,aID],function(err,results){
+      connection.query(sql,[ins,aID],function(error,results){
         if(error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else {
