@@ -48,7 +48,6 @@ connection.connect();
  ******************************************************************************/
 
 
-//var mime = require('mime');
 var multer = require('multer');
 var patt = new RegExp("/.*.pdf.*/i");
 
@@ -494,9 +493,7 @@ app.route('/api/abschlussarbeit/getall')
 app.route('/api/abschlussarbeit/create')
 .get(function(req, res) {
 	 abschluss(connection, function(error, results, fields) {
-		 console.log(results);
 		 if(error) {
-			console.log(error);
 			res.status(500);
 		res.send(error);
 			} else {
@@ -508,7 +505,6 @@ app.route('/api/abschlussarbeit/add')
 .get(function(req, res) {
 	 abschluss(connection, function(error, results, fields) {
 		if(error) {
-			console.log(error);
 			res.status(500);
 		res.send(error);
 			} else {
@@ -656,7 +652,6 @@ app.route('/api/person/update')
 .get(function(req, res) {
 	 person(connection, function(error, results, fields) {
 		if(error) {
-			console.log(error)
 			res.status(500);
 		res.send(error);
 			} else {
@@ -771,7 +766,6 @@ app.route('/api/kategorie/getbyid')
 .get(function(req, res) {
 	 kategorie(connection, function(error, results, fields) {
 		if(error) {
-			console.log(error);
 			res.status(500);
 		res.send(error);
 			} else {
@@ -1120,8 +1114,7 @@ app.route('/api/dozent/update')
 .get(function(req, res) {
 	 dozent(connection, function(error, results, fields) {
 		if(error) {
-			console.log(error)
-			res.status(500);
+	res.status(500);
 		res.send(error);
 			} else {
 				res.send(results)

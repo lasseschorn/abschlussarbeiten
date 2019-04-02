@@ -12,9 +12,11 @@ function(connection, callback) {
           var hashedPassword ;
 
           const myPlaintextPassword = password;
-          hashedPassword = bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+          //bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+          //      return ;
 
-          });
+        //  });
+          //console.log(hashedPassword);
 
           //var hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
 

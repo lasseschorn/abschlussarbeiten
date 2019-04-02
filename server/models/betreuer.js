@@ -40,7 +40,6 @@ function(connection, callback) {
                     'p.geschlecht as Geschlecht, p.`e-mail` as MAIL,u.Firmenname as Firmenname,u.Adresse_AdressID,u.Rechtsform_RechtsformID, ' +
                     'u.Branche_BranchenID from betreuer b join unternehmen u on u.UnternehmensID = b.unternehmen_unternehmensID JOIN person p ' +
                     'on p.personenID = b.person_personenID) u on u.Adresse_AdressID = adresse.AdressID) a where RechtsformID = rechtsform  ) r where BranchenID = r.BrancheID';
-                    console.log(connection.query(sql));
             connection.query(sql, function(error,results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
