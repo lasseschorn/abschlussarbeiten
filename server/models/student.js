@@ -3,10 +3,8 @@ function(connection, callback) {
     return {
         getById: (req) => {
         	var pPID = req.query['pPID'];
-            var sql  = `SELECT *
-                        FROM student
-                        WHERE Person_PersonenID = ? ;`;
-            connection.query(sql,pPid, function(error,results){
+          var sql= 'select * from `akademischer Grad` a inner join ( select personenID, vorname, nachname, geschlecht, `e-mail`, studiengangID, sBezeichnung, kategorie.kategorieID, kategorie.bezeichnung as kBezeichnung, `akademischer grad_gradID` from kategorie inner join ( select personenID, vorname, nachname, geschlecht, `e-mail`, studiengang.StudiengangID, studiengang.bezeichnung as sBezeichnung,abschlussarbeiten_kategorie_kategorieID,`akademischer grad_gradID` from studiengang inner join ( select * from person p inner join student s on p.personenID = s.person_personenID) d on studiengang.studiengangID = d.abschlussarbeiten_studiengang_studiengangID ) g on kategorie.kategorieID = g.abschlussarbeiten_kategorie_kategorieID ) ka on a.gradID = ka.`akademischer grad_gradID` where personenID = ?';
+            connection.query(sql,pPID, function(error,results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
@@ -17,8 +15,8 @@ function(connection, callback) {
             });
         },
         getAll: () => {
-        	var sql = `SELECT *
-            FROM student; `;
+          var sql= 'select * from `akademischer Grad` a inner join ( select personenID, vorname, nachname, geschlecht, `e-mail`, studiengangID, sBezeichnung, kategorie.kategorieID, kategorie.bezeichnung as kBezeichnung, `akademischer grad_gradID` from kategorie inner join ( select personenID, vorname, nachname, geschlecht, `e-mail`, studiengang.StudiengangID, studiengang.bezeichnung as sBezeichnung,abschlussarbeiten_kategorie_kategorieID,`akademischer grad_gradID` from studiengang inner join ( select * from person p inner join student s on p.personenID = s.person_personenID) d on studiengang.studiengangID = d.abschlussarbeiten_studiengang_studiengangID ) g on kategorie.kategorieID = g.abschlussarbeiten_kategorie_kategorieID ) ka on a.gradID = ka.`akademischer grad_gradID`';
+            console.log(connection.query(sql));
             connection.query(sql, function(error,results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
@@ -28,12 +26,12 @@ function(connection, callback) {
             });
         },
         delete: (req) => {
-        	var pPId = req.query['pPid'];
+        	var pPID = req.query['pPid'];
         	var sql = `DELETE
                         FROM Student
                         WHERE Person_PersonenID = ? ;`;
 
-            connection.query(sql,pPid, callback);
+            connection.query(sql,pPID, callback);
         },
         update: (req) => {
         	var pPID = req.query['pPID'];
@@ -47,7 +45,7 @@ function(connection, callback) {
         	var sql = `UPDATE Student
                         SET  ?
                         WHERE Person_PersonenID = ?;`;
-            connection.query(sql,[ins,pPid], function(error,results){
+            connection.query(sql,[ins,pPID], function(error,results){
               if(error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else {

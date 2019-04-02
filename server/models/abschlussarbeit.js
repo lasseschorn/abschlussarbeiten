@@ -4,9 +4,25 @@ function(connection, callback) {
     getById: (req) => {
       var aID = req.query['aID']
 
-      var sql  = `SELECT *
-      FROM abschlussarbeit
-      WHERE ArbeitsID = ?`;
+      var sql  = `select Abstract, Titel, Datum, KategorieID, KBezeichnung as Kategorie, Studiengang_StudiengangID as StudiengangID, Bezeichnung as Studiengang, dozent_personID as DozentID, DVorname, DNachname, Betreuer_Unternehmen_UnternehmensID as UnternehmensID, Firmenname, Betreuer_Unternehmen_Adresse_AdressID as AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort, Student_PersonID as StudentID, Vorname, Nachname, ArbeitsID
+from person join
+    (select *
+    from adresse right join
+        ( select *
+        from unternehmen right join
+            ( select Abstract, Titel, Datum, KategorieID, KBezeichnung,  Studiengang_StudiengangID,Bezeichnung, dozent_personID, Vorname as DVorname, Nachname as DNachname, Betreuer_Unternehmen_UnternehmensID, Betreuer_Unternehmen_Adresse_AdressID, Student_PersonID, ArbeitsID
+            from person join
+                ( select *
+                from studiengang join
+                    ( select Abstract, Titel, Datum, KategorieID, Bezeichnung as KBezeichnung, Studiengang_StudiengangID, dozent_personID, Betreuer_Unternehmen_UnternehmensID, Betreuer_Unternehmen_Adresse_AdressID, Student_PersonID, ArbeitsID
+					from kategorie join (
+					select * from abschlussarbeit where arbeitsID = ? )
+					a where KategorieID = Kategorie_KategorieID) k
+                where StudiengangID = Studiengang_StudiengangID ) s
+            where personenID = dozent_personID  ) d
+        on UnternehmensID = Betreuer_Unternehmen_UnternehmensID ) u
+    on AdressID = Betreuer_Unternehmen_Adresse_AdressID ) a
+where person.PersonenID = Student_PersonID`;
 
       connection.query(sql,aID, function(error,results) {
         if (error){
@@ -19,13 +35,26 @@ function(connection, callback) {
       });
     },
     getAll: () => {
-      var sql = `SELECT *
-      FROM abschlussarbeit a
-      JOIN kategorie k on a.Kategorie_KategorieID  = k.KategorieID
-      join Studiengang s on a.Studiengang_StudiengangID = s.StudiengangID
-      join person p on a.Dozent_DozentID = p.PersonenID and a.Student_PersonID = p.PersonenID
-      join unternehmen u on a.Betreuer_Unternehmen_UnternehmensID = u.UnternehmensID
-      join adress as on a.Betreuer_Unternehmen_Adresse_AdressID = as.AdressID; `;
+      var sql = `select Abstract, Titel, Datum, KategorieID, KBezeichnung as Kategorie, Studiengang_StudiengangID as StudiengangID, Bezeichnung as Studiengang, dozent_personID as DozentID, DVorname, DNachname, Betreuer_Unternehmen_UnternehmensID as UnternehmensID, Firmenname, Betreuer_Unternehmen_Adresse_AdressID as AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort, Student_PersonID as StudentID, Vorname, Nachname, ArbeitsID
+from person join
+    (select *
+    from adresse right join
+        ( select *
+        from unternehmen right join
+            ( select Abstract, Titel, Datum, KategorieID, KBezeichnung,  Studiengang_StudiengangID,Bezeichnung, dozent_personID, Vorname as DVorname, Nachname as DNachname, Betreuer_Unternehmen_UnternehmensID, Betreuer_Unternehmen_Adresse_AdressID, Student_PersonID, ArbeitsID
+            from person join
+                ( select *
+                from studiengang join
+                    ( select Abstract, Titel, Datum, KategorieID, Bezeichnung as KBezeichnung, Studiengang_StudiengangID, dozent_personID, Betreuer_Unternehmen_UnternehmensID, Betreuer_Unternehmen_Adresse_AdressID, Student_PersonID, ArbeitsID
+					from kategorie join (
+					select * from abschlussarbeit)
+					a where KategorieID = Kategorie_KategorieID) k
+                where StudiengangID = Studiengang_StudiengangID ) s
+            where personenID = dozent_personID  ) d
+        on UnternehmensID = Betreuer_Unternehmen_UnternehmensID ) u
+    on AdressID = Betreuer_Unternehmen_Adresse_AdressID ) a
+where person.PersonenID = Student_PersonID
+`;
 
       connection.query(sql, function(error,results){
         if (error){

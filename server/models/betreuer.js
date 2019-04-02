@@ -2,25 +2,45 @@ exports.method =
 function(connection, callback) {
     return {
         getById: (req) => {
-        	var uUID = req.query['uUID'];
-        	var uAAID = req.query['uAAID'];
-            var sql  = `SELECT *
-                        FROM betreuer
-                        WHERE Unternehmen_UnternehmensID = ? and
-                        Unternehmen_Adresse_AdressID = ?`
-            connection.query(sql,[uUID,uAAID], function(error,results){
+        	var pPID = req.query['pPID'];
+          var sql = 'select r.PersonenID as PersonenID,r.Vorname as Vorname, r.Nachname as Nachname,r.geschlecht as Geschlecht, ' +
+                    'r.MAIL as Mail, r.Firmenname as Firmenname,r.RechtsformBez as Rechtsform, bezeichnung as Branche, r.straße as Straße, ' +
+                    'r.Hausnummer as Hausnummer, r.zusatz as Zusatz, r.PLZ as PLZ, r.Ort as Ort ' +
+                    'from branche join ( select a.Firmenname as Firmenname, a.Straße as Straße, a.Hausnummer as Hausnummer,a.Zusatz as Zusatz, ' +
+                    'a.PLZ as PLZ ,a.Ort as Ort,a.PersonenID as PersonenID,a.Vorname as Vorname,a.Nachname as Nachname,a.Geschlecht as Geschlecht, ' +
+                    'a.MAIL as MAIL,a.adresseID,a.rechtsform as rechtsform,a.BrancheID as BrancheID, rechtsform.bezeichnung as RechtsformBez ' +
+                    'from rechtsform join ( select u.Firmenname as Firmenname ,adresse.straße as Straße ,adresse.hausnummer as Hausnummer, ' +
+                    'adresse.zusatz as Zusatz,adresse.postleitzahl as PLZ,adresse.ort as Ort, u.PersonenID as PersonenID, u.Vorname as Vorname , ' +
+                    'u.Nachname as Nachname ,u.Geschlecht as Geschlecht ,u.MAIL as MAIL ,u.Adresse_AdressID as adresseID,u.Rechtsform_RechtsformID as rechtsform, ' +
+                    'u.Branche_BranchenID as BrancheID from adresse join ( select p.personenID as PersonenID,p.vorname as Vorname,p.nachname as Nachname, ' +
+                    'p.geschlecht as Geschlecht, p.`e-mail` as MAIL,u.Firmenname as Firmenname,u.Adresse_AdressID,u.Rechtsform_RechtsformID, ' +
+                    'u.Branche_BranchenID from betreuer b join unternehmen u on u.UnternehmensID = b.unternehmen_unternehmensID JOIN person p ' +
+                    'on p.personenID = b.person_personenID where b.person_personenID = ?) u on u.Adresse_AdressID = adresse.AdressID) a where RechtsformID = rechtsform  ) r where BranchenID = r.BrancheID';
+          connection.query(sql,pPID, function(error,results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
               } else if (results.length > 0){
                 return callback(null,JSON.stringify(results));
               } else {
-                return callback(new Error("Falsche ID angegeben"),null);
+                return callback(new Error("Falsche PersonenID angegeben"),null);
               }
             });
         },
         getAll: () => {
-        	var sql = `SELECT *
-            FROM betreuer; `;
+        	var sql = 'select r.PersonenID as PersonenID,r.Vorname as Vorname, r.Nachname as Nachname,r.geschlecht as Geschlecht, ' +
+                    'r.MAIL as Mail, r.Firmenname as Firmenname,r.RechtsformBez as Rechtsform, bezeichnung as Branche, r.straße as Straße, ' +
+                    'r.Hausnummer as Hausnummer, r.zusatz as Zusatz, r.PLZ as PLZ, r.Ort as Ort ' +
+                    'from branche join ( select a.Firmenname as Firmenname, a.Straße as Straße, a.Hausnummer as Hausnummer,a.Zusatz as Zusatz, ' +
+                    'a.PLZ as PLZ ,a.Ort as Ort,a.PersonenID as PersonenID,a.Vorname as Vorname,a.Nachname as Nachname,a.Geschlecht as Geschlecht, ' +
+                    'a.MAIL as MAIL,a.adresseID,a.rechtsform as rechtsform,a.BrancheID as BrancheID, rechtsform.bezeichnung as RechtsformBez ' +
+					          'from rechtsform join ( select u.Firmenname as Firmenname ,adresse.straße as Straße ,adresse.hausnummer as Hausnummer, ' +
+                    'adresse.zusatz as Zusatz,adresse.postleitzahl as PLZ,adresse.ort as Ort, u.PersonenID as PersonenID, u.Vorname as Vorname , ' +
+                    'u.Nachname as Nachname ,u.Geschlecht as Geschlecht ,u.MAIL as MAIL ,u.Adresse_AdressID as adresseID,u.Rechtsform_RechtsformID as rechtsform, ' +
+                    'u.Branche_BranchenID as BrancheID from adresse join ( select p.personenID as PersonenID,p.vorname as Vorname,p.nachname as Nachname, ' +
+                    'p.geschlecht as Geschlecht, p.`e-mail` as MAIL,u.Firmenname as Firmenname,u.Adresse_AdressID,u.Rechtsform_RechtsformID, ' +
+                    'u.Branche_BranchenID from betreuer b join unternehmen u on u.UnternehmensID = b.unternehmen_unternehmensID JOIN person p ' +
+                    'on p.personenID = b.person_personenID) u on u.Adresse_AdressID = adresse.AdressID) a where RechtsformID = rechtsform  ) r where BranchenID = r.BrancheID';
+                    console.log(connection.query(sql));
             connection.query(sql, function(error,results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
@@ -39,9 +59,7 @@ function(connection, callback) {
         },
         update: (req) => {
         	const ins ={
-        			Unternehmen_UnternehmensID : req.query['uUID'],
-        			Unternehmen_Adresse_AdressID : req.query['uAAID']
-
+        			Unternehmen_UnternehmensID : req.query['uUID']
         	}
 
         	var pPID = req.query['pPID'];
@@ -67,7 +85,6 @@ function(connection, callback) {
         add: (req) => {
         	const ins = {
         			Unternehmen_UnternehmensID: req.query['uUID'],
-        			Unternehmen_Adresse_AdressID: req.query['uAAID'],
         			Person_PersonenID: req.query['pPID']
         	}
 

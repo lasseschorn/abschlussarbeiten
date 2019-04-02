@@ -5,12 +5,17 @@ function(connection, callback) {
 
       var uID = req.query['uID'];
 
-      var sql  = `SELECT *
-      FROM Unternehmen
-      JOIN adresse on Unternehmen.Adresse_AdressID = adresse.AdressID
-      JOIN rechtsform on Unternehmen.Rechtsform_RechtsformID = rechtsform.RechtsformID
-      JOIN branche on Unternehmen.Branche_BranchenID = branche.BranchenID
-      WHERE UnternehmensID = ?`;
+      var sql  = `select *
+from (
+select branche.BranchenID, branche.Bezeichnung as BBzeichnung, r.RechtsformID, r.Bezeichnung, UnternehmensID, Firmenname, AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort
+from branche join ( select *
+from rechtsform join (	select *
+						from unternehmen
+						join adresse	WHERE Adresse_AdressID = AdressID) a
+where RechtsformID = Rechtsform_RechtsformID ) r
+where BranchenID = Branche_BranchenID
+) u
+where UnternehmensID = ?`;
       connection.query(sql,uID, function(error, results) {
         if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
@@ -22,11 +27,13 @@ function(connection, callback) {
       });
     },
     getAll: () => {
-      var sql = `SELECT *
-      FROM Unternehmen
-      JOIN adresse on Unternehmen.Adresse_AdressID = adresse.AdressID
-      JOIN rechtsform on Unternehmen.Rechtsform_RechtsformID = rechtsform.RechtsformID
-      JOIN branche on Unternehmen.Branche_BranchenID = branche.BranchenID ; `;
+      var sql = `select branche.BranchenID, branche.Bezeichnung, r.RechtsformID, r.Bezeichnung, UnternehmensID, Firmenname, AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort
+from branche join ( select *
+from rechtsform join (select *
+from unternehmen join adresse
+WHERE Adresse_AdressID = AdressID) a
+where RechtsformID = Rechtsform_RechtsformID ) r
+where BranchenID = Branche_BranchenID `;
 
       connection.query(sql, function(error,results) {
         if (error){
