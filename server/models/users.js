@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 exports.method =
@@ -41,6 +41,28 @@ function(connection, callback) {
 
         add: (req) => {
 
+        },
+        getUserDetails: (req) => {
+          var username = req.query['zID'];
+        	var password = req.query['pwd'];
+
+          var sql  = `SELECT userType
+                        FROM zugangsdaten
+                        WHERE zugangsID = ? and passwort like "` + password + `"`;
+
+            connection.query(sql,username , function(error,results,fields){
+              if (error){
+                return callback(new Error("Etwas ist schief gegangen."),null);
+              } else {
+                  if(results.length == 0 ){
+                    return callback(new Error("Falsche Zugangsdaten."),null)
+                  } else {
+                    var temp = JSON.stringify(results[0]).toString();
+                    var userType = temp.slice((temp.indexOf(":") + 2),temp.lastIndexOf('"'));
+                    return callback(null,userType,username);
+                  }
+            }
+          });
         }
 
 

@@ -184,14 +184,22 @@ var storage =   multer.diskStorage({
 
   function check_auth(req, res, next) {
     if(!req.session.user){
-      res.send(JSON.stringify({status:false}));
-    //  res.redirect("api/login");
+      res.send(JSON.stringify({status:false,message:"Nicht eingeloggt keine berechtigung auf Server ebene."}));
       return;
     }
-    //res.send(JSON.stringify({status:true}));
     next();
   }
 
+
+    app.route('/api/login/isloggedin')
+        .get(function(req, res, next){
+          if(!req.session.user){
+            res.send(JSON.stringify({status:false}))
+          } else {
+            res.send(JSON.stringify({status:true}))
+          }
+        }
+      )
 
   app.route('/api/login')
       .post(function(req, res, next){
@@ -211,7 +219,32 @@ var storage =   multer.diskStorage({
       }
     )
 
-  app.route('/api/logout')
+      app.route('/api/login/userdetails')
+          .post(function(req, res, next){
+              users(connection, function(error, results, fields)  {
+                  if(error) {
+                      res.status(500);
+                      if (error.message == "Falsche Zugangsdaten."){
+                        res.send(JSON.stringify({success:false,message:"Falsche Zugangsdaten"}));
+
+                      } else {
+                        res.send(JSON.stringify({sucess:false,message:"etwas ist schief gelaufen"}))
+                      }
+                  } else {
+                        if (results == "Admin"){
+                            req.session.user = fields;
+                            req.session.login = results;
+                            res.send(JSON.stringify({success:true,message:"This is the secret no one knows but the admin"}));
+                        } else {
+                            res.send(JSON.stringify({sucess:false,message:"Invalid credentials"}))
+                        }
+                    }
+
+              }).getUserDetails(req)
+          }
+        )
+
+  app.route('/api/login/logout')
       .get(function(req,res,next){
         req.session.destroy();
         res.send(JSON.stringify({success:true}))
