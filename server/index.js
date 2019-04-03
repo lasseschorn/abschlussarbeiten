@@ -525,7 +525,7 @@ app.route('/api/abschlussarbeit/update')
 				}}).update(req)
 })
 
-app.route('/api/abschlussarbeit/find')
+app.route('/api/abschlussarbeit/findByKategorie')
 .get(function(req, res) {
 	 abschluss(connection, function(error, results, fields) {
 		if(error) {
@@ -533,7 +533,18 @@ app.route('/api/abschlussarbeit/find')
 		res.send(error);
 			} else {
 				res.send(results)
-				}}).find(req)
+				}}).findByKategorie(req)
+})
+
+app.route('/api/abschlussarbeit/findByStudiengang')
+.get(function(req, res) {
+	 abschluss(connection, function(error, results, fields) {
+		if(error) {
+			res.status(500);
+		res.send(error);
+			} else {
+				res.send(results)
+      }}).findByStudiengang(req)
 })
 
 /* -------------------------------------------------------------
