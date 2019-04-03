@@ -66,6 +66,8 @@ var storage =   multer.diskStorage({
 
 
 	});
+
+
 	var upload = multer({
 		storage : storage,
 		fileFilter: function (req, file, cb) {
@@ -85,7 +87,7 @@ var storage =   multer.diskStorage({
 		res.sendFile(__dirname + "/index.html");
 	});
 
-
+//Hier ist die seite wo man weiter geleitet wird .
 	app.post('/uploadjavatpoint',function(req,res){
 	    upload(req,res,function(err) {
 	    	if(err) {
@@ -94,6 +96,42 @@ var storage =   multer.diskStorage({
 	        res.end("File is uploaded successfully!");
 	    });
 	});
+
+
+
+
+
+
+//
+//              file searcher
+//
+
+  function getAllPDFinDir() {
+    var walk    = require('walk');
+    var files   = [];
+
+    // Walker options
+    var walker  = walk.walk('./uploads', { followLinks: false });
+
+    walker.on('file', function(root, stat, next) {
+        // Add this file to the list of files
+        files.push(root + '/' + stat.name);
+        next();
+    });
+
+    walker.on('end', function() {
+        console.log(files);
+    });
+    return files;
+  }
+
+  app.route('/api/uploads/show')
+      .get(function(req,res,next){
+        getAllPDFinDir()
+      })
+
+
+
 
 
 /*--------------------------------------------------------------------------------
