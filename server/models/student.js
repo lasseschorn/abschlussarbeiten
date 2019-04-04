@@ -17,7 +17,6 @@ function(connection, callback) {
         },
         getAll: () => {
           var sql= 'select gradID, bezeichnung, personenID, vorname, nachname,geschlecht, `e-mail` as email,StudiengangID as studiengangid,sBezeichnung,kategorieID,kBezeichnung,`akademischer grad_gradID` from `akademischer Grad` a inner join ( select personenID, vorname, nachname, geschlecht, `e-mail`, studiengangID, sBezeichnung, kategorie.kategorieID, kategorie.bezeichnung as kBezeichnung, `akademischer grad_gradID` from kategorie inner join ( select personenID, vorname, nachname, geschlecht, `e-mail`, studiengang.StudiengangID, studiengang.bezeichnung as sBezeichnung,abschlussarbeiten_kategorie_kategorieID,`akademischer grad_gradID` from studiengang inner join ( select * from person p inner join student s on p.personenID = s.person_personenID) d on studiengang.studiengangID = d.abschlussarbeiten_studiengang_studiengangID ) g on kategorie.kategorieID = g.abschlussarbeiten_kategorie_kategorieID ) ka on a.gradID = ka.`akademischer grad_gradID`';
-            console.log(connection.query(sql));
             connection.query(sql, function(error,results){
               if (error){
                 return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
