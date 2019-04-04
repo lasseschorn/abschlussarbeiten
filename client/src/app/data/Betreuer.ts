@@ -8,9 +8,9 @@ export class Betreuer {
   geschlecht: string;
   mail: string;
   firmenname: string;
-  rechtsform:string;
+  rechtsform: string;
   branche: string;
-  strasse:string;
+  strasse: string;
   hausnummer: number;
   zusatz: string;
   plz: number;
