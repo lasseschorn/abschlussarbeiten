@@ -3,9 +3,16 @@ import { Adresse } from './Adresse';
 import { Branche } from './Branche';
 
 export class Unternehmen {
-unternehmensID: number;
-firmenname: string;
-rechtsform: Rechtsform;
-adresse: Adresse;
-branche: Branche;
+  branchenID: number;
+  branche: string;
+  rechtsformID: number;
+  rechtsform: string;
+  unternehmensID: number;
+  firmenname: string;
+  adressID: number;
+  strasse: string;
+  hausnummer: number;
+  zusatz: string;
+  plz: number;
+  ort: string;
 }
