@@ -1,5 +1,5 @@
 {
-    "/api/branche/getAll": {
+  "/assets": {
     "target": "http://localhost:8080",
     "secure": false,
     "changeOrigin": true
@@ -8,5 +8,5 @@
     "target": "http://localhost:8080",
     "secure": false,
     "changeOrigin": true
-  }   
+  }
 }

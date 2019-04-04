@@ -1,12 +1,12 @@
 <section id="container3">
-    <form (submit)="loginUser($event)" >
+    <form  >
   <div id="login">
     <br>
-    <form action="#">
+    <form (ngSubmit)="loginUser($event)">
       <div id="txt">
         <div id="name">Bitte geben Sie Ihre Anmeldedaten ein.</div> <br>
-        <div>Benutzername  </div> <div> <input type="text" autocomplete="off" placeholder="Username" id="username" name ="name"> </div> <br>
-        <div>Passwort  </div><div>      <input type="password" autocomplete="off" placeholder="Password" id="password" name="passwort"> </div>
+        <div>Benutzername  </div> <div> <input   type="text" autocomplete="off" placeholder="Username" id="username" name ="username"> </div> <br>
+        <div>Passwort  </div><div>      <input   type="password" autocomplete="off" placeholder="Password" id="password" name="password"> </div>
         <button type="submit" id="submit">Anmelden </button>
       </div>
     </form>

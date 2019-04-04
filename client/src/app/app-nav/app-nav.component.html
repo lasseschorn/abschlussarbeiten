@@ -1,23 +1,23 @@
 <div id="navbar">
     <div id="box1">
-      <div id="link5">
-          <img src="logo.jpg" alt="Logo">
+      <div id="link5" [routerLink]="['http://www.fh-wedel.de']">
+          <img src="assets/fotos/logo.jpg" alt="Logo">
       </div>
-        <div id="link1">
+        <div id="link1" [routerLink]="['/uebersicht']">
             <i class="fas fa-search"></i>
             <p> Suche </p>
         </div>
-       <div id="link2">
-           <i class="fas fa-plus-circle"></i>
+       <div id="link2" [routerLink]="['/erstellseite']">
+           <i class="fas fa-plus-circle"  ></i>
              <p> Eintrag </p>
         </div>
-        <div id="link3">
-            <i class="fas fa-edit"></i>
+        <div id="link3" [routerLink]="['/admin']">
+            <i class="fas fa-edit" ></i>
               <p> Ändern </p>
         </div>
 
-        <div id="link4">
-            <i class="fas fa-sign-out-alt"></i>
+        <div id="link4" [routerLink]="['/logout']">
+            <i class="fas fa-sign-out-alt"  ></i>
               <p> Logout </p>
         </div>
     </div>

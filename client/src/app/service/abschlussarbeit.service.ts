@@ -16,7 +16,7 @@ private generalUrl = '/api/abschlussarbeit';
 
 
   getAll(): Observable<Abschlussarbeit[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Abschlussarbeit[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Abschlussarbeit[]>('getAll', []))
@@ -40,6 +40,15 @@ getAbschlussarbeit(id: number): Observable<Abschlussarbeit> {
       catchError(this.errorService.handleError<Abschlussarbeit>(`getAbschlussarbeit id=${id}`))
     );
   }
+  findAbschlussarbeiten(kid, sid): Observable<Abschlussarbeit[]> {
+    const url = `${this.generalUrl}/findByKategorieAndStudiengang?kID=${kid}&sID=${sid}`;
+    return this.http.get<Abschlussarbeit[]>(url)
+    .pipe(
+      tap(_ => this.errorService.log(`fetched Abschlussarbeiten kID=${kid} sID=${sid}`)),
+      catchError(this.errorService.handleError<Abschlussarbeit[]>(`findByKategorieAndStudiengang kID=${kid} sID=${sid}}`))
+    );
+  }
+
 //   searchAbschlussarbeiten(term: string): Observable<Abschlussarbeit[]> {
 //       const url = `${this.generalUrl}/search`;
 //    if (!term.trim()) {

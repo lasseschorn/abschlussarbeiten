@@ -17,7 +17,7 @@ private generalUrl = '/api/studiengang';
 
 
   getAll(): Observable<Studiengang[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Studiengang[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Studiengang[]>('getAll', []))

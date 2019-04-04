@@ -16,7 +16,7 @@ export class UnternehmenService {
 
 
   getAll(): Observable<Unternehmen[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Unternehmen[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Unternehmen[]>('getAll', []))

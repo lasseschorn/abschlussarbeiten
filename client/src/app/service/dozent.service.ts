@@ -16,7 +16,7 @@ export class DozentService {
 
 
   getAll(): Observable<Dozent[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Dozent[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Dozent[]>('getAll', []))
@@ -57,7 +57,7 @@ getDozent(id: number): Observable<Dozent> {
       const url = `${this.generalUrl}/add?bez=${name}`;
       return this.http.get<Dozent>(url)
     .pipe(
-     tap((newDozent: Dozent) => this.errorService.log(`added Dozent w/ id=${newDozent.person.personId}`)),
+     tap((newDozent: Dozent) => this.errorService.log(`added Dozent w/ id=${newDozent.personenID}`)),
       catchError(this.errorService.handleError<Dozent>('add'))
     );
   }

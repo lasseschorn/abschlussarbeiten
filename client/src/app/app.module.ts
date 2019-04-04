@@ -22,6 +22,7 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
 
 @NgModule({
   imports: [
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     FormsModule,
@@ -53,10 +54,12 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
     component: ErstellSeiteComponent},
     {path: 'test',
     component: TestComponent},
+    {path: 'logout',
+    component: LogoutComponent},
     {path: 'admin',
     component: AdminComponent,
     canActivate: [AuthGuard]},
-  ]), FormsModule
+  ])
 ],
   providers: [AuthService, AuthGuard],
   declarations: [

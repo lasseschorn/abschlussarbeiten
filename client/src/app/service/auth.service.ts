@@ -24,10 +24,10 @@ export class AuthService {
 //    return this.loggedInStatus;
   }
 
-  getUserDetails(email, password) {
+  getUserDetails(username, password) {
     // post these details to API server return user info if correct
     return this.http.post<MyData>('/api/login/auth', {
-      email,
+      username,
       password
     });
   }

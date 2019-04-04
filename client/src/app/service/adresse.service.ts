@@ -16,7 +16,7 @@ export class AdresseService {
 
 
   getAll(): Observable<Adresse[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Adresse[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Adresse[]>('getAll', []))
