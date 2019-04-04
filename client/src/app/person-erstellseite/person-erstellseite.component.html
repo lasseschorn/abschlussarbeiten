@@ -1,0 +1,40 @@
+<h1> Person erstellen </h1>
+  <input type="radio" name="geschlecht" value="weiblich" ng-model="place" />weiblich
+  <input type="radio" name="geschlecht" value="maennlich" ng-model="place" />männlich
+    <p>Vorname
+        <input type="text" name="vorname" ng-model="vorname" /></p>
+        <p>Nachname
+            <input type="text" name="name" ng-model="nachname" /></p>
+            <p>E-Mail
+                <input type="email" name="mail" ng-model="mail" /></p>
+
+<input type="radio" name="place" value="student" ng-model="place" />Student
+<input type="radio" name="place" value="betreuer" ng-model="place" />Betreuer
+<input type="radio" name="place" value="betreuer" ng-model="place" />Dozent
+
+<div ng-hide="place !== 'student'">
+  <select id="studiengang" name="studiengang">
+    <option *ngFor="let studiengang of studiengaenge"  [value]="studiengang.studiengangID">{{studiengang.bezeichnung}}</option>
+    </select>
+      Kategorie:
+      <select id="kategorie" name="kategorie">
+        <option *ngFor="let kategorie of kategorien"  [value]="kategorie.kategorieID">{{kategorie.bezeichnung}}</option>
+        </select>
+        Kategorie:
+        <select id="akaGrad" name="akaGrad">
+          <option *ngFor="let akaGrad of akaGrade"  [value]="akademischergrad.gradID">{{akademischergrad.bezeichnung}}</option>
+          </select>
+</div>
+
+<div ng-hide="place !== 'betreuer'">
+Unternehmen:
+<select id="unternehmen" name="unternehmen">
+  <option *ngFor="let unternehmen of unternehmen"  [value]="unternehmen.unternehmensID">{{unternehmen.firmenname}}</option>
+  </select>
+  </div>
+
+  <div ng-hide="place !== 'dozent'">
+    </div>
+
+    <input class="buttonMain" (click)="accept()" value="Erstellen" [routerLink]="['/start']">
+    <input class="buttonMain" (click)="decline()" value="abbrechen" [routerLink]="['/start']">
