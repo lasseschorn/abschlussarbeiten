@@ -239,7 +239,7 @@ var storage =   multer.diskStorage({
         }
       )
 
-  app.route('/api/login')
+  app.route('/api/login/login')
       .post(function(req, res, next){
           users(connection, function(error, results, fields)  {
               if(error) {
@@ -257,7 +257,7 @@ var storage =   multer.diskStorage({
       }
     )
 
-      app.route('/api/login/userdetails')
+      app.route('/api/login/auth')
           .post(function(req, res, next){
               users(connection, function(error, results, fields)  {
                   if(error) {
