@@ -13,9 +13,7 @@ export class AdminComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getData().subscribe(data => {
-      this.message = data.message;
-    });
+
   }
 
 }

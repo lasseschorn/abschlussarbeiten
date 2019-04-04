@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./logout.component.css']
 })
 export class LogoutComponent implements OnInit {
-
+ausgeloggt: boolean;
   constructor(private userService: UserService,
               private router: Router,
               private authService: AuthService) { }
@@ -17,6 +17,7 @@ export class LogoutComponent implements OnInit {
   ngOnInit() {
     this.userService.logout().subscribe(data => {
       if ( data.sussess ) {
+        this.ausgeloggt = data.sussess;
         this.router.navigate(['']);
         this.authService.setLoggedIn(false);
       } else {

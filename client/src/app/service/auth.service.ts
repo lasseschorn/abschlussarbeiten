@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { MyData } from '../data/MyData';
-import { RegisterResponse } from '../data/RegisterResponse';
 
 
 
@@ -23,13 +22,9 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString());
 //    return this.loggedInStatus;
   }
-
   getUserDetails(username, password) {
     // post these details to API server return user info if correct
-    return this.http.post<MyData>('/api/login/auth', {
-      username,
-      password
-    });
+    return this.http.post<MyData>('/api/login/auth?zID=${username}&pwd=${password}', {});
   }
 
 // getUserDetails(email, password) {
