@@ -20,15 +20,12 @@ main {
 
 /* container 1 */
 #container3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-row-gap: 80px;
   text-align: start;
   font-size: 20px;
   font-weight: bold;
   color: #222E6A;
   clear: left;
+  margin-bottom: 5vh;
 }
 
 #tab {
@@ -71,8 +68,4 @@ main {
     font-size: 30px;
     font-weight: bold;
     color: #222E6A;
-}
-
-@media only screen and (max-width: 768px) {
-
 }

@@ -31,8 +31,8 @@
 <tbody>
     <tr *ngFor="let abschlussarbeit of abschlussarbeiten | grdFilter: searchText ;">
       <td id="titel">{{abschlussarbeit.titel}}</td>
-      <td>{{abschlussarbeit.Autor}}</td>
-      <td>{{abschlussarbeit.Dozent}}</td>
+      <td>{{abschlussarbeit.Vorname}} {{abschlussarbeit.Nachname}}</td>
+      <td>{{abschlussarbeit.DVorname}} {{abschlussarbeit.DNachname}}</td>
       <td>{{abschlussarbeit.Kategorie}}</td>
 
     </tr>
