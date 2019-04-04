@@ -6,7 +6,7 @@ export class Betreuer {
   vorname: string;
   nachname: string;
   geschlecht: string;
-  mail: string;
+  email: string;
   firmenname: string;
   rechtsform: string;
   branche: string;
