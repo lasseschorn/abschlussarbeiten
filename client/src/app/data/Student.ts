@@ -4,9 +4,16 @@ import { Studiengang } from './Studiengang';
 import { Abschlussarbeit } from './Abschlussarbeit';
 
 export class Student {
-person: Person;
-matrikelnummer: number;
-akaGrad: AkaGrad;
-studiengang: Studiengang;
-abschlussarbeit: Abschlussarbeit;
+  gradID: number;
+  bezeichnung: string;
+  personenID: number;
+  vorname: string;
+  nachname: string;
+  geschlecht: string;
+  email: string;
+  studiengangID: number;
+  studiengang: string;
+  kategorieID: number;
+  kategorie: string;
+  akademischergrad: string;
 }
