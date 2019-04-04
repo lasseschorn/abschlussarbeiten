@@ -303,7 +303,7 @@ var storage =   multer.diskStorage({
 					Branche
 -------------------------------------------------------------*/
 app.route('/api/branche/getbyid')
-    .get(check_auth,function(req, res, next){
+    .get(function(req, res, next){
         branche(connection, function(error, results, fields)  {
             if(error) {
                 res.status(500);
@@ -318,7 +318,7 @@ app.route('/api/branche/getbyid')
   )
 
  app.route('/api/branche/getAll')
- .get(check_auth, function(req, res) {
+ .get( function(req, res) {
 	 branche(connection, function(error, results, fields) {
 		if(error) {
 			res.status(500);
