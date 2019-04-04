@@ -16,7 +16,7 @@ export class StudentService {
 
 
   getAll(): Observable<Student[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Student[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Student[]>('getAll', []))
@@ -57,7 +57,7 @@ getStudent(id: number): Observable<Student> {
       const url = `${this.generalUrl}/add?bez=${name}`;
       return this.http.get<Student>(url)
     .pipe(
-     tap((newStudent: Student) => this.errorService.log(`added Student w/ id=${newStudent.person.personId}`)),
+     tap((newStudent: Student) => this.errorService.log(`added Student w/ id=${newStudent.personenID}`)),
       catchError(this.errorService.handleError<Student>('add'))
     );
   }

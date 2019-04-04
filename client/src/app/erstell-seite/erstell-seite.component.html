@@ -1,3 +1,118 @@
+<h1>Abschlussarbeit erstellen</h1>
+<form>
+  <input type="radio" name="place" value="country" ng-model="place" />country
+  <input type="radio" name="place" value="city" ng-model="place" />city
+
+  <div ng-hide="place !== 'country'">
+      <p>Country name
+          <input type="text" name="countryName" ng-model="location.country" /></p>
+  </div>
+  <div ng-hide="place !== 'city'">
+      <p>City name
+          <input type="text" name="cityName" ng-model="location.city" /></p>
+  </div>
+  {{place}}
+</form>
+<div id="autor" >
+<h3>Autor</h3>
 <p>
-  erstell-seite works!
+    <label>
+  Autor-Vorname:
+  <input type="text" [(ngModel)]="asurname" name="asurname" pattern="[A-Z][a-z]*" required>
+  </label>
 </p>
+<p>
+    <label>
+  Autor-Nachname:
+  <input type="text" [(ngModel)]="aname" name="aname" pattern="[A-Z][a-z]*" required>
+  </label>
+</p>
+<p>
+<label>
+Matrikelnummer:
+<input type="number" [(ngModel)]="matrikel" name="matrikel" min="000000" max="999999" placeholder="101010" required>
+</label>
+</p>
+<p>
+Studiengang:
+<select name="Studiengang">
+<option *ngFor="let studiengang of studiengaenge"  [value]="studiengang.studiengangID">{{studiengang.bezeichnung}}</option>
+</select>
+</p>
+</div>
+<div id="abschlussarbeit" >
+<h3>Abschlussarbeit</h3>
+  <label>
+Titel:
+<input type="text" [(ngModel)]="titel" name="titel" pattern="[A-Z][a-z]*" required>
+</label>
+<label>
+  Kategorie:
+  <select name="kategorie">
+    <option *ngFor="let kategorie of kategorien"  [value]="kategorie.studiengangID">{{kategorie.bezeichnung}}</option>
+    </select>
+</label>
+<label>
+Abstract:
+<input type="textarea" [(ngModel)]="abstract" name="abstract" rows="8" cols="80" required>
+</label>
+<p>
+Studiengang:
+<select name="aStudiengang">
+<option *ngFor="let studiengang of studiengaenge"  [value]="studiengang.studiengangID">{{studiengang.bezeichnung}}</option>
+</select>
+</p>
+</div>
+<div id="unternehmen" >
+<h3>Unternehmen</h3>
+<p>
+    <label>
+  Betreuer-Vorname:
+  <input type="text" [(ngModel)]="bsurname" name="bsurname" pattern="[A-Z][a-z]*" required>
+  </label>
+</p>
+<p>
+    <label>
+  Betreuer-Nachname:
+  <input type="text" [(ngModel)]="bname" name="bname" pattern="[A-Z][a-z]*" required>
+  </label>
+</p>
+<p>
+    <label>
+  Firmenname:
+  <input type="text" [(ngModel)]="firmenname" name="firmenname" required>
+  </label>
+  <p>
+      <label>
+    Straße:
+    <input type="text" [(ngModel)]="adress" name="adress" required>
+    </label>
+  </p>
+  <p>
+      <label>
+    Hausnummer:
+    <input type="number" [(ngModel)]="number" name="number" required>
+    </label>
+  </p>
+  <p>
+      <label>
+    Postleitzahl:
+    <input type="number" [(ngModel)]="postcode" name="postcode" min="01001" max="99998" placeholder="12345" required>
+    </label>
+  </p>
+  <p>
+      <label>
+    Ort:
+    <input type="text" [(ngModel)]="state" name="state" pattern="[A-Z][a-z]*" required>
+    </label>
+  </p>
+  <p>
+    Branche:
+      <select name="branche">
+        <option *ngFor="let branche of branchen"  [value]="branche.branchenID">{{branche.bezeichnung}}</option>
+        </select>
+</p>
+</div>
+<p></p>
+  <input class="buttonMain" (click)="accept()" value="Erstellen" [routerLink]="['/start']">
+  <input class="buttonMain" (click)="decline()" value="abbrechen" [routerLink]="['/start']">

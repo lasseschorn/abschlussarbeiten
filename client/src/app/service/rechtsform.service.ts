@@ -17,7 +17,7 @@ export class RechtsformService {
 
 
   getAll(): Observable<Rechtsform[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Rechtsform[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Rechtsform[]>('getAll', []))

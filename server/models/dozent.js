@@ -3,11 +3,7 @@ function(connection, callback) {
   return {
     getById: (req) => {
       var pPID = req.query['pPID'];
-      var sql  = 'select p.personenID, ad.bezeichnung,p.vorname,p.nachname,p.geschlecht,p.`e-mail`' +
-                'from dozent d join `akademischer grad` ad on ad.gradID = d.`akademischer grad_gradID` ' +
-                'join person p on d.person_personenID = p.personenID ' +
-                'where d.person_personenID = ?';
-                console.log(connection.query(sql,pPID));
+      var sql  = 'select p.personenID as personenID, ad.bezeichnung as bezeichnung,p.vorname as vorname,p.nachname as nachname,p.geschlecht as geschlecht,p.`e-mail` as email from dozent d join `akademischer grad` ad on ad.gradID = d.`akademischer grad_gradID` join person p on d.person_personenID = p.personenID where d.person_personenID = ?';
       connection.query(sql,pPID, function(error,results){
         if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
@@ -19,9 +15,7 @@ function(connection, callback) {
       });
     },
     getAll: () => {
-          var sql1 = 'select p.personenID, ad.bezeichnung,p.vorname,p.nachname,p.geschlecht,p.`e-mail`' +
-                    'from dozent d join `akademischer grad` ad on ad.gradID = d.`akademischer grad_gradID` ' +
-                    'join person p on d.person_personenID = p.personenID'
+          var sql1 = 'select p.personenID as personenID, ad.bezeichnung as bezeichnung,p.vorname as vorname,p.nachname as nachname,p.geschlecht as geschlecht,p.`e-mail` as email from dozent d join `akademischer grad` ad on ad.gradID = d.`akademischer grad_gradID` join person p on d.person_personenID = p.personenID'
 
 
       connection.query(sql1, function(error,results){

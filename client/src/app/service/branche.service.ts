@@ -16,7 +16,7 @@ export class BrancheService {
 
 
   getAll(): Observable<Branche[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Branche[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Branche[]>('getAll', []))

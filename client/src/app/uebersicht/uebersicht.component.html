@@ -1,26 +1,19 @@
-<form>
+<form (ngSubmit)="suchen($event)">
   <div id="filter">
     <div class="filter">Studiengang:
-    <select name="Studiengang">
-      <option value="999"> alle</option>
+    <select id="studiengang" name="studiengang">
+      <option value="*"> alle</option>
       <option *ngFor="let studiengang of studiengaenge"  [value]="studiengang.studiengangID">{{studiengang.bezeichnung}}</option>
       </select>
       </div>
       <div class="filter">
-        Branche:
-          <select name="branche">
-            <option value="0"> alle</option>
-            <option *ngFor="let branche of branchen"  [value]="branche.branchenID">{{branche.bezeichnung}}</option>
-            </select>
-      </div>
-      <div class="filter">
         Kategorie:
-        <select name="kategorie">
-          <option value="999"> alle</option>
-          <option *ngFor="let kategorie of kategorien"  [value]="kategorie.studiengangID">{{kategorie.bezeichnung}}</option>
+        <select id="kategorie" name="kategorie">
+          <option value="*"> alle</option>
+          <option *ngFor="let kategorie of kategorien"  [value]="kategorie.kategorieID">{{kategorie.bezeichnung}}</option>
           </select>
       </div>
-          <button (click)="login()">Suchen</button>
+      <button type="submit" id="submit">Suchen</button>
     </div>
     <p> Freitextsuche im Titel: <input [(ngModel)]="searchText" placeholder="Freitextsuche.." name="freitext"></p>
     </form>
@@ -38,9 +31,10 @@
 <tbody>
     <tr *ngFor="let abschlussarbeit of abschlussarbeiten | grdFilter: searchText ;">
       <td id="titel">{{abschlussarbeit.titel}}</td>
-      <td>{{abschlussarbeit.student_personID}}</td>
-      <td>{{abschlussarbeit.dozent_personID}}</td>
-      <td>{{abschlussarbeit.kategorie_kategorieID}}</td>
+      <td>{{abschlussarbeit.Autor}}</td>
+      <td>{{abschlussarbeit.Dozent}}</td>
+      <td>{{abschlussarbeit.Kategorie}}</td>
+
     </tr>
   </tbody>
       </table>

@@ -110,7 +110,7 @@ where person.PersonenID = Student_PersonID
 
     //nach was hier suchen???
     findByStudiengang: (req) => {
-      var sGang = req.query['sGang']
+      var sID = req.query['sID']
       var sql = `select Abstract, Titel, Datum, KategorieID, KBezeichnung as Kategorie, Studiengang_StudiengangID as StudiengangID, Bezeichnung as Studiengang, dozent_personID as DozentID, DVorname, DNachname, Betreuer_Unternehmen_UnternehmensID as UnternehmensID, Firmenname, Betreuer_Unternehmen_Adresse_AdressID as AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort, Student_PersonID as StudentID, Vorname, Nachname, ArbeitsID
 from person join
     (select *
@@ -127,12 +127,12 @@ from person join
 							from abschlussarbeit)
 							a where KategorieID = Kategorie_KategorieID) k
                 where StudiengangID = Studiengang_StudiengangID
-				and	 Bezeichnung like ?			) s
+				        and	StudiengangID = ? 			) s
             where personenID = dozent_personID  ) d
         on UnternehmensID = Betreuer_Unternehmen_UnternehmensID ) u
     on AdressID = Betreuer_Unternehmen_Adresse_AdressID ) a
 where person.PersonenID = Student_PersonID`;
-      connection.query(sql,sGang, function(error, results){
+      connection.query(sql,sID, function(error, results){
         if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else if (results.length > 0){
@@ -143,7 +143,7 @@ where person.PersonenID = Student_PersonID`;
         });
     },
     findByKategorie: (req) => {
-      var kategorie = req.query['kategorie']
+      var kID = req.query['kID']
       var sql = `select Abstract, Titel, Datum, KategorieID, KBezeichnung as Kategorie, Studiengang_StudiengangID as StudiengangID, Bezeichnung as Studiengang, dozent_personID as DozentID, DVorname, DNachname, Betreuer_Unternehmen_UnternehmensID as UnternehmensID, Firmenname, Betreuer_Unternehmen_Adresse_AdressID as AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort, Student_PersonID as StudentID, Vorname, Nachname, ArbeitsID
 from person join
     (select *
@@ -159,13 +159,13 @@ from person join
 							select *
 							from abschlussarbeit) a
 							where KategorieID = Kategorie_KategorieID
-							and kategorie.bezeichnung like ?) k
+							and kategorie.KategorieID = ?) k
                 where StudiengangID = Studiengang_StudiengangID ) s
             where personenID = dozent_personID  ) d
         on UnternehmensID = Betreuer_Unternehmen_UnternehmensID ) u
     on AdressID = Betreuer_Unternehmen_Adresse_AdressID ) a
 where person.PersonenID = Student_PersonID`;
-      connection.query(sql,kategorie, function(error, results){
+      connection.query(sql,kID, function(error, results){
         if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else if (results.length > 0){
@@ -176,8 +176,8 @@ where person.PersonenID = Student_PersonID`;
         });
     },
     findByKategorieAndStudiengang: (req) => {
-      var kategorie = req.query['kategorie'];
-      var sGang = req.query['sGang'];
+      var kID = req.query['kID'];
+      var sID = req.query['sID'];
       var sql = `select Abstract, Titel, Datum, KategorieID, KBezeichnung as Kategorie, Studiengang_StudiengangID as StudiengangID, Bezeichnung as Studiengang, dozent_personID as DozentID, DVorname, DNachname, Betreuer_Unternehmen_UnternehmensID as UnternehmensID, Firmenname, Betreuer_Unternehmen_Adresse_AdressID as AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort, Student_PersonID as StudentID, Vorname, Nachname, ArbeitsID
 from person join
     (select *
@@ -193,14 +193,14 @@ from person join
 							select *
 							from abschlussarbeit) a
 							where KategorieID = Kategorie_KategorieID
-							and kategorie.bezeichnung like ?) k
+							and kategorie.KategorieID = ?) k
                 where StudiengangID = Studiengang_StudiengangID
-				and studiengang.bezeichnung = ?) s
+				and studiengang.StudiengangID = ?) s
             where personenID = dozent_personID  ) d
         on UnternehmensID = Betreuer_Unternehmen_UnternehmensID ) u
     on AdressID = Betreuer_Unternehmen_Adresse_AdressID ) a
 where person.PersonenID = Student_PersonID`;
-      connection.query(sql,[kategorie,sGang], function(error, results){
+      connection.query(sql,[kID,sID], function(error, results){
         if (error){
           return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
         } else if (results.length > 0){

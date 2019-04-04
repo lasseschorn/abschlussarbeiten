@@ -17,7 +17,7 @@ export class KategorieService {
 
 
   getAll(): Observable<Kategorie[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Kategorie[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Kategorie[]>('getAll', []))

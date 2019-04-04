@@ -16,7 +16,7 @@ export class BetreuerService {
 
 
   getAll(): Observable<Betreuer[]> {
-    const url = `${this.generalUrl}/getAll`;
+    const url = `${this.generalUrl}/getall`;
     return this.http.get<Betreuer[]>(url)
     .pipe(
       catchError(this.errorService.handleError<Betreuer[]>('getAll', []))
@@ -57,7 +57,7 @@ getBetreuer(id: number): Observable<Betreuer> {
       const url = `${this.generalUrl}/add?bez=${name}`;
       return this.http.get<Betreuer>(url)
     .pipe(
-     tap((newBetreuer: Betreuer) => this.errorService.log(`added Betreuer w/ id=${newBetreuer.person.personId}`)),
+     tap((newBetreuer: Betreuer) => this.errorService.log(`added Betreuer w/ id=${newBetreuer.personenID}`)),
       catchError(this.errorService.handleError<Betreuer>('add'))
     );
   }

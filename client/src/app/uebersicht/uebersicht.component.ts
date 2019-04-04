@@ -17,6 +17,7 @@ import { AbschlussarbeitService } from '../service/abschlussarbeit.service';
   styleUrls: ['./uebersicht.component.css']
 })
 export class UebersichtComponent implements OnInit {
+  searchText: string;
   branchen: Branche[];
   studiengaenge: Studiengang[];
   kategorien: Kategorie[];
@@ -29,7 +30,7 @@ export class UebersichtComponent implements OnInit {
              ) { }
 
   ngOnInit() {
-    this.getBranchen();
+//    this.getBranchen();
     this.getStudiengaenge();
     this.getKategorien();
     this.getAbschlussarbeiten();
@@ -51,7 +52,12 @@ export class UebersichtComponent implements OnInit {
     this.abschlussarbeitService.getAll()
     .subscribe(abschlussarbeiten => this.abschlussarbeiten = abschlussarbeiten);
   }
-  login(): void {
-
+  suchen(event): void {
+    event.preventDefault();
+    const target = event.target;
+    const kid = target.querySelector('#kategorie').value;
+    const sid = target.querySelector('#studiengang').value;
+    this.abschlussarbeitService.findAbschlussarbeiten(kid, sid)
+    .subscribe(abschlussarbeiten => this.abschlussarbeiten = abschlussarbeiten);
   }
 }
