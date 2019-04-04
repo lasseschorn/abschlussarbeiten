@@ -4,7 +4,7 @@ function(connection, callback) {
         getById: (req) => {
         	var pPID = req.query['pPID'];
           var sql = 'select r.PersonenID as personenID,r.Vorname as vorname, r.Nachname as nachname,r.geschlecht as geschlecht, ' +
-                    'r.MAIL as email, r.Firmenname as firmenname,r.RechtsformBez as rechtsform, bezeichnung as branche, r.straße as Straße, ' +
+                    'r.MAIL as mail, r.Firmenname as firmenname,r.RechtsformBez as rechtsform, bezeichnung as branche, r.straße as Straße, ' +
                     'r.Hausnummer as hausnummer, r.zusatz as zusatz, r.PLZ as plz, r.Ort as ort ' +
                     'from branche join ( select a.Firmenname as Firmenname, a.Straße as Straße, a.Hausnummer as Hausnummer,a.Zusatz as Zusatz, ' +
                     'a.PLZ as PLZ ,a.Ort as Ort,a.PersonenID as PersonenID,a.Vorname as Vorname,a.Nachname as Nachname,a.Geschlecht as Geschlecht, ' +
@@ -28,7 +28,7 @@ function(connection, callback) {
         },
         getAll: () => {
         	var sql = 'select r.PersonenID as personenID,r.Vorname as vorname, r.Nachname as nachname,r.geschlecht as geschlecht, ' +
-                    'r.MAIL as email, r.Firmenname as firmenname,r.RechtsformBez as rechtsform, bezeichnung as branche, r.straße as straße, ' +
+                    'r.MAIL as mail, r.Firmenname as firmenname,r.RechtsformBez as rechtsform, bezeichnung as branche, r.straße as straße, ' +
                     'r.Hausnummer as hausnummer, r.zusatz as zusatz, r.PLZ as plz, r.Ort as ort ' +
                     'from branche join ( select a.Firmenname as Firmenname, a.Straße as Straße, a.Hausnummer as Hausnummer,a.Zusatz as Zusatz, ' +
                     'a.PLZ as PLZ ,a.Ort as Ort,a.PersonenID as PersonenID,a.Vorname as Vorname,a.Nachname as Nachname,a.Geschlecht as Geschlecht, ' +

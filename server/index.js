@@ -106,10 +106,9 @@ var storage =   multer.diskStorage({
 //              file searcher
 //
 
-  function getAllPDFinDir() {
+  function getAllPDFinDir(req,res,next) {
     var walk    = require('walk');
     var files   = [];
-
     // Walker options
     var walker  = walk.walk('./uploads', { followLinks: false });
 
@@ -117,17 +116,18 @@ var storage =   multer.diskStorage({
         // Add this file to the list of files
         files.push(root + '/' + stat.name);
         next();
+    }).on('end', function() {
+      console.log(files);
     });
 
-    walker.on('end', function() {
-        console.log(files);
-    });
-    return files;
   }
+
+
 
   app.route('/api/uploads/show')
       .get(function(req,res,next){
-        getAllPDFinDir()
+        getAllPDFinDir(req,res,next)
+      //  console.log(next);
       })
 
 
