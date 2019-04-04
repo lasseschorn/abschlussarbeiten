@@ -2,8 +2,17 @@ import { Person } from './Person';
 import { Unternehmen } from './Unternehmen';
 
 export class Betreuer {
-
-person: Person;
-unternehmen: Unternehmen;
-
+  personenID: number;
+  vorname: string;
+  nachname: string;
+  geschlecht: string;
+  mail: string;
+  firmenname: string;
+  rechtsform:string;
+  branche: string;
+  strasse:string;
+  hausnummer: number;
+  zusatz: string;
+  plz: number;
+  ort: string;
 }
