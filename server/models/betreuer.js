@@ -3,9 +3,9 @@ function(connection, callback) {
     return {
         getById: (req) => {
         	var pPID = req.query['pPID'];
-          var sql = 'select r.PersonenID as PersonenID,r.Vorname as Vorname, r.Nachname as Nachname,r.geschlecht as Geschlecht, ' +
-                    'r.MAIL as Mail, r.Firmenname as Firmenname,r.RechtsformBez as Rechtsform, bezeichnung as Branche, r.straße as Straße, ' +
-                    'r.Hausnummer as Hausnummer, r.zusatz as Zusatz, r.PLZ as PLZ, r.Ort as Ort ' +
+          var sql = 'select r.PersonenID as personenID,r.Vorname as vorname, r.Nachname as nachname,r.geschlecht as geschlecht, ' +
+                    'r.MAIL as email, r.Firmenname as firmenname,r.RechtsformBez as rechtsform, bezeichnung as branche, r.straße as Straße, ' +
+                    'r.Hausnummer as hausnummer, r.zusatz as zusatz, r.PLZ as plz, r.Ort as ort ' +
                     'from branche join ( select a.Firmenname as Firmenname, a.Straße as Straße, a.Hausnummer as Hausnummer,a.Zusatz as Zusatz, ' +
                     'a.PLZ as PLZ ,a.Ort as Ort,a.PersonenID as PersonenID,a.Vorname as Vorname,a.Nachname as Nachname,a.Geschlecht as Geschlecht, ' +
                     'a.MAIL as MAIL,a.adresseID,a.rechtsform as rechtsform,a.BrancheID as BrancheID, rechtsform.bezeichnung as RechtsformBez ' +
@@ -27,9 +27,9 @@ function(connection, callback) {
             });
         },
         getAll: () => {
-        	var sql = 'select r.PersonenID as PersonenID,r.Vorname as Vorname, r.Nachname as Nachname,r.geschlecht as Geschlecht, ' +
-                    'r.MAIL as Mail, r.Firmenname as Firmenname,r.RechtsformBez as Rechtsform, bezeichnung as Branche, r.straße as Straße, ' +
-                    'r.Hausnummer as Hausnummer, r.zusatz as Zusatz, r.PLZ as PLZ, r.Ort as Ort ' +
+        	var sql = 'select r.PersonenID as personenID,r.Vorname as vorname, r.Nachname as nachname,r.geschlecht as geschlecht, ' +
+                    'r.MAIL as email, r.Firmenname as firmenname,r.RechtsformBez as rechtsform, bezeichnung as branche, r.straße as straße, ' +
+                    'r.Hausnummer as hausnummer, r.zusatz as zusatz, r.PLZ as plz, r.Ort as ort ' +
                     'from branche join ( select a.Firmenname as Firmenname, a.Straße as Straße, a.Hausnummer as Hausnummer,a.Zusatz as Zusatz, ' +
                     'a.PLZ as PLZ ,a.Ort as Ort,a.PersonenID as PersonenID,a.Vorname as Vorname,a.Nachname as Nachname,a.Geschlecht as Geschlecht, ' +
                     'a.MAIL as MAIL,a.adresseID,a.rechtsform as rechtsform,a.BrancheID as BrancheID, rechtsform.bezeichnung as RechtsformBez ' +
