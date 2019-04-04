@@ -58,7 +58,13 @@ where BranchenID = Branche_BranchenID `;
         Branche_BranchenID: req.query['bbID'],
       }
       var sql = `INSERT INTO Unternehmen SET ? `
-      connection.query(sql,ins,callback);
+      connection.query(sql,ins,function(error,results){
+        if (error){
+          return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+        } else{
+          return callback(null,JSON.stringify(results));
+        }
+      });
 
     },
 
