@@ -618,6 +618,17 @@ app.route('/api/abschlussarbeit/findByStudiengang')
       }}).findByStudiengang(req)
 })
 
+app.route('/api/abschlussarbeit/findByKategorieAndStudiengang')
+.get(function(req, res) {
+	 abschluss(connection, function(error, results, fields) {
+		if(error) {
+			res.status(500);
+		res.send(error);
+			} else {
+				res.send(results)
+      }}).findByKategorieAndStudiengang(req)
+})
+
 /* -------------------------------------------------------------
 					student
 -------------------------------------------------------------*/

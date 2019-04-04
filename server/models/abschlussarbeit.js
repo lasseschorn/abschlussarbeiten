@@ -138,7 +138,7 @@ where person.PersonenID = Student_PersonID`;
         } else if (results.length > 0){
           return callback(null,JSON.stringify(results));
         } else {
-          return callback(new Error("Es existiert kein Studiengang mit dem angegeben Namen"),null);
+          return callback(new Error("Es existiert keine Arbeit mit dem angegeben Studiengang"),null);
         }
         });
     },
@@ -171,7 +171,42 @@ where person.PersonenID = Student_PersonID`;
         } else if (results.length > 0){
           return callback(null,JSON.stringify(results));
         } else {
-          return callback(new Error("Es existiert kein Studiengang mit dem angegeben Namen"),null);
+          return callback(new Error("Es existiert keine Arbeit mit der angegeben Kategorie "),null);
+        }
+        });
+    },
+    findByKategorieAndStudiengang: (req) => {
+      var kategorie = req.query['kategorie'];
+      var sGang = req.query['sGang'];
+      var sql = `select Abstract, Titel, Datum, KategorieID, KBezeichnung as Kategorie, Studiengang_StudiengangID as StudiengangID, Bezeichnung as Studiengang, dozent_personID as DozentID, DVorname, DNachname, Betreuer_Unternehmen_UnternehmensID as UnternehmensID, Firmenname, Betreuer_Unternehmen_Adresse_AdressID as AdressID, Straße, Hausnummer, Zusatz, Postleitzahl, Ort, Student_PersonID as StudentID, Vorname, Nachname, ArbeitsID
+from person join
+    (select *
+    from adresse right join
+        ( select *
+        from unternehmen right join
+            ( select Abstract, Titel, Datum, KategorieID, KBezeichnung,  Studiengang_StudiengangID,Bezeichnung, dozent_personID, Vorname as DVorname, Nachname as DNachname, Betreuer_Unternehmen_UnternehmensID, Betreuer_Unternehmen_Adresse_AdressID, Student_PersonID, ArbeitsID
+            from person join
+                ( 	select *
+					from studiengang join
+						( select Abstract, Titel, Datum, KategorieID, Bezeichnung as KBezeichnung, Studiengang_StudiengangID, dozent_personID, Betreuer_Unternehmen_UnternehmensID, Betreuer_Unternehmen_Adresse_AdressID, Student_PersonID, ArbeitsID
+						from kategorie join (
+							select *
+							from abschlussarbeit) a
+							where KategorieID = Kategorie_KategorieID
+							and kategorie.bezeichnung like ?) k
+                where StudiengangID = Studiengang_StudiengangID
+				and studiengang.bezeichnung = ?) s
+            where personenID = dozent_personID  ) d
+        on UnternehmensID = Betreuer_Unternehmen_UnternehmensID ) u
+    on AdressID = Betreuer_Unternehmen_Adresse_AdressID ) a
+where person.PersonenID = Student_PersonID`;
+      connection.query(sql,[kategorie,sGang], function(error, results){
+        if (error){
+          return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+        } else if (results.length > 0){
+          return callback(null,JSON.stringify(results));
+        } else {
+          return callback(new Error("Es existiert keine arbeit mit den Kreterien"),null);
         }
         });
     },
