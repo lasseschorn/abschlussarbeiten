@@ -40,6 +40,20 @@ function(connection, callback) {
         },
 
         add: (req) => {
+          const ins = {
+              zugangsID: req.query['zID'],
+              person_personenID: req.query['pID'],
+              passwort: req.query['pwd'],
+              userType: req.query['uType']
+          }
+          var sql = `INSERT INTO Zugangsdaten SET ? `
+                connection.query(sql,ins,function(error,results){
+                  if (error){
+                    return callback(new Error("SQL-Query konnte nicht ausgeführt werden"),null);
+                  } else{
+                    return callback(null,JSON.stringify(results));
+                  }
+                });
 
         },
         getUserDetails: (req) => {
