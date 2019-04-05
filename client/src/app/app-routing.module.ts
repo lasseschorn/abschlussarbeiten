@@ -19,7 +19,7 @@ const routes: Routes = [
       {path: 'login', component: LoginComponent},
       {path: 'anmeldung', component: LoginComponent},
       {path: 'detail', component: DetailseiteComponent},
-      {path: 'detailseite', component: DetailseiteComponent},
+      {path: 'detailseite/:id', component: DetailseiteComponent},
       {path: 'abschlussarbeit', component: DetailseiteComponent},
       {path: 'neuanlegen', component: ErstellSeiteComponent},
       {path: 'erstellseite', component: ErstellSeiteComponent},

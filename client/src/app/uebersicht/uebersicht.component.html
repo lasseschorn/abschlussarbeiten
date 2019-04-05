@@ -29,11 +29,13 @@
         </tr>
 </thead>
 <tbody>
+
     <tr *ngFor="let abschlussarbeit of abschlussarbeiten | grdFilter: searchText ;">
-      <td id="titel">{{abschlussarbeit.titel}}</td>
-      <td>{{abschlussarbeit.Vorname}} {{abschlussarbeit.Nachname}}</td>
-      <td>{{abschlussarbeit.DVorname}} {{abschlussarbeit.DNachname}}</td>
-      <td>{{abschlussarbeit.Kategorie}}</td>
+
+      <td id="titel"> <a [routerLink]="['/detailseite/', abschlussarbeit.arbeitsID ]" routerLinkActive="active"> {{abschlussarbeit.titel}}  </a> </td>
+      <td> <a routerLink="/detailseite" routerLinkActive="active"> {{abschlussarbeit.Vorname}} {{abschlussarbeit.Nachname}} </a></td>
+      <td> <a routerLink="/detailseite" routerLinkActive="active"> {{abschlussarbeit.DVorname}} {{abschlussarbeit.DNachname}} </a></td>
+      <td> <a routerLink="/detailseite" routerLinkActive="active"> {{abschlussarbeit.Kategorie}} </a></td>
     </tr>
   </tbody>
       </table>

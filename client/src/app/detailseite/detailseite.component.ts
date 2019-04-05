@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Abschlussarbeit } from '../data/Abschlussarbeit';
+import { AbschlussarbeitService } from '../service/abschlussarbeit.service';
 
 @Component({
   selector: 'app-detailseite',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailseiteComponent implements OnInit {
 
-  constructor() { }
+  abschlussarbeit: Abschlussarbeit;
+  constructor(private route: ActivatedRoute,
+              private abschlussarbeitService: AbschlussarbeitService) { }
 
   ngOnInit() {
+      this.abschlussarbeitService.getNo404( this.route.snapshot.params.id )
+      .subscribe(abschlussarbeit => this.abschlussarbeit = abschlussarbeit);
+    }
   }
-
-}
