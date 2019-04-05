@@ -49,6 +49,24 @@ getAbschlussarbeit(id: number): Observable<Abschlussarbeit> {
     );
   }
 
+  findByStudiengang(sid): Observable<Abschlussarbeit[]> {
+    const url = `${this.generalUrl}/findByStudiengang?sID=${sid}`;
+    return this.http.get<Abschlussarbeit[]>(url)
+    .pipe(
+      tap(_ => this.errorService.log(`fetched Abschlussarbeiten sID=${sid}`)),
+      catchError(this.errorService.handleError<Abschlussarbeit[]>(`findByStudiengang sID=${sid}}`))
+    );
+  }
+
+  findByKategorie(kid): Observable<Abschlussarbeit[]> {
+    const url = `${this.generalUrl}/findByKategorie?kID=${kid}`;
+    return this.http.get<Abschlussarbeit[]>(url)
+    .pipe(
+      tap(_ => this.errorService.log(`fetched Abschlussarbeiten kID=${kid}`)),
+      catchError(this.errorService.handleError<Abschlussarbeit[]>(`findByKategorie kID=${kid}}`))
+    );
+  }
+
 //   searchAbschlussarbeiten(term: string): Observable<Abschlussarbeit[]> {
 //       const url = `${this.generalUrl}/search`;
 //    if (!term.trim()) {

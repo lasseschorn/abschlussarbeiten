@@ -15,3 +15,10 @@ body {
 .main-wrapper {
     display: flex;
 }
+
+.buttonMain {
+  background-color: #72e54b;
+  font-weight: bold;
+  border: 1px solid #298A08;
+  cursor: pointer;
+}

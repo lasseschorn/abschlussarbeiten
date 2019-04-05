@@ -57,7 +57,8 @@ export class UebersichtComponent implements OnInit {
     const target = event.target;
     const kid = target.querySelector('#kategorie').value;
     const sid = target.querySelector('#studiengang').value;
+
     this.abschlussarbeitService.findAbschlussarbeiten(kid, sid)
     .subscribe(abschlussarbeiten => this.abschlussarbeiten = abschlussarbeiten);
-  }
+}
 }

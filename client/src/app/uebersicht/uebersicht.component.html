@@ -17,7 +17,7 @@
     </div>
     <p> Freitextsuche im Titel: <input [(ngModel)]="searchText" placeholder="Freitextsuche.." name="freitext"></p>
     </form>
-  <section id="container3">
+  <section id="container3" *ngIf="abschlussarbeiten.length !=0; else notShow">
     <div id="tab">
     <table>
       <thead>
@@ -34,9 +34,13 @@
       <td>{{abschlussarbeit.Vorname}} {{abschlussarbeit.Nachname}}</td>
       <td>{{abschlussarbeit.DVorname}} {{abschlussarbeit.DNachname}}</td>
       <td>{{abschlussarbeit.Kategorie}}</td>
-
     </tr>
   </tbody>
       </table>
       </div>
   </section>
+  <ng-template #notShow>
+  <p>
+    Leider sind noch keine Abschlussarbeiten für deine Filter angelegt..!
+  </p>
+</ng-template>

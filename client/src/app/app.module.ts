@@ -1,4 +1,5 @@
 import { AuthGuard } from './guard/auth.guard';
+import { AdminGuard } from './admin.guard';
 import { AuthService } from './service/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ import { AppNavComponent } from './app-nav/app-nav.component';
 import { AdminComponent } from './admin/admin.component';
 import { LogoutComponent } from './logout/logout.component';
 import { FileuploadComponent } from './fileupload/fileupload.component';
+import { PersonErstellseiteComponent } from './person-erstellseite/person-erstellseite.component';
 
 @NgModule({
   imports: [
@@ -59,7 +61,9 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
     component: ErstellSeiteComponent,
     canActivate: [AuthGuard]},
     {path: 'erstellseite',
-    component: ErstellSeiteComponent,
+    component: ErstellSeiteComponent},
+    {path: 'personerstellseite',
+    component: PersonErstellseiteComponent,
     canActivate: [AuthGuard]},
     {path: 'hinzufuegen',
     component: ErstellSeiteComponent,
@@ -72,10 +76,10 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
     canActivate: [AuthGuard]},
     {path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard]}
+    canActivate: [AdminGuard]}
   ])
 ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AdminGuard, AuthGuard],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -89,7 +93,8 @@ import { FileuploadComponent } from './fileupload/fileupload.component';
     AdminComponent,
     LogoutComponent,
     FileuploadComponent,
-    GrdFilterPipe
+    GrdFilterPipe,
+    PersonErstellseiteComponent
   ],
   bootstrap: [AppComponent]
 })

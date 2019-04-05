@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { DetailseiteComponent } from './detailseite/detailseite.component';
 import { ErstellSeiteComponent } from './erstell-seite/erstell-seite.component';
+import { PersonErstellseiteComponent } from './person-erstellseite/person-erstellseite.component';
 import { AdminComponent } from './admin/admin.component';
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path: 'abschlussarbeit', component: DetailseiteComponent},
       {path: 'neuanlegen', component: ErstellSeiteComponent},
       {path: 'erstellseite', component: ErstellSeiteComponent},
+      {path: 'personerstellseite', component: PersonErstellseiteComponent},
       {path: 'hinzufuegen', component: ErstellSeiteComponent},
       {path: 'test', component: TestComponent},
       {path: 'logout', component: LogoutComponent},
