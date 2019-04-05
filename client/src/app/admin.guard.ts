@@ -11,19 +11,18 @@ import { Router } from '@angular/router';
 })
 export class AdminGuard implements CanActivate {
   constructor(  private authService: AuthService,
-    private router: Router,
-    private userService: UserService ) {
+                private router: Router,
+                private userService: UserService ) {
 }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    {{debugger}}
-      if(this.auth.isLoggedIn) {
+      if(this.authService.isLoggedIn) {
         return true
       }
-      return this.user.isLoggedIn().pipe(map(res => {
+      return this.userService.isLoggedIn().pipe(map(res => {
         if(res.status) {
-          this.auth.setLoggedIn(true)
+          this.authService.setLoggedIn(true)
           return true
         } else {
           this.router.navigate(['login'])
