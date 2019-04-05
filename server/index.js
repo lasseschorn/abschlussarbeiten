@@ -33,8 +33,8 @@ const mysql      = require('mysql');
 //muss hier noch angepasst werden egtl für jede Benutzerrolle eine eigene connection
 const connection = mysql.createConnection({
   host     : 'localhost',
-  user     : 'root',
-  password : '',
+  user     : 'admin02',
+  password : 'qwert1234',
   database : 'abschlussarbeitendb'
 });
 connection.connect();
