@@ -24,7 +24,7 @@ export class UnternehmenService {
 }
 
   getNo404(id: number): Observable<Unternehmen> {
-    const url = `${this.generalUrl}/getbyid?bID=${id}`;
+    const url = `${this.generalUrl}/getbyid?uID=${id}`;
     return this.http.get<Unternehmen>(url)
      .pipe(
         map(unternehmenen => unternehmenen[0]), // returns a {0|1} element array
@@ -33,7 +33,7 @@ export class UnternehmenService {
       );
   }
 getUnternehmen(id: number): Observable<Unternehmen> {
-    const url = `${this.generalUrl}/getbyid?bID=${id}`;
+    const url = `${this.generalUrl}/getbyid?uID=${id}`;
     return this.http.get<Unternehmen>(url)
     .pipe(
       tap(_ => this.errorService.log(`fetched Unternehmen id=${id}`)),

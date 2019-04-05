@@ -15,7 +15,7 @@ export class Abschlussarbeit {
   dozentID: number;
   dozvorname: string;
   doznachname: string;
-  unternehmensID: string;
+  unternehmensID: number;
   firmenname: string;
   adressID: number;
   strasse: number;

@@ -1,18 +1,35 @@
 <section id="container2">
           <div id="beschreibung">Beschreibung
             <div>
-              {{arbeit.beschreibung}}
+              <p>
+                Titel: {{abschlussarbeit.titel}}
+                Abstract: {{abschlussarbeit.abstract}}
+               Kategorie:{{abschlussarbeit.kategorie}}
+              </p>
             </div>
           </div>
           <div id="autor">Autor
             <div>
-              Name:{{arbeit.autor.akaGrad}} {{arbeit.autor.name}}
+              <p>
+                {{student.bezeichnung}} {{student.vorname}} {{student.nachname}}
+                {{student.matrikelnummer}}
+                {{student.kategorie}}
+                {{student.studiengang}}
+                {{student.email}}
+              </p>
             </div>
           </div>
           <div id="betreuer">Betreuer
             <div>
-              Firma: {{arbeit.firma.name}}
-
+              <p>
+                Dozent:
+                {{dozent.bezeichnung}} {{dozent.vorname}} {{dozent.nachname}}
+                {{dozent.email}}
+                Firma: {{unternehmen.firmenname}} {{unternehmen.rechtsform}}
+                {{unternehmen.branche}}
+                {{unternehmen.strasse}} {{unternehmen.hausnummer}} {{unternehmen.zusatz}}
+                {{unternehmen.plz}} {{unternehmen.ort}}
+              </p>
             </div>
           </div>
       </section>

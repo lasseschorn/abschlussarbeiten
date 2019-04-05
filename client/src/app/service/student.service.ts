@@ -24,7 +24,7 @@ export class StudentService {
 }
 
   getNo404(id: number): Observable<Student> {
-    const url = `${this.generalUrl}/getbyid?bID=${id}`;
+    const url = `${this.generalUrl}/getbyid?pPID=${id}`;
     return this.http.get<Student>(url)
      .pipe(
         map(studenten => studenten[0]), // returns a {0|1} element array
@@ -33,10 +33,10 @@ export class StudentService {
       );
   }
 getStudent(id: number): Observable<Student> {
-    const url = `${this.generalUrl}/getbyid?bID=${id}`;
+    const url = `${this.generalUrl}/getbyid?pPID=${id}`;
     return this.http.get<Student>(url)
     .pipe(
-      tap(_ => this.errorService.log(`fetched Student id=${id}`)),
+      tap(_ => this.errorService.log(`fetched Student pPID=${id}`)),
       catchError(this.errorService.handleError<Student>(`getStudent id=${id}`))
     );
   }

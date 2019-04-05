@@ -24,19 +24,19 @@ private generalUrl = '/api/abschlussarbeit';
 }
 
   getNo404(id: number): Observable<Abschlussarbeit> {
-    const url = `${this.generalUrl}/getbyid?bID=${id}`;
+    const url = `${this.generalUrl}/getbyid?aID=${id}`;
     return this.http.get<Abschlussarbeit>(url)
      .pipe(
         map(abschlussarbeiten => abschlussarbeiten[0]), // returns a {0|1} element array
-        tap(_ => this.errorService.log(`fetched or did not find id=${id}`)),
+        tap(_ => this.errorService.log(`fetched or did not find aID=${id}`)),
         catchError(this.errorService.handleError<Abschlussarbeit>(`getAbschlussarbeit id=${id}`))
       );
   }
 getAbschlussarbeit(id: number): Observable<Abschlussarbeit> {
-    const url = `${this.generalUrl}/getbyid?bID=${id}`;
+    const url = `${this.generalUrl}/getbyid?aID=${id}`;
     return this.http.get<Abschlussarbeit>(url)
     .pipe(
-      tap(_ => this.errorService.log(`fetched Abschlussarbeit id=${id}`)),
+      tap(_ => this.errorService.log(`fetched Abschlussarbeit aID=${id}`)),
       catchError(this.errorService.handleError<Abschlussarbeit>(`getAbschlussarbeit id=${id}`))
     );
   }

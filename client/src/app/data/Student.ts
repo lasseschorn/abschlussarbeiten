@@ -16,4 +16,5 @@ export class Student {
   kategorieID: number;
   kategorie: string;
   akademischergrad: string;
+  matrikelnummer: string;
 }
