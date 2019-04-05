@@ -30,16 +30,11 @@ export class UebersichtComponent implements OnInit {
              ) { }
 
   ngOnInit() {
-//    this.getBranchen();
     this.getStudiengaenge();
     this.getKategorien();
     this.getAbschlussarbeiten();
   }
 
-  getBranchen(): void {
-    this.brancheService.getAll()
-    .subscribe(branchen => this.branchen = branchen);
-  }
   getStudiengaenge(): void {
     this.studiengangService.getAll()
     .subscribe(studiengaenge => this.studiengaenge = studiengaenge);
@@ -52,13 +47,25 @@ export class UebersichtComponent implements OnInit {
     this.abschlussarbeitService.getAll()
     .subscribe(abschlussarbeiten => this.abschlussarbeiten = abschlussarbeiten);
   }
-  suchen(event): void {
-    event.preventDefault();
-    const target = event.target;
-    const kid = target.querySelector('#kategorie').value;
-    const sid = target.querySelector('#studiengang').value;
-
-    this.abschlussarbeitService.findAbschlussarbeiten(kid, sid)
+suchen(event): void {
+  event.preventDefault();
+  const target = event.target;
+  const kid = target.querySelector('#kategorie').value;
+  const sid = target.querySelector('#studiengang').value;
+  if (kid == "*" && sid != "*") {
+    this.abschlussarbeitService.findByStudiengang(sid)
     .subscribe(abschlussarbeiten => this.abschlussarbeiten = abschlussarbeiten);
+  }
+  if (kid == "*" && sid == "*") {
+    this.getAbschlussarbeiten();
+  }
+  if ( kid!="*" && sid=="*" ) {
+    this.abschlussarbeitService.findByKategorie(kid)
+    .subscribe(abschlussarbeiten => this.abschlussarbeiten = abschlussarbeiten);
+  }
+  if ( kid!="*" && sid!="*" ) {
+  this.abschlussarbeitService.findAbschlussarbeiten(kid, sid)
+  .subscribe(abschlussarbeiten => this.abschlussarbeiten = abschlussarbeiten);
+}
 }
 }
