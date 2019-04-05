@@ -297,7 +297,7 @@ var storage =   multer.diskStorage({
           res.send(error);
             } else {
               res.send(results)
-        }).add(req)
+        }}).add(req)
       })
 
 
