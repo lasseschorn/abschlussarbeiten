@@ -292,7 +292,11 @@ var storage =   multer.diskStorage({
   app.route('/api/signup')
       .post(function(req,res,next){
         users(connection, function(error,results,fields){
-
+          if(error) {
+            res.status(500);
+          res.send(error);
+            } else {
+              res.send(results)
         }).add(req)
       })
 
